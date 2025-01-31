@@ -15,7 +15,7 @@ export const connectToDatabase = async () => {
 
   try {
     const options: ConnectOptions = {
-      dbName: "uc_bot",
+      dbName: "mesmer-admin",
       autoCreate: true,
     };
     await mongoose.connect(process.env.MONGODB_URI!, options);
