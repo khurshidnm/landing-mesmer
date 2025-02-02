@@ -4,13 +4,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import garmoshka from "@/../public/garmoshka.png";
 
 const activities = [
   {
     id: 1,
     number: "01",
-    image: garmoshka,
+    image: "/garmoshka.png",
     title: "Развитие бизнеса в строительстве",
     description:
       "Комплексное развитие строительного бизнеса с применением инновационных технологий и современных методов управления.",
@@ -18,7 +17,7 @@ const activities = [
   {
     id: 2,
     number: "02",
-    image: garmoshka,
+    image: "/garmoshka.png",
     title: "Управление проектными работами",
     description:
       "Эффективное управление проектами любой сложности с учетом современных стандартов и требований рынка.",
@@ -26,7 +25,7 @@ const activities = [
   {
     id: 3,
     number: "03",
-    image: garmoshka,
+    image: "/garmoshka.png",
     title: "Закупка оборудования",
     description:
       "Профессиональный подход к закупке и поставке высококачественного оборудования для различных отраслей.",
@@ -34,7 +33,7 @@ const activities = [
   {
     id: 4,
     number: "04",
-    image: garmoshka,
+    image: "/garmoshka.png",
     title: "Эксплуатация и техническое обслуживание",
     description:
       "Комплексное обслуживание и поддержка технического оборудования на всех этапах эксплуатации.",
@@ -42,7 +41,7 @@ const activities = [
   {
     id: 5,
     number: "05",
-    image: garmoshka,
+    image: "/garmoshka.png",
     title: "Эксплуатация и техническое обслуживание",
     description:
       "Профессиональное техническое обслуживание и своевременная поддержка всех систем.",
@@ -50,7 +49,7 @@ const activities = [
   {
     id: 6,
     number: "06",
-    image: garmoshka,
+    image: "/garmoshka.png",
     title: "Инженерно-техническое проектирование",
     description:
       "Разработка инновационных инженерных решений и технической документации любой сложности.",
@@ -58,7 +57,7 @@ const activities = [
   {
     id: 7,
     number: "07",
-    image: garmoshka,
+    image: "/garmoshka.png",
     title: "Финансовая поддержка",
     description:
       "Комплексные решения по финансированию и поддержке проектов на всех этапах реализации.",
