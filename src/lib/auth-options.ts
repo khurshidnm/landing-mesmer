@@ -28,6 +28,7 @@ export const authOptions: AuthOptions = {
       async authorize(credentials) {
         await connectToDatabase();
         const user = await User.findOne({ username: credentials?.username });
+        console.log(user, "user");
 
         if (user) {
           const isPasswordValid = await compare(
@@ -36,9 +37,7 @@ export const authOptions: AuthOptions = {
           );
 
           if (isPasswordValid) {
-            console.log(user);
-
-            if (!user?.verified) return null;
+            console.log(user, "password is valid");
 
             return user;
           }
@@ -48,12 +47,20 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session }) {
+    // @ts-expect-error: sdfs
+    async session({ session, token }) {
       await connectToDatabase();
+
+      // Agar token mavjud bo'lmasa yoki yaroqsiz bo'lsa, sessionni null qaytarish
+      if (!token || !token.sub) {
+        return null;
+      }
+
       const isExistingUser = await User.findOne({
         // @ts-ignore
-        username: session.user?.username,
+        _id: token.sub,
       });
+      console.log(isExistingUser, "SDsd")
 
       // @ts-ignore
       session.user = {
@@ -61,7 +68,17 @@ export const authOptions: AuthOptions = {
         username: isExistingUser?.username,
       } as SessionUser;
 
+      // console.log(session)
+
       return session;
+    },
+    async jwt({ token, user }) {
+      // Agar foydalanuvchi mavjud bo'lsa, token ga foydalanuvchi ma'lumotlarini qo'shish
+      if (user) {
+        // @ts-expect-error: error not defined
+        token.sub = user._id;
+      }
+      return token;
     },
   },
   debug: process.env.NODE_ENV === "development",

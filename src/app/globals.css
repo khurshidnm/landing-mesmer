@@ -33,6 +33,14 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -59,6 +67,14 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -69,4 +85,62 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+/* Quill Editor Styles */
+.ql-container {
+  font-size: 16px !important;
+}
+
+.ql-editor {
+  @apply max-w-none;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Table styles */
+.ql-editor table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.ql-editor td,
+.ql-editor th {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.ql-editor th {
+  background-color: #f3f4f6;
+  font-weight: bold;
+}
+
+/* rich text editor */
+h1.rich-text-editor {
+  @apply text-4xl font-bold;
+}
+
+h2.rich-text-editor {
+  @apply text-3xl font-bold;
+}
+
+h3.rich-text-editor {
+  @apply text-2xl font-bold;
+}
+
+h4.rich-text-editor {
+  @apply text-xl font-bold;
+}
+
+h5.rich-text-editor {
+  @apply text-lg font-bold;
+}
+
+h6.rich-text-editor {
+  @apply text-base font-bold;
 }
