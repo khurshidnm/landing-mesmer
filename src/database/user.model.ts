@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose" ;
 
 const userSchema = new mongoose.Schema(
   {
@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true}
 );
 
 const User = mongoose.models.Admins || mongoose.model("Admins", userSchema);
