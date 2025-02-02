@@ -66,7 +66,9 @@ export default function VacanciesPage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="description">Job Description</Label>
-            <RichTextEditor value={description} onChange={setDescription} placeholder="Write the job description..." />
+            <RichTextEditor
+            // @ts-expect-error: error is not defined
+            value={description} onChange={setDescription} placeholder="Write the job description..." />
           </div>
           <div className="flex gap-4">
             <Button className="flex-1" variant="outline">

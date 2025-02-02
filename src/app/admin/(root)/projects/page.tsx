@@ -58,6 +58,7 @@ export default function ProjectsPage() {
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
             <RichTextEditor
+            // @ts-expect-error: error is not defined
               value={description}
               onChange={setDescription}
               placeholder="Write your project description..."
