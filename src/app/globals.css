@@ -120,3 +120,27 @@ body {
   font-weight: bold;
 }
 
+/* rich text editor */
+h1.rich-text-editor {
+  @apply text-4xl font-bold;
+}
+
+h2.rich-text-editor {
+  @apply text-3xl font-bold;
+}
+
+h3.rich-text-editor {
+  @apply text-2xl font-bold;
+}
+
+h4.rich-text-editor {
+  @apply text-xl font-bold;
+}
+
+h5.rich-text-editor {
+  @apply text-lg font-bold;
+}
+
+h6.rich-text-editor {
+  @apply text-base font-bold;
+}
