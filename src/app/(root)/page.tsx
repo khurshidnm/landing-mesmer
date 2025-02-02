@@ -8,6 +8,8 @@ import Banner from "./components/Banner";
 import Image from "next/image";
 import BusinessActivities from "./components/Carousel";
 import Footer from "./components/Footer";
+import Goals from "./components/Goals";
+import HomeProjects from "./components/HomeProjects";
 
 const HomePage = () => {
   return (
@@ -18,6 +20,8 @@ const HomePage = () => {
       <Advantages />
       <Banner />
       <BusinessActivities />
+      <Goals />
+      <HomeProjects />
       <Footer />
     </div>
   );

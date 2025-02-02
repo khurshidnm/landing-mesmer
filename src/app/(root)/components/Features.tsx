@@ -166,63 +166,64 @@ const Advantages = () => {
         />
       )}
 
-      <div className="flex flex-col md:flex-row items-center justify-between mt-16">
-        <motion.div
-          ref={contentRef}
-          initial="hidden"
-          animate={contentInView ? "visible" : "hidden"}
-          variants={fadeInUp}
-          className="mb-8 md:w-2/3"
-        >
-          <p className="text-gray-800 leading-relaxed max-w-3xl">
-            Компания «MESMER» обладает рядом престижных международных и
-            национальных сертификатов, подтверждающих её соответствие высоким
-            стандартам управления качеством, экологическими нормами и охраной
-            труда. Среди них:
-          </p>
-        </motion.div>
+      <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Левая пустая часть */}
+          <div className="hidden md:block"></div>
 
-        <motion.div
-          ref={standardsRef}
-          initial="hidden"
-          animate={standardsInView ? "visible" : "hidden"}
-          variants={{
-            visible: {
-              transition: {
-                staggerChildren: 0.15,
-              },
-            },
-          }}
-          className="space-y-4"
-        >
-          <div></div>
-          <div>
-            {standards.map((standard) => (
-              <motion.div
-                key={standard.id}
-                variants={{
-                  hidden: { opacity: 0, x: -20 },
-                  visible: { opacity: 1, x: 0 },
-                }}
-                className="flex items-start space-x-3"
-              >
-                <Image src={`/ptichka.svg`} alt="" width={20} height={20} />
-                <span className="text-gray-700">{standard.title}</span>
-              </motion.div>
-            ))}
+          {/* Правая часть с содержимым */}
+          <div className="flex flex-col items-start space-y-6">
+            <motion.div
+              ref={contentRef}
+              initial="hidden"
+              animate={contentInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+            >
+              <p className="text-gray-800 leading-relaxed max-w-md font-bold">
+                Компания «MESMER» обладает рядом престижных международных и
+                национальных сертификатов, подтверждающих её соответствие
+                высоким стандартам управления качеством, экологическими нормами
+                и охраной труда. Среди них:
+              </p>
+            </motion.div>
+
+            <motion.div
+              ref={standardsRef}
+              initial="hidden"
+              animate={standardsInView ? "visible" : "hidden"}
+              variants={{
+                visible: { transition: { staggerChildren: 0.15 } },
+              }}
+              className="space-y-3"
+            >
+              {standards.map((standard) => (
+                <motion.div
+                  key={standard.id}
+                  variants={{
+                    hidden: { opacity: 0, x: -20 },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                  className="flex items-start space-x-3"
+                >
+                  <Image src="/ptichka.svg" alt="" width={20} height={20} />
+                  <span className="text-gray-700">{standard.title}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.p
+              initial="hidden"
+              animate={standardsInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+              className="mt-6 text-gray-600 italic max-w-md"
+            >
+              Эти сертификаты подтверждают приверженность компании лучшим
+              мировым и национальным практикам, обеспечивая клиентам и партнерам
+              уверенность в надежности и качестве предоставляемых услуг.
+            </motion.p>
           </div>
-          <motion.p
-            initial="hidden"
-            animate={standardsInView ? "visible" : "hidden"}
-            variants={fadeInUp}
-            className="mt-8 text-gray-600 italic"
-          >
-            Эти сертификаты подтверждают приверженность компании лучшим мировым
-            и национальным практикам, обеспечивая клиентам и партнерам
-            уверенность в надежности и качестве предоставляемых услуг.
-          </motion.p>
-        </motion.div>
-      </div>
+        </div>
+      </section>
     </div>
   );
 };
