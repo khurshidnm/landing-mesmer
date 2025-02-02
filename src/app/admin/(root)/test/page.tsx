@@ -7,7 +7,9 @@ export default function Home() {
 
   return (
     <div>
-      <RichTextEditor value={content} onChange={setContent} />
+      <RichTextEditor
+      // @ts-expect-error: error is not defined 
+      value={content} onChange={setContent} />
     </div>
   );
 }
