@@ -14,7 +14,12 @@ import HomeProjects from "./components/HomeProjects";
 const HomePage = () => {
   return (
     <div>
-      <Hero />
+      <Hero
+        backgroundImage={"/heroImg.png"}
+        height={"100vh"}
+        subtitle=" Специализация в трех рыночных сегментах:"
+        title=" Энергетика, водоснабжение и экологическая инфраструктура"
+      />
       <PartnersCarousel />
       <About />
       <Advantages />
