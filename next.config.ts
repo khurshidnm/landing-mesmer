@@ -9,23 +9,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.(png|jpe?g|gif|svg)$/i,
-      type: "asset/resource",
-      generator: {
-        filename: "static/uploads/[hash][ext][query]",
-      },
-    });
-    return config;
-  },
-  experimental: {
-    serverActions: {
-      bodySizeLimit: "100mb",
-      allowedOrigins: ["http://localhost:3000"],
-    },
-  },
-
 };
 
 export default nextConfig;
