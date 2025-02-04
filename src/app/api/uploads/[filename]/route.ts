@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
+  // @ts-expect-error: error is not defined
   { params }: { params: { filename: string } }
 ) {
   try {
