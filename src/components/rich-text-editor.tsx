@@ -99,7 +99,7 @@ export function RichTextEditor({ className, setValue, disabled }: { className?: 
         try {
           const response = await axios.post("/api/upload", formData);
           if (response.data.success) {
-            editor?.chain().focus().setImage({ src: "/uploads/" + response.data.name }).run();
+            editor?.chain().focus().setImage({ src: "/api/uploads/" + response.data.name }).run();
           } else {
             alert("Rasm yuklashda xatolik yuz berdi.");
           }

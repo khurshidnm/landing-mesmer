@@ -65,7 +65,7 @@ export default function NewsPage() {
         title,
         description: content,
         slug,
-        cover: "/uploads/" + coverImageUrl
+        cover: "/api/uploads/" + coverImageUrl
       })
       
       if (response.status) {
