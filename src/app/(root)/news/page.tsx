@@ -7,6 +7,9 @@ import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import { NewsGrid } from "@/components/news-grid";
+import { Card } from "@/components/ui/card";
+import { Cards } from "../components/Cards";
 
 const newsItems = [
   {
@@ -39,7 +42,7 @@ const News = () => {
         subtitle=""
       />
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <motion.div
+        {/* <motion.div
           ref={ref}
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
@@ -79,7 +82,8 @@ const News = () => {
               </Link>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
+        <Cards />
       </div>
       <Footer />
     </div>
