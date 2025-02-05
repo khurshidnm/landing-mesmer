@@ -2,9 +2,47 @@ import mongoose from "mongoose";
 
 const newsSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
+    uz: {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+      content: {
+        type: String,
+        required: true,
+      },
+    },
+    oz: {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+      content: {
+        type: String,
+        required: true,
+      },
+    },
+    ru: {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+      content: {
+        type: String,
+        required: true,
+      },
     },
     slug: {
       type: String,
@@ -12,10 +50,6 @@ const newsSchema = new mongoose.Schema(
       unique: true,
     },
     cover: {
-      type: String,
-      required: true,
-    },
-    description: {
       type: String,
       required: true,
     },

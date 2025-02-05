@@ -16,24 +16,23 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { PreviewModal } from "./preview-modal"
-import type { NewsItem, NewsGridProps } from "@/types/news"
-import { useRouter } from "next/navigation"
+import { PreviewModal } from "./projects-preview-modal"
+import type { ProjectsItem, ProjectsGridProps } from "@/types/projects"
 
-export function NewsGrid({ items, onPreview, onEdit, onDelete }: NewsGridProps) {
-  const [selectedItem, setSelectedItem] = useState<NewsItem | null>(null)
+export function ProjectsGrid({ items, onPreview, onEdit, onDelete }: ProjectsGridProps) {
+  const [selectedItem, setSelectedItem] = useState<ProjectsItem | null>(null)
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+  const [isEditOpen, setIsEditOpen] = useState(false)
   const [itemToDelete, setItemToDelete] = useState<string | null>(null)
 
-  const router = useRouter()
-
-  const handlePreview = (item: NewsItem) => {
+  const handlePreview = (item: ProjectsItem) => {
     setSelectedItem(item)
     setIsPreviewOpen(true)
   }
 
-  const handleEdit = (item: NewsItem) => {
-    router.push(`/admin/news/${item.slug}`)
+  const handleEdit = (item: ProjectsItem) => {
+    setSelectedItem(item)
+    setIsEditOpen(true)
   }
 
   const handleDelete = (slug: string) => {
@@ -41,15 +40,16 @@ export function NewsGrid({ items, onPreview, onEdit, onDelete }: NewsGridProps) 
     setItemToDelete(null)
   }
 
-  const handleSave = (updatedItem: NewsItem) => {
+  const handleSave = (updatedItem: ProjectsItem) => {
     onEdit(updatedItem.slug)
   }
 
+  console.log(items)
   return (
     <>
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((item) => (
+          {items?.map((item) => (
             <Card key={item.slug} className="overflow-hidden">
               <div className="relative aspect-video">
                 <Image
@@ -87,7 +87,7 @@ export function NewsGrid({ items, onPreview, onEdit, onDelete }: NewsGridProps) 
                     <AlertDialogHeader>
                       <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                       <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete the news article &quot;
+                        This action cannot be undone. This will permanently delete the project &quot;
                         {item.uz.title}&quot;.
                       </AlertDialogDescription>
                     </AlertDialogHeader>

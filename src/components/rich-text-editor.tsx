@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
@@ -14,75 +14,72 @@ import { Color } from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import Underline from "@tiptap/extension-underline";
 import CodeBlockLowlight from "@tiptap/extension-code-block";
+import BulletList from "@tiptap/extension-bullet-list";
+import OrderedList from "@tiptap/extension-ordered-list";
+import ListItem from "@tiptap/extension-list-item";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css"; // PrismJS uchun tema
+import "prismjs/themes/prism-tomorrow.css";
 
-export function RichTextEditor({ className, setValue, disabled }: { className?: string; setValue: (value: string) => void, disabled?: boolean }) {
+export function RichTextEditor({
+  className,
+  setValue,
+  disabled,
+  value,
+}: {
+  className?: string;
+  setValue: (value: string) => void;
+  disabled?: boolean;
+  value?: string;
+}) {
   const [loading, setLoading] = useState(false);
 
   // TipTap Editor konfiguratsiyasi
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        heading: {
-          levels: [1, 2, 3, 4, 5, 6],
-          HTMLAttributes: {
-            class: "rich-text-editor",
-          },
-        },
+        heading: { levels: [1, 2, 3, 4, 5, 6] },
       }),
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: "text-blue-500 underline rich-text-editor",
-        },
-      }),
-      Image.configure({
-        inline: true,
-        allowBase64: true,
-        HTMLAttributes: {
-          class: "rounded-lg max-w-full h-auto rich-text-editor",
-          style: "cursor: pointer;",
-        },
-      }),
-      Table.configure({
-        resizable: true,
-        HTMLAttributes: {
-          class: "border-collapse border border-gray-400 rich-text-editor",
-        },
-      }),
+      Link.configure({ openOnClick: false }),
+      Image.configure({ inline: true, allowBase64: true }),
+      Table.configure({ resizable: true }),
       TableRow,
       TableHeader,
-      TableCell.configure({
-        HTMLAttributes: {
-          class: "border border-gray-400 p-2 rich-text-editor",
-        },
-      }),
+      TableCell,
       TextStyle,
       Color,
       Highlight,
       Underline,
+      BulletList,
+      OrderedList,
+      ListItem,
       CodeBlockLowlight.configure({
-        // @ts-expect-error: error is not defined
+        // @ts-expect-error: `lowlight` is a required option
         lowlight: {
-          // @ts-expect-error: error is not defined
-          highlight: (language, code) => {
-            if (Prism.languages[language]) {
-              return Prism.highlight(code, Prism.languages[language], language);
-            } else {
-              return code;
-            }
+          highlight: (language: string, code: string) => {
+            return Prism.languages[language]
+              ? Prism.highlight(code, Prism.languages[language], language)
+              : code;
           },
         },
       }),
     ],
-    content: "<p>Matnni shu yerga yozing...</p>",
+    content:
+      value || '<p class="rich-text-editor">Matnni shu yerga yozing...</p>',
     onUpdate: ({ editor }) => {
       setValue(editor.getHTML());
     },
   });
+
+  // value o'zgarganda editor kontentini yangilash
+  useEffect(() => {
+    if (editor && value !== editor.getHTML()) {
+      editor.commands.setContent(
+        value || '<p class="rich-text-editor">Matnni shu yerga yozing...</p>'
+      );
+    }
+  }, [value, editor]);
 
   // Rasm yuklash funksiyasi
   const handleImageUpload = async () => {
@@ -99,7 +96,11 @@ export function RichTextEditor({ className, setValue, disabled }: { className?: 
         try {
           const response = await axios.post("/api/upload", formData);
           if (response.data.success) {
-            editor?.chain().focus().setImage({ src: "/api/uploads/" + response.data.name }).run();
+            editor
+              ?.chain()
+              .focus()
+              .setImage({ src: "/api/uploads/" + response.data.name })
+              .run();
           } else {
             alert("Rasm yuklashda xatolik yuz berdi.");
           }
@@ -114,15 +115,28 @@ export function RichTextEditor({ className, setValue, disabled }: { className?: 
     fileInput.click();
   };
 
-  // Qo'shimcha funksiyalar
-  const handleMark = () => {
-    editor?.chain().focus().toggleHighlight().run();
+  // Link qo'shish funksiyasi
+  const addLink = () => {
+    const url = prompt("Havola manzilini kiriting:");
+    if (url) {
+      editor
+        ?.chain()
+        .focus()
+        .extendMarkRange("link")
+        .setLink({ href: url })
+        .run();
+    }
   };
 
   return (
-    <div className={cn("rounded-lg border bg-white shadow-sm", className)}>
+    <div
+      className={cn(
+        "rich-text-editor rounded-b-lg border bg-white shadow-sm",
+        className
+      )}
+    >
       {/* Toolbar */}
-      <div className="flex flex-wrap gap-2 border-b p-2">
+      <div className="rich-text-editor flex flex-wrap gap-2 border-b p-2">
         {[1, 2, 3, 4, 5, 6].map((level) => (
           <button
             key={level}
@@ -130,10 +144,10 @@ export function RichTextEditor({ className, setValue, disabled }: { className?: 
               editor
                 ?.chain()
                 .focus()
-                .toggleHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 })
+                .toggleHeading({ level } as any)
                 .run()
             }
-            className={`rounded px-2 py-1 ${
+            className={`rich-text-editor px-2 py-1 ${
               editor?.isActive("heading", { level })
                 ? "bg-blue-500 text-white"
                 : "bg-gray-200 hover:bg-gray-300"
@@ -144,68 +158,56 @@ export function RichTextEditor({ className, setValue, disabled }: { className?: 
         ))}
         <button
           onClick={() => editor?.chain().focus().toggleBold().run()}
-          className={`rounded px-2 py-1 ${
-            editor?.isActive("bold")
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+          className="rich-text-editor px-2 py-1"
         >
-          <strong>B</strong>
+          B
         </button>
         <button
           onClick={() => editor?.chain().focus().toggleItalic().run()}
-          className={`rounded px-2 py-1 ${
-            editor?.isActive("italic")
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+          className="rich-text-editor px-2 py-1"
         >
-          <em>I</em>
+          I
         </button>
         <button
           onClick={() => editor?.chain().focus().toggleUnderline().run()}
-          className={`rounded px-2 py-1 ${
-            editor?.isActive("underline")
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+          className="rich-text-editor px-2 py-1"
         >
           U
         </button>
         <button
           onClick={() => editor?.chain().focus().toggleStrike().run()}
-          className={`rounded px-2 py-1 ${
-            editor?.isActive("strike")
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+          className="rich-text-editor px-2 py-1"
         >
           S
         </button>
         <button
-          onClick={handleMark}
-          className={`rounded px-2 py-1 ${
-            editor?.isActive("highlight")
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+          onClick={addLink}
+          className="rich-text-editor bg-gray-200 px-2 py-1 hover:bg-gray-300"
         >
-          Mark
+          🔗 Link
+        </button>
+        <button
+          onClick={() => editor?.chain().focus().toggleBulletList().run()}
+          className="rich-text-editor px-2 py-1"
+        >
+          • List
+        </button>
+        <button
+          onClick={() => editor?.chain().focus().toggleOrderedList().run()}
+          className="rich-text-editor px-2 py-1"
+        >
+          1. List
         </button>
         <button
           onClick={handleImageUpload}
-          className="rounded bg-gray-200 px-2 py-1 hover:bg-gray-300"
+          className="rich-text-editor bg-gray-200 px-2 py-1 hover:bg-gray-300"
           disabled={loading}
         >
           {loading ? "Yuklanmoqda..." : "Rasm"}
         </button>
         <button
           onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
-          className={`rounded px-2 py-1 ${
-            editor?.isActive("codeBlock")
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+          className="rich-text-editor px-2 py-1"
         >
           Kod
         </button>
@@ -213,9 +215,9 @@ export function RichTextEditor({ className, setValue, disabled }: { className?: 
 
       {/* Editor */}
       <EditorContent
-      disabled={disabled || false}
+        disabled={disabled || false}
         editor={editor}
-        className="min-h-[200px] p-4 outline-none"
+        className="rich-text-editor min-h-[200px] p-4 outline-none"
       />
     </div>
   );
