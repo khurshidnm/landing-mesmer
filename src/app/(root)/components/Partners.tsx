@@ -2,28 +2,17 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import partner1 from "../../../../public/partners/partner (1).png";
-import partner2 from "../../../../public/partners/partner (2).png";
-import partner3 from "../../../../public/partners/partner (3).png";
-import partner4 from "../../../../public/partners/partner (4).png";
-import partner5 from "../../../../public/partners/partner (5).png";
-import partner6 from "../../../../public/partners/partner (6).png";
-import partner7 from "../../../../public/partners/partner (7).png";
-import partner8 from "../../../../public/partners/partner (8).png";
-import partner9 from "../../../../public/partners/partner (9).png";
-import partner10 from "../../../../public/partners/partner (10).png";
-
 const partners = [
-  partner1,
-  partner2,
-  partner3,
-  partner4,
-  partner5,
-  partner6,
-  partner7,
-  partner8,
-  partner9,
-  partner10,
+  "/partners/partner (1).png",
+  "/partners/partner (2).png",
+  "/partners/partner (3).png",
+  "/partners/partner (4).png",
+  "/partners/partner (5).png",
+  "/partners/partner (6).png",
+  "/partners/partner (7).png",
+  "/partners/partner (8).png",
+  "/partners/partner (9).png",
+  "/partners/partner (10).png",
 ];
 
 const PartnersCarousel = () => {
