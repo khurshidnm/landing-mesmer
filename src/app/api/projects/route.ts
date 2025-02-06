@@ -1,4 +1,4 @@
-import News from "@/database/news.model";
+import Projects from "@/database/projects.model";
 import { authOptions } from "@/lib/auth-options";
 import { connectToDatabase } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
@@ -8,13 +8,13 @@ export async function GET() {
   try {
     await connectToDatabase();
 
-    const collections = await News.find({});
+    const projects = await Projects.find({});
 
     return NextResponse.json({
-      message: "Collections",
+      message: "Projects",
       errors: null,
       data: {
-        collections,
+        projects,
       },
     });
   } catch (error) {
@@ -48,26 +48,58 @@ export async function POST(req: Request) {
       );
     }
 
-    const { title_uz, title_oz, title_ru, description_uz, description_oz, description_ru, content_uz, content_oz, content_ru, cover, slug } = await req.json();
+    const {
+      title_uz,
+      title_oz,
+      title_ru,
+      description_uz,
+      description_oz,
+      description_ru,
+      status_uz,
+      status_oz,
+      status_ru,
+      volume_of_tasks_uz,
+      volume_of_tasks_oz,
+      volume_of_tasks_ru,
+      customer_uz,
+      customer_oz,
+      customer_ru,
+      implementation_period_uz,
+      implementation_period_oz,
+      implementation_period_ru,
+      cover,
+      slug,
+      gallery,
+    } = await req.json();
 
-    const collection = await News.create({
+    const collection = await Projects.create({
       uz: {
         title: title_uz,
         description: description_uz,
-        content: content_uz,
+        status: status_uz,
+        volume_of_tasks: volume_of_tasks_uz,
+        customer: customer_uz,
+        implementation_period: implementation_period_uz,
       },
       oz: {
         title: title_oz,
         description: description_oz,
-        content: content_oz,
+        status: status_oz,
+        volume_of_tasks: volume_of_tasks_oz,
+        customer: customer_oz,
+        implementation_period: implementation_period_oz,
       },
       ru: {
         title: title_ru,
         description: description_ru,
-        content: content_ru,
+        status: status_ru,
+        volume_of_tasks: volume_of_tasks_ru,
+        customer: customer_ru,
+        implementation_period: implementation_period_ru,
       },
-      cover,
       slug,
+      cover,
+      gallery,
     });
 
     return NextResponse.json({

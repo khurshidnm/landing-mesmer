@@ -1,70 +1,115 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { RichTextEditor } from "@/components/rich-text-editor"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { generateSlug } from "@/lib/generate-slug"
-import { cn } from "@/lib/utils"
-import axios from "axios"
-import { toast } from "@/hooks/use-toast"
-import { Loader2 } from "lucide-react"
-import { useRouter } from "next/navigation"
+import type React from "react";
+import { useEffect, useState } from "react";
+import { RichTextEditor } from "@/components/rich-text-editor";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { generateSlug } from "@/lib/generate-slug";
+import { cn } from "@/lib/utils";
+import axios from "axios";
+import { toast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { NewsItem } from "@/types/news";
 
 interface LanguageContent {
-  title: string
-  description: string
-  content: string
+  title: string;
+  description: string;
+  content: string;
 }
 
-export default function NewsPage() {
-  const [uz, setUz] = useState<LanguageContent>({ title: "", description: "", content: "" })
-  const [oz, setOz] = useState<LanguageContent>({ title: "", description: "", content: "" })
-  const [ru, setRu] = useState<LanguageContent>({ title: "", description: "", content: "" })
-  const [coverImage, setCoverImage] = useState<File | null>(null)
-  const [coverImageUrl, setCoverImageUrl] = useState("")
-  const [slug, setSlug] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+export default function NewsEditPageInner({ news }: { news: NewsItem }) {
+  const [uz, setUz] = useState<LanguageContent>({
+    title: "",
+    description: "",
+    content: "",
+  });
+  const [oz, setOz] = useState<LanguageContent>({
+    title: "",
+    description: "",
+    content: "",
+  });
+  const [ru, setRu] = useState<LanguageContent>({
+    title: "",
+    description: "",
+    content: "",
+  });
+  const [coverImage, setCoverImage] = useState<File | null>(null);
+  const [coverImageUrl, setCoverImageUrl] = useState("");
+  const [slug, setSlug] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const handleCoverImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null
+  useEffect(() => {
+    setUz({
+      title: news.uz.title,
+      description: news.uz.description,
+      content: news.uz.content,
+    });
+    setOz({
+      title: news.oz.title,
+      description: news.oz.description,
+      content: news.oz.content,
+    });
+    setRu({
+      title: news.ru.title,
+      description: news.ru.description,
+      content: news.ru.content,
+    });
+    setCoverImageUrl(news.cover);
+    const coverImage = fetch(news.cover)
+      .then((res) => res.blob())
+      .then((blob) => setCoverImage(new File([blob], "cover.png", { type: "image/png" })))
+      .catch(() => null);
+    setSlug(news.slug);
+  }, [news]);
+
+  const handleCoverImageChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files ? e.target.files[0] : null;
     if (file) {
-      setCoverImage(file)
+      setCoverImage(file);
       try {
-        const formData = new FormData()
-        formData.append("file", file)
+        const formData = new FormData();
+        formData.append("file", file);
         const response = await axios.post("/api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        })
+        });
         if (response.data.success) {
-          setCoverImageUrl(response.data.name)
+          setCoverImageUrl(response.data.name);
         }
       } catch (error) {
         toast({
           title: "Error",
           description: "Failed to upload cover image",
           variant: "destructive",
-        })
+        });
       }
     } else {
       toast({
         title: "Error",
         description: "You must select a cover image",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const handlePublish = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       const response = await axios.post("/api/news", {
@@ -79,43 +124,43 @@ export default function NewsPage() {
         content_ru: ru.content,
         slug,
         cover: "/api/uploads/" + coverImageUrl,
-      })
+      });
 
       if (response.status === 200) {
         toast({
           title: "Success",
           description: "News article created successfully",
           variant: "default",
-        })
-        router.push("/admin/news")
+        });
+        router.push("/admin/news");
       }
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to create news article",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleTitleChange = (lang: "uz" | "oz" | "ru", value: string) => {
-    const newTitle = value
+    const newTitle = value;
     if (lang === "uz") {
-      setUz((prev) => ({ ...prev, title: newTitle }))
-      setSlug(generateSlug(newTitle))
+      setUz((prev) => ({ ...prev, title: newTitle }));
+      setSlug(generateSlug(newTitle));
     } else if (lang === "oz") {
-      setOz((prev) => ({ ...prev, title: newTitle }))
+      setOz((prev) => ({ ...prev, title: newTitle }));
     } else {
-      setRu((prev) => ({ ...prev, title: newTitle }))
+      setRu((prev) => ({ ...prev, title: newTitle }));
     }
-  }
+  };
 
   const renderLanguageTab = (
     lang: "uz" | "oz" | "ru",
     content: LanguageContent,
-    setContent: React.Dispatch<React.SetStateAction<LanguageContent>>,
+    setContent: React.Dispatch<React.SetStateAction<LanguageContent>>
   ) => (
     <TabsContent value={lang}>
       <div className="space-y-4">
@@ -131,35 +176,50 @@ export default function NewsPage() {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`description-${lang}`}>Description ({lang.toUpperCase()})</Label>
+          <Label htmlFor={`description-${lang}`}>
+            Description ({lang.toUpperCase()})
+          </Label>
           <Input
             id={`description-${lang}`}
             placeholder={`Enter news description in ${lang.toUpperCase()}`}
             disabled={isLoading}
             className={isLoading ? "animate-pulse" : ""}
             value={content.description}
-            onChange={(e) => setContent((prev) => ({ ...prev, description: e.target.value }))}
+            onChange={(e) =>
+              setContent((prev) => ({ ...prev, description: e.target.value }))
+            }
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`content-${lang}`}>Content ({lang.toUpperCase()})</Label>
+          <Label htmlFor={`content-${lang}`}>
+            Content ({lang.toUpperCase()})
+          </Label>
           <RichTextEditor
             disabled={isLoading}
             className={isLoading ? "animate-pulse" : ""}
             value={content.content}
-            setValue={(value) => setContent((prev) => ({ ...prev, content: value }))}
+            setValue={(value) =>
+              setContent((prev) => ({ ...prev, content: value }))
+            }
           />
         </div>
       </div>
     </TabsContent>
-  )
+  );
 
   return (
-    <div className={cn("container mx-auto", isLoading && "animate-pulse [animation-duration:1.5s]")}>
+    <div
+      className={cn(
+        "container mx-auto",
+        isLoading && "animate-pulse [animation-duration:1.5s]"
+      )}
+    >
       <Card>
         <CardHeader>
           <CardTitle>Create News Article</CardTitle>
-          <CardDescription>Add a new news article to your website</CardDescription>
+          <CardDescription>
+            Add a new news article to your website
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <Tabs defaultValue="uz">
@@ -174,7 +234,13 @@ export default function NewsPage() {
           </Tabs>
           <div className="space-y-2">
             <Label htmlFor="slug">Slug</Label>
-            <Input id="slug" disabled={isLoading} className={isLoading ? "animate-pulse" : ""} value={slug} readOnly />
+            <Input
+              id="slug"
+              disabled={isLoading}
+              className={isLoading ? "animate-pulse" : ""}
+              value={slug}
+              readOnly
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="cover">Cover Image</Label>
@@ -197,7 +263,11 @@ export default function NewsPage() {
             )}
           </div>
           <div className="flex gap-4">
-            <Button className={cn("flex-1", isLoading && "animate-pulse")} disabled={isLoading} onClick={handlePublish}>
+            <Button
+              className={cn("flex-1", isLoading && "animate-pulse")}
+              disabled={isLoading}
+              onClick={handlePublish}
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Publish
             </Button>
@@ -227,6 +297,5 @@ export default function NewsPage() {
         </Card>
       )}
     </div>
-  )
+  );
 }
-

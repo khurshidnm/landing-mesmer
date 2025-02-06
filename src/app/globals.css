@@ -144,3 +144,7 @@ h5.rich-text-editor {
 h6.rich-text-editor {
   @apply text-base font-bold;
 }
+
+.tiptap.ProseMirror {
+  @apply outline-none min-h-[200px];
+}
