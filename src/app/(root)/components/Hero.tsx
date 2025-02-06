@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +26,7 @@ const Hero = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState("UZ");
+  const pathname = usePathname();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const changeLanguage = (lang: string) => setLanguage(lang);
@@ -83,27 +85,36 @@ const Hero = ({
         <nav className="px-4 lg:px-10 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 lg:gap-16">
-              <Image
-                src="/logo.svg"
-                width={100}
-                height={25}
-                alt="Logo"
-                className="w-[80px] md:w-[100px]"
-              />
+              <Link href={"/"}>
+                <Image
+                  src="/logo.svg"
+                  width={100}
+                  height={25}
+                  alt="Logo"
+                  className="w-[80px] md:w-[100px]"
+                />
+              </Link>
               <div className="hidden lg:flex space-x-6">
                 {links.map((link) => (
                   <Link
                     key={link.text}
                     href={link.href}
-                    className="text-white hover:text-gray-200 transition-colors"
+                    className={`text-white hover:text-gray-200 transition-colors relative ${
+                      pathname === link.href ? "font-bold" : ""
+                    }`}
                   >
                     {link.text}
+                    {pathname === link.href && (
+                      <motion.div
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-white"
+                        layoutId="underline"
+                      />
+                    )}
                   </Link>
                 ))}
               </div>
             </div>
             <div className="flex items-center gap-4 lg:gap-8 text-white">
-              {/* Телефон */}
               <a
                 href="tel:+998555188870"
                 className="hover:text-gray-200 transition-colors flex items-center gap-2"
@@ -111,7 +122,6 @@ const Hero = ({
                 <Phone size={18} />
                 <span className="hidden lg:inline">+998 55 518 88 70</span>
               </a>
-              {/* Почта */}
               <a
                 href="mailto:info@mesmer.uz"
                 className="hover:text-gray-200 transition-colors flex items-center gap-2"
@@ -119,29 +129,27 @@ const Hero = ({
                 <Mail size={18} />
                 <span className="hidden lg:inline">info@mesmer.uz</span>
               </a>
-              {/* Выбор языка */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
-                    className="bg-transparent text-white"
+                    className="bg-transparent text-white border-white hover:bg-white hover:text-black transition-colors"
                   >
                     {language}
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="text-white">
+                <DropdownMenuContent className="bg-white/10 backdrop-blur-md border-white/20">
                   {["UZ", "RU", "ЎЗ"].map((lang) => (
                     <DropdownMenuItem
                       key={lang}
                       onClick={() => changeLanguage(lang)}
-                      className="text-gray-900 hover:bg-gray-100"
+                      className="text-white hover:bg-white/20 transition-colors"
                     >
                       {lang}
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-              {/* Кнопка меню для мобильных устройств */}
               <div className="lg:hidden flex items-center gap-4">
                 <button
                   onClick={toggleMenu}
@@ -207,7 +215,9 @@ const Hero = ({
                   >
                     <Link
                       href={link.href}
-                      className="text-white text-lg hover:text-gray-200 transition-colors"
+                      className={`text-white text-lg hover:text-gray-200 transition-colors ${
+                        pathname === link.href ? "font-bold" : ""
+                      }`}
                       onClick={toggleMenu}
                     >
                       {link.text}
