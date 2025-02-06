@@ -60,12 +60,12 @@ const Hero = ({
   };
 
   const links = [
-    "О компании",
-    "Сфера деятельности",
-    "Проекты",
-    "Новости",
-    "Карьера",
-    "Контакты",
+    { text: "О компании", href: "/about" },
+    { text: "Сфера деятельности", href: "/services" },
+    { text: "Проекты", href: "/projects" },
+    { text: "Новости", href: "/news" },
+    { text: "Карьера", href: "/career" },
+    { text: "Контакты", href: "/contact" },
   ];
 
   return (
@@ -93,11 +93,11 @@ const Hero = ({
               <div className="hidden lg:flex space-x-6">
                 {links.map((link) => (
                   <Link
-                    key={link}
-                    href="#"
+                    key={link.text}
+                    href={link.href}
                     className="text-white hover:text-gray-200 transition-colors"
                   >
-                    {link}
+                    {link.text}
                   </Link>
                 ))}
               </div>
@@ -199,18 +199,18 @@ const Hero = ({
               <nav className="flex flex-col space-y-6">
                 {links.map((link, i) => (
                   <motion.div
-                    key={link}
+                    key={link.text}
                     custom={i}
                     variants={linkVariants}
                     initial="closed"
                     animate="open"
                   >
                     <Link
-                      href="#"
+                      href={link.href}
                       className="text-white text-lg hover:text-gray-200 transition-colors"
                       onClick={toggleMenu}
                     >
-                      {link}
+                      {link.text}
                     </Link>
                   </motion.div>
                 ))}
