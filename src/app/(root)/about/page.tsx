@@ -3,50 +3,29 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Hero from "../components/Hero";
-import partner1 from "@/../public/our-partners/partner1.png";
-import partner2 from "@/../public/our-partners/partner2.png";
-import partner3 from "@/../public/our-partners/partner3.png";
-import partner4 from "@/../public/our-partners/partner4.png";
-import partner5 from "@/../public/our-partners/partner5.png";
-import partner6 from "@/../public/our-partners/partner6.png";
-import partner7 from "@/../public/our-partners/partner7.png";
-import partner8 from "@/../public/our-partners/partner8.png";
-import partner9 from "@/../public/our-partners/partner9.png";
-import partner10 from "@/../public/our-partners/partner10.png";
-import partner11 from "@/../public/our-partners/partner11.png";
-import partner12 from "@/../public/our-partners/partner12.png";
-import partner13 from "@/../public/our-partners/partner13.png";
-import partner14 from "@/../public/our-partners/partner14.png";
-import partner15 from "@/../public/our-partners/partner15.png";
-import partner16 from "@/../public/our-partners/partner16.png";
-import partner17 from "@/../public/our-partners/partner17.png";
-import partner18 from "@/../public/our-partners/partner18.png";
-import partner19 from "@/../public/our-partners/partner19.png";
-import partner20 from "@/../public/our-partners/partner20.png";
-import partner21 from "@/../public/our-partners/partner21.png";
 
 const partners = [
-  partner1,
-  partner2,
-  partner3,
-  partner4,
-  partner5,
-  partner6,
-  partner7,
-  partner8,
-  partner9,
-  partner10,
-  partner11,
-  partner12,
-  partner13,
-  partner14,
-  partner15,
-  partner16,
-  partner17,
-  partner18,
-  partner19,
-  partner20,
-  partner21,
+  "/our-partners/partner1.png",
+  "/our-partners/partner2.png",
+  "/our-partners/partner3.png",
+  "/our-partners/partner4.png",
+  "/our-partners/partner5.png",
+  "/our-partners/partner6.png",
+  "/our-partners/partner7.png",
+  "/our-partners/partner8.png",
+  "/our-partners/partner9.png",
+  "/our-partners/partner10.png",
+  "/our-partners/partner11.png",
+  "/our-partners/partner12.png",
+  "/our-partners/partner13.png",
+  "/our-partners/partner14.png",
+  "/our-partners/partner15.png",
+  "/our-partners/partner16.png",
+  "/our-partners/partner17.png",
+  "/our-partners/partner18.png",
+  "/our-partners/partner19.png",
+  "/our-partners/partner20.png",
+  "/our-partners/partner21.png",
 ];
 
 const About = () => {
