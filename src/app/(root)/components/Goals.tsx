@@ -7,11 +7,20 @@ import Image from "next/image";
 const goals = Array.from({ length: 18 }, (_, i) => ({
   id: i + 1,
   img: `/goals/goals${i + 1}.png`,
-  border: [6, 7, 8, 9, 13, 17].includes(i + 1), // Устанавливаем границу для нужных целей
+  animate: [6, 7, 8, 9, 13, 17].includes(i + 1),
 }));
 
 const Goals = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  const pulseAnimation = {
+    scale: [1, 1.1, 1],
+    transition: {
+      duration: 2,
+      repeat: Number.POSITIVE_INFINITY,
+      ease: "easeInOut",
+    },
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -41,17 +50,13 @@ const Goals = () => {
           <motion.div
             key={goal.id}
             variants={{
-              hidden: { opacity: 0, scale: 0.8 },
+              hidden: { opacity: 0, scale: 0.7 },
               visible: { opacity: 1, scale: 1 },
             }}
-            transition={{ duration: 0.5 }}
+            animate={goal.animate ? pulseAnimation : undefined}
             className="relative group"
           >
-            <div
-              className={`aspect-square rounded-lg overflow-hidden p-[3px] ${
-                goal.border ? "border-4 border-indigo-500" : ""
-              }`}
-            >
+            <div className="aspect-square rounded-lg overflow-hidden p-[3px]">
               <Image
                 src={goal.img}
                 alt={`Goal ${goal.id}`}

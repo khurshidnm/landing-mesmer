@@ -65,7 +65,7 @@ const activities = [
 ];
 
 const BusinessActivities = () => {
-  const [activeId, setActiveId] = useState(1);
+  const [activeId, setActiveId] = useState<number | null>(null);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
@@ -78,9 +78,10 @@ const BusinessActivities = () => {
           <motion.div
             key={activity.id}
             layout
-            onClick={() => setActiveId(activity.id)}
-            className={`relative cursor-pointer overflow-hidden rounded-lg transition-all ${
-              activeId === activity.id ? "bg-blue-600" : "bg-white"
+            onMouseEnter={() => setActiveId(activity.id)}
+            onMouseLeave={() => setActiveId(null)}
+            className={`relative overflow-hidden rounded-lg transition-all ${
+              activeId === activity.id ? "bg-blue-600 text-white" : "bg-white"
             }`}
             animate={{
               backgroundColor: activeId === activity.id ? "#2563eb" : "#f9fafb",
@@ -97,7 +98,7 @@ const BusinessActivities = () => {
             >
               <span
                 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mr-3 sm:mr-4 md:mr-6 transition-colors duration-300 ${
-                  activeId === activity.id ? "text-white/20" : "text-gray-200"
+                  activeId === activity.id ? "text-white" : "text-gray-200"
                 }`}
               >
                 {activity.number}

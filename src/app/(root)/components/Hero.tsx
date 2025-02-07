@@ -12,6 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Navbar from "./Navbar";
 
 const Hero = ({
   backgroundImage,
@@ -76,97 +77,12 @@ const Hero = ({
       style={{ backgroundImage: `url(${backgroundImage})`, height }}
     >
       <div className="absolute inset-0 bg-black/40 z-10"></div>
-      <motion.header
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-20"
-      >
-        <nav className="px-4 lg:px-10 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4 lg:gap-16">
-              <Link href={"/"}>
-                <Image
-                  src="/logo.svg"
-                  width={100}
-                  height={25}
-                  alt="Logo"
-                  className="w-[80px] md:w-[100px]"
-                />
-              </Link>
-              <div className="hidden lg:flex space-x-6">
-                {links.map((link) => (
-                  <Link
-                    key={link.text}
-                    href={link.href}
-                    className={`text-white hover:text-gray-200 transition-colors relative ${
-                      pathname === link.href ? "font-bold" : ""
-                    }`}
-                  >
-                    {link.text}
-                    {pathname === link.href && (
-                      <motion.div
-                        className="absolute bottom-0 left-0 w-full h-0.5 bg-white"
-                        layoutId="underline"
-                      />
-                    )}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className="flex items-center gap-4 lg:gap-8 text-white">
-              <a
-                href="tel:+998555188870"
-                className="hover:text-gray-200 transition-colors flex items-center gap-2"
-              >
-                <Phone size={18} />
-                <span className="hidden lg:inline">+998 55 518 88 70</span>
-              </a>
-              <a
-                href="mailto:info@mesmer.uz"
-                className="hover:text-gray-200 transition-colors flex items-center gap-2"
-              >
-                <Mail size={18} />
-                <span className="hidden lg:inline">info@mesmer.uz</span>
-              </a>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="bg-transparent text-white border-white hover:bg-white hover:text-black transition-colors"
-                  >
-                    {language}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-white/10 backdrop-blur-md border-white/20">
-                  {["UZ", "RU", "ЎЗ"].map((lang) => (
-                    <DropdownMenuItem
-                      key={lang}
-                      onClick={() => changeLanguage(lang)}
-                      className="text-white hover:bg-white/20 transition-colors"
-                    >
-                      {lang}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <div className="lg:hidden flex items-center gap-4">
-                <button
-                  onClick={toggleMenu}
-                  className="text-white p-2 hover:bg-white/10 rounded-full transition-colors"
-                >
-                  {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </motion.header>
+      <Navbar />
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="absolute bottom-[200px] md:bottom-20 left-0 right-0 md:left-8 text-white z-10 px-4 md:px-8"
+        className="absolute bottom-[200px] md:bottom-20 left-0 right-0 md:left-8 text-white z-10 px-4"
       >
         <motion.p
           initial={{ y: 20, opacity: 0 }}
