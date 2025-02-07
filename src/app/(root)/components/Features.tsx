@@ -85,27 +85,32 @@ const Advantages = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <motion.div
-        ref={headerRef}
         initial="hidden"
-        animate={headerInView ? "visible" : "hidden"}
+        animate="visible"
         variants={fadeInUp}
-        className="mb-12 flex flex-col md:flex-row items-start justify-between"
+        className="mb-12"
       >
-        <h1 className="text-4xl font-bold text-gray-900 mb-8 md:mb-0">
-          ПРЕИМУЩЕСТВО
-        </h1>
-        <div className="space-y-6 md:space-y-0 md:w-2/3">
-          <motion.div variants={fadeInUp}>
-            <h2 className="text-2xl font-semibold mb-4">Наши достоинства</h2>
-            <p className="text-gray-600 leading-relaxed max-w-3xl">
-              Мы - динамично развивающаяся компания, которая придерживается
-              основных принципов безопасности, командной работы и поддержания
-              высокой репутации. Инновационные решения, предоставляемые нашей
-              компанией, являются гарантом своевременного качественного и
-              безопасного выполнения проектов, обеспечивая при этом защиту
-              окружающей среды.
-            </p>
-          </motion.div>
+        <div className="flex flex-col mt-5 lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
+          <div>
+            <h1 className="text-xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10">
+              ПРЕИМУЩЕСТВО
+            </h1>
+          </div>
+          <div className="space-y-6 max-w-2xl">
+            <motion.div variants={fadeInUp}>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">
+                Наши достоинства
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                Мы - динамично развивающаяся компания, которая придерживается
+                основных принципов безопасности, командной работы и поддержания
+                высокой репутации. Инновационные решения, предоставляемые нашей
+                компанией, являются гарантом своевременного качественного и
+                безопасного выполнения проектов, обеспечивая при этом защиту
+                окружающей среды.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </motion.div>
 
@@ -167,61 +172,66 @@ const Advantages = () => {
       )}
 
       <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Левая пустая часть */}
+        <div className="flex items-center justify-between">
           <div className="hidden md:block"></div>
 
-          {/* Правая часть с содержимым */}
-          <div className="flex flex-col items-start space-y-6">
-            <motion.div
-              ref={contentRef}
-              initial="hidden"
-              animate={contentInView ? "visible" : "hidden"}
-              variants={fadeInUp}
-            >
-              <p className="text-gray-800 leading-relaxed max-w-md font-bold">
-                Компания «MESMER» обладает рядом престижных международных и
-                национальных сертификатов, подтверждающих её соответствие
-                высоким стандартам управления качеством, экологическими нормами
-                и охраной труда. Среди них:
-              </p>
-            </motion.div>
-
-            <motion.div
-              ref={standardsRef}
-              initial="hidden"
-              animate={standardsInView ? "visible" : "hidden"}
-              variants={{
-                visible: { transition: { staggerChildren: 0.15 } },
-              }}
-              className="space-y-3"
-            >
-              {standards.map((standard) => (
-                <motion.div
-                  key={standard.id}
-                  variants={{
-                    hidden: { opacity: 0, x: -20 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                  className="flex items-start space-x-3"
-                >
-                  <Image src="/ptichka.svg" alt="" width={20} height={20} />
-                  <span className="text-gray-700">{standard.title}</span>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeInUp}
+            className="mb-12"
+          >
+            <div className="flex flex-col mt-5 lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
+              <div>
+                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10"></h1>
+              </div>
+              <div className="space-y-6 max-w-2xl">
+                <motion.div variants={fadeInUp}>
+                  <p className="text-gray-800 leading-relaxed max-w-md font-bold">
+                    Компания «MESMER» обладает рядом престижных международных и
+                    национальных сертификатов, подтверждающих её соответствие
+                    высоким стандартам управления качеством, экологическими
+                    нормами и охраной труда. Среди них:
+                  </p>
                 </motion.div>
-              ))}
-            </motion.div>
+                <motion.div
+                  ref={standardsRef}
+                  initial="hidden"
+                  animate={standardsInView ? "visible" : "hidden"}
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.15 } },
+                  }}
+                  className="space-y-3"
+                >
+                  {standards.map((standard) => (
+                    <motion.div
+                      key={standard.id}
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0 },
+                      }}
+                      className="flex items-start space-x-3"
+                    >
+                      <Image src="/ptichka.svg" alt="" width={20} height={20} />
+                      <span className="text-gray-700">{standard.title}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
 
-            <motion.p
-              initial="hidden"
-              animate={standardsInView ? "visible" : "hidden"}
-              variants={fadeInUp}
-              className="mt-6 text-gray-600 italic max-w-md"
-            >
-              Эти сертификаты подтверждают приверженность компании лучшим
-              мировым и национальным практикам, обеспечивая клиентам и партнерам
-              уверенность в надежности и качестве предоставляемых услуг.
-            </motion.p>
-          </div>
+                <motion.p
+                  initial="hidden"
+                  animate={standardsInView ? "visible" : "hidden"}
+                  variants={fadeInUp}
+                  className="mt-6 text-gray-600 italic max-w-md"
+                >
+                  Эти сертификаты подтверждают приверженность компании лучшим
+                  мировым и национальным практикам, обеспечивая клиентам и
+                  партнерам уверенность в надежности и качестве предоставляемых
+                  услуг.
+                </motion.p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

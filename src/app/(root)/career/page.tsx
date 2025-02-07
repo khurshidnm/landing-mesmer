@@ -156,7 +156,7 @@ export default function JobListings() {
         title="Вакансии"
         subtitle=""
         backgroundImage="/contact.png"
-        height="80vh"
+        height="500px"
       />
       <div className="flex flex-col justify-center items-center md:flex-row">
         <div className="w-full md:w-1/2"></div>

@@ -13,7 +13,7 @@ export default function ProjectPage({ project }: { project: ProjectsItem }) {
         title=""
         subtitle={`Наши проекты / ${project.ru.title}`}
         backgroundImage="/our.png"
-        height="80vh"
+        height="500px"
       />
       <article className="min-h-screen bg-white container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto pt-8">

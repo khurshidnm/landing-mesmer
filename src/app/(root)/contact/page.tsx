@@ -20,7 +20,7 @@ const Contact = () => {
         title="Контакты"
         subtitle=""
         backgroundImage="/contact.png"
-        height="80vh"
+        height="500px"
       />
 
       <div className="container mx-auto px-4 py-16">

@@ -43,7 +43,7 @@ const AboutCompany = () => {
               О КОМПАНИИ
             </h1>
           </div>
-          <div className="space-y-6 max-w-3xl">
+          <div className="space-y-6 max-w-2xl">
             <motion.div variants={fadeInUp}>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">
                 Наша ключевая задача – быть признанными нашими клиентами, хорошо
@@ -121,28 +121,32 @@ const AboutCompany = () => {
         ))}
       </div>
 
-      <div className="flex justify-between items-center">
-        <div></div>
-        <div>
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-            className="mt-16"
-          >
-            <h2 className="text-2xl font-semibold mb-4">
-              Наша миссия - оставаться ведущей многопрофильной компанией
-            </h2>
-            <p className="text-gray-600 leading-relaxed max-w-3xl">
-              Развивая долгосрочные партнерские взаимоотношения с клиентами по
-              всему миру, предоставляя инновационные решения, отвечающие мировым
-              стандартам услуг и высококачественную продукцию, максимальную
-              эффективность, большой технический опыт и максимальную пользу от
-              инвестиций.
-            </p>
-          </motion.div>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        className="mb-12"
+      >
+        <div className="flex flex-col mt-5 lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
+          <div>
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10"></h1>
+          </div>
+          <div className="space-y-6 max-w-2xl">
+            <motion.div variants={fadeInUp}>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">
+                Наша миссия - оставаться ведущей многопрофильной компанией
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                Развивая долгосрочные партнерские взаимоотношения с клиентами по
+                всему миру, предоставляя инновационные решения, отвечающие
+                мировым стандартам услуг и высококачественную продукцию,
+                максимальную эффективность, большой технический опыт и
+                максимальную пользу от инвестиций.
+              </p>
+            </motion.div>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

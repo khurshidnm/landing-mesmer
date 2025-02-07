@@ -39,7 +39,7 @@ const News = ({ news }: { news: NewsItem[] }) => {
     <div>
       <Hero
         backgroundImage="/news.png"
-        height="70vh"
+        height="500px"
         title="Новости"
         subtitle=""
       />

@@ -50,6 +50,17 @@ const partners = [
 ];
 
 const About = () => {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -57,15 +68,15 @@ const About = () => {
   };
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden ">
       <Hero
         title="О компании"
         subtitle=""
         backgroundImage="/about.png"
-        height="80vh"
+        height="500px"
       />
 
-      <section className="container mx-auto px-4 py-5">
+      <section className=" px-4 py-5 container mx-auto">
         <div className="flex flex-col lg:flex-row items-start gap-12">
           <motion.div className="w-1/2"></motion.div>
 
@@ -242,28 +253,30 @@ const About = () => {
 
       <section className="py-5 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-start ">
+          <div className="flex flex-col lg:flex-row items-start gap-12">
             <motion.div className="w-1/2"></motion.div>
+
             <motion.div
-              className="w-full lg:w-1/2  mb-5"
+              className="w-full lg:w-1/2 space-y-8"
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
               variants={fadeIn}
             >
-              <h2 className="text-3xl font-bold mb-6">Наши партнеры</h2>
-              <p className="text-gray-700 leading-relaxed">
-                «MESMER» сотрудничает с ведущими мировыми технологическими и
-                инженерными компаниями, что позволяет нам предлагать клиентам
-                самые передовые решения и гарантировать высокое качество наших
-                услуг. Мы гордимся нашими партнерами и ценим их вклад в наш
-                общий успех.
-              </p>
+              <div>
+                <h2 className="text-3xl font-bold mb-6">Наши партнеры</h2>
+                <p className="text-gray-700 leading-relaxed">
+                  «MESMER» сотрудничает с ведущими мировыми технологическими и
+                  инженерными компаниями. Наши партнеры – это признанные лидеры
+                  в своих отраслях, чьи инновационные решения помогают
+                  реализовывать сложные проекты с высоким качеством.
+                </p>
+              </div>
             </motion.div>
           </div>
 
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-0 border border-collapse rounded-lg overflow-hidden"
+            className="grid grid-cols-2 mt-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-0 border border-collapse rounded-lg overflow-hidden"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
