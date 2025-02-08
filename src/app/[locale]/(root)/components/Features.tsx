@@ -8,6 +8,7 @@ import { FC, useState } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { Certificate } from "@/types/certificates";
+import { useLocale, useTranslations } from "next-intl";
 
 const standards = [
   {
@@ -33,6 +34,9 @@ const Advantages: FC<Props> = ({ certificates }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
+  const t = useTranslations("home.features");
+  const locale = useLocale();
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <motion.div
@@ -44,17 +48,15 @@ const Advantages: FC<Props> = ({ certificates }) => {
         <div className="flex flex-col mt-5 lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
           <div>
             <h1 className="text-xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10">
-              ПРЕИМУЩЕСТВО
+              {t("title")}
             </h1>
           </div>
           <div className="space-y-6 max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">
-              Наши достоинства
+              {t("sub_title")}
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              Мы - динамично развивающаяся компания, которая придерживается
-              основных принципов безопасности, командной работы и поддержания
-              высокой репутации.
+              {t("description")}
             </p>
           </div>
         </div>
@@ -84,7 +86,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
                   }}
                 />
               </div>
-              <p className="text-sm text-gray-600">{cert.ru.title}</p>
+              <p className="text-sm text-gray-600">{cert[locale as "ru" | "en" | "uz"].title}</p>
             </motion.div>
           ))}
         </div>
@@ -114,7 +116,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
                   className="object-contain cursor-pointer"
                 />
               </div>
-              <p className="text-sm text-gray-600">{cert.ru.title}</p>
+              <p className="text-sm text-gray-600">{cert[locale as "ru" | "en" | "uz"]?.title}</p>
             </motion.div>
           ))}
         </div>

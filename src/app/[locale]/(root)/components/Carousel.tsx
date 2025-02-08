@@ -4,73 +4,99 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "@/components/BluredImage";
 import { ArrowUpRight } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
 const activities = [
   {
     id: 1,
     number: "01",
     image: "/garmoshka.png",
-    title: "Развитие бизнеса в строительстве",
-    description:
-      "Комплексное развитие строительного бизнеса с применением инновационных технологий и современных методов управления.",
+    ru_title: "Развитие бизнеса в строительстве",
+    ru_description: "Комплексное развитие строительного бизнеса с применением инновационных технологий и современных методов управления.",
+    en_title: "Business Development in Construction",
+    en_description: "Comprehensive development of the construction business using innovative technologies and modern management methods.",
+    uz_title: "Qurilish biznesini rivojlantirish",
+    uz_description: "Qurilish biznesini innovatsion texnologiyalar va zamonaviy boshqaruv usullari yordamida kompleks rivojlantirish.",
   },
   {
     id: 2,
     number: "02",
     image: "/garmoshka.png",
-    title: "Управление проектными работами",
-    description:
-      "Эффективное управление проектами любой сложности с учетом современных стандартов и требований рынка.",
+    ru_title: "Управление проектными работами",
+    ru_description: "Эффективное управление проектами любой сложности с учетом современных стандартов и требований рынка.",
+    en_title: "Project Management",
+    en_description: "Efficient management of projects of any complexity, taking into account modern standards and market requirements.",
+    uz_title: "Loyihalarni boshqarish",
+    uz_description: "Har qanday murakkablikdagi loyihalarni zamonaviy standartlar va bozor talablari asosida samarali boshqarish.",
   },
   {
     id: 3,
     number: "03",
     image: "/garmoshka.png",
-    title: "Закупка оборудования",
-    description:
-      "Профессиональный подход к закупке и поставке высококачественного оборудования для различных отраслей.",
+    ru_title: "Закупка оборудования",
+    ru_description: "Профессиональный подход к закупке и поставке высококачественного оборудования для различных отраслей.",
+    en_title: "Equipment Procurement",
+    en_description: "A professional approach to the procurement and supply of high-quality equipment for various industries.",
+    uz_title: "Uskunalar xaridi",
+    uz_description: "Turli sohalar uchun yuqori sifatli uskunalarni xarid qilish va yetkazib berish bo‘yicha professional yondashuv.",
   },
   {
     id: 4,
     number: "04",
     image: "/garmoshka.png",
-    title: "Эксплуатация и техническое обслуживание",
-    description:
-      "Комплексное обслуживание и поддержка технического оборудования на всех этапах эксплуатации.",
+    ru_title: "Эксплуатация и техническое обслуживание",
+    ru_description: "Комплексное обслуживание и поддержка технического оборудования на всех этапах эксплуатации.",
+    en_title: "Operation and Maintenance",
+    en_description: "Comprehensive service and support for technical equipment at all stages of operation.",
+    uz_title: "Ekspluatatsiya va texnik xizmat ko‘rsatish",
+    uz_description: "Texnik uskunalarni barcha ekspluatatsiya bosqichlarida kompleks xizmat va qo‘llab-quvvatlash.",
   },
   {
     id: 5,
     number: "05",
     image: "/garmoshka.png",
-    title: "Эксплуатация и техническое обслуживание",
-    description:
-      "Профессиональное техническое обслуживание и своевременная поддержка всех систем.",
+    ru_title: "Эксплуатация и техническое обслуживание",
+    ru_description: "Профессиональное техническое обслуживание и своевременная поддержка всех систем.",
+    en_title: "Operation and Technical Support",
+    en_description: "Professional technical maintenance and timely support for all systems.",
+    uz_title: "Ekspluatatsiya va texnik qo‘llab-quvvatlash",
+    uz_description: "Barcha tizimlar uchun professional texnik xizmat ko‘rsatish va o‘z vaqtida qo‘llab-quvvatlash.",
   },
   {
     id: 6,
     number: "06",
     image: "/garmoshka.png",
-    title: "Инженерно-техническое проектирование",
-    description:
-      "Разработка инновационных инженерных решений и технической документации любой сложности.",
+    ru_title: "Инженерно-техническое проектирование",
+    ru_description: "Разработка инновационных инженерных решений и технической документации любой сложности.",
+    en_title: "Engineering and Technical Design",
+    en_description: "Development of innovative engineering solutions and technical documentation of any complexity.",
+    uz_title: "Muhandislik-texnik loyihalash",
+    uz_description: "Har qanday murakkablikdagi innovatsion muhandislik yechimlari va texnik hujjatlarni ishlab chiqish.",
   },
   {
     id: 7,
     number: "07",
     image: "/garmoshka.png",
-    title: "Финансовая поддержка",
-    description:
-      "Комплексные решения по финансированию и поддержке проектов на всех этапах реализации.",
+    ru_title: "Финансовая поддержка",
+    ru_description: "Комплексные решения по финансированию и поддержке проектов на всех этапах реализации.",
+    en_title: "Financial Support",
+    en_description: "Comprehensive solutions for financing and supporting projects at all stages of implementation.",
+    uz_title: "Moliyaviy qo‘llab-quvvatlash",
+    uz_description: "Loyihalarni barcha amalga oshirish bosqichlarida moliyalashtirish va qo‘llab-quvvatlash bo‘yicha kompleks yechimlar.",
   },
 ];
+
 
 const BusinessActivities = () => {
   const [activeId, setActiveId] = useState<number | null>(null);
 
+  const t = useTranslations("home.activities");
+  const locale = useLocale()
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-12">
-        СФЕРА ДЕЯТЕЛЬНОСТИ
+        {t("title")}
       </h1>
 
       <div className="space-y-2 sm:space-y-3">
@@ -107,7 +133,7 @@ const BusinessActivities = () => {
               <div className="relative w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 mr-3 sm:mr-4 md:mr-6 flex-shrink-0">
                 <Image
                   src={activity.image || "/placeholder.svg"}
-                  alt={activity.title}
+                  alt={activity[`${locale as "uz" | "ru" | "en"}_title`]}
                   fill
                   className="object-cover rounded"
                 />
@@ -119,7 +145,7 @@ const BusinessActivities = () => {
                     activeId === activity.id ? "text-white" : "text-gray-900"
                   }`}
                 >
-                  {activity.title}
+                  {activity[`${locale as "uz" | "ru" | "en"}_title`]}
                 </h3>
 
                 <AnimatePresence>
@@ -131,7 +157,7 @@ const BusinessActivities = () => {
                       transition={{ duration: 0.15 }}
                       className="text-white/80 mt-2 text-xs sm:text-sm md:text-base line-clamp-2 sm:line-clamp-none"
                     >
-                      {activity.description}
+                      {activity[`${locale as "uz" | "ru" | "en"}_description`]}
                     </motion.p>
                   )}
                 </AnimatePresence>

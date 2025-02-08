@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "@/components/BluredImage";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const partners = [
   "/partners/partner (1).svg",
@@ -18,6 +19,7 @@ const partners = [
 ];
 
 const Partners = () => {
+  const t = useTranslations("home.partners");
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -27,7 +29,7 @@ const Partners = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Нам доверяют
+          {t("trust_us")}
         </motion.h2>
         <div className="overflow-hidden relative mix-blend-darken">
           <motion.div

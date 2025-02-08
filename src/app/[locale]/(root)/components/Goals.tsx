@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "@/components/BluredImage";
+import { useTranslations } from "next-intl";
 
 const goals = Array.from({ length: 18 }, (_, i) => ({
   id: i + 1,
@@ -22,6 +23,8 @@ const Goals = () => {
     },
   };
 
+  const t = useTranslations("home.goals");
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <motion.div
@@ -31,11 +34,10 @@ const Goals = () => {
         className="text-center mb-12"
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Мы вносим свой вклад в устойчивое развитие
+          {t("title")}
         </h2>
         <p className="text-gray-600 max-w-3xl mx-auto">
-          Компания "MESMER" стремится к содействию проведения 7 из 17 целей ООН
-          в области устойчивого развития
+          {t("description")}
         </p>
       </motion.div>
 

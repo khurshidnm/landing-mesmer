@@ -4,6 +4,7 @@ import Image from "@/components/BluredImage";
 import { motion } from "framer-motion";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
+import { useTranslations } from "next-intl";
 
 const partners = [
   "/our-partners/partner1.png",
@@ -47,10 +48,12 @@ const About = () => {
     transition: { duration: 0.6 },
   };
 
+  const t = useTranslations("about");
+
   return (
     <div className="overflow-hidden ">
       <Hero
-        title="О компании"
+        title={t("main_title")}
         subtitle=""
         backgroundImage="/about.png"
         height="500px"
@@ -67,7 +70,7 @@ const About = () => {
             viewport={{ once: true }}
             variants={fadeIn}
           >
-            <h2 className="text-3xl font-bold">Кратко о нас</h2>
+            <h2 className="text-3xl font-bold">{t("title")}</h2>
             <div className="relative w-full aspect-[16/9]">
               <Image
                 src="/about2.png"
@@ -77,16 +80,7 @@ const About = () => {
               />
             </div>
             <p className="text-gray-700 leading-relaxed">
-              "MESMER" – многопрофильная компания, предлагающая широкий спектр
-              инженерных и коммерческих услуг на международном рынке. Мы
-              учитываем индивидуальные потребности клиентов в таких сферах, как
-              проектирование, поставка оборудования, строительство и управление
-              проектами. Основанная в 2006 году, наша компания объединяет
-              квалифицированных специалистов, прошедших обучение и обладающих
-              богатым практическим опытом. Мы предлагаем инновационные
-              технологические решения, которые применяем в проектах очистки
-              питьевой воды, системах канализации, водоснабжения, ирригации и
-              мелиорации.
+              {t("description")}
             </p>
           </motion.div>
         </div>
@@ -119,35 +113,28 @@ const About = () => {
             variants={fadeIn}
           >
             <div>
-              <h2 className="text-3xl font-bold mb-6">Цели и задачи</h2>
+              <h2 className="text-3xl font-bold mb-6">
+                {t("goals.title")}
+                </h2>
               <div className="relative w-full aspect-[16/9] mb-4">
                 <Image
                   src="/about4.png"
                   alt="Goals icon"
                   fill
                   className="object-cover"
-                />
+                  />
               </div>
               <p className="text-gray-700 leading-relaxed mb-8">
-                Мы стремимся оставаться ведущей многопрофильной компанией,
-                устанавливая долгосрочные партнерские отношения с клиентами по
-                всему миру. Наша миссия — предоставлять инновационные решения,
-                соответствующие мировым стандартам, гарантируя высокое качество
-                услуг и продукции, максимальную эффективность, технический опыт
-                и значительную отдачу от инвестиций.
+                  {t("goals.description")}
               </p>
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold mb-6">Честная конкуренция</h2>
+              <h2 className="text-3xl font-bold mb-6">
+                {t("competition.title")}
+              </h2>
               <p className="text-gray-700 leading-relaxed">
-                Компания «MESMER» активно участвует в тендерах и конкурсах,
-                строго соблюдая принципы честной конкуренции. Мы гарантируем
-                прозрачность и открытость в отношениях с конкурентами, клиентами
-                и поставщиками. Соблюдение честных стандартов позволяет нам
-                укреплять доверие партнеров и обеспечивать справедливую борьбу
-                на рынке, что в свою очередь способствует развитию бизнеса и
-                достижению долгосрочных целей.
+                {t("competition.description")}
               </p>
             </div>
           </motion.div>
@@ -188,41 +175,27 @@ const About = () => {
           >
             <div>
               <h2 className="text-3xl font-bold mb-4 leading-snug">
-                Сотрудничество с поставщиками, партнерами и клиентами
+                {t("ethics.title")}
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                Компания «MESMER» придерживается высоких этических стандартов,
-                строго соблюдая все договорные обязательства и обеспечивая
-                прозрачность во всех отношениях с партнерами и клиентами. Мы
-                ценим долгосрочные отношения и стремимся к взаимовыгодному
-                сотрудничеству, основанному на доверии и взаимном уважении.
+                {t("ethics.description")}
               </p>
             </div>
 
             <div>
               <h2 className="text-3xl font-bold mb-4 leading-snug">
-                Контроль качества
+                {t("quality.title")}
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Компания «MESMER» обладает более чем десятилетним опытом работы
-                в инженерной и строительной отраслях. За это время мы накопили
-                богатый опыт и знания, которые позволяют нам гарантировать
-                высокое качество наших услуг и продукции. Мы внедрили строгую
-                систему контроля качества на всех этапах проекта, от
-                проектирования до сдачи объекта в эксплуатацию.
+                {t("quality.description")}
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed mb-4">
-                <li>Регулярные проверки на соответствие стандартам качества</li>
-                <li>Использование передовых технологий и оборудования</li>
-                <li>Квалифицированный персонал с богатым опытом работы</li>
-                <li>Строгий контроль за использованием материалов</li>
+                {[1,2,3,4].map((item) => (
+                  <li key={item}>{t(`quality.list.label_${item}`)}</li>
+                ))}
               </ul>
               <p className="text-gray-700 leading-relaxed">
-                Успех компании зависит от слаженной работы всей команды, поэтому
-                мы постоянно инвестируем в развитие наших сотрудников и
-                совершенствование наших процессов. Мы стремимся к постоянному
-                улучшению качества наших услуг и продукции, чтобы удовлетворить
-                потребности наших клиентов и превзойти их ожидания.
+                {t("quality.sub_description")}
               </p>
             </div>
           </motion.div>

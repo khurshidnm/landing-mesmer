@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, } from "lucide-react";
 import Navbar from "./Navbar";
+import { useLocale, useTranslations } from "next-intl";
 
 const Hero = ({
   backgroundImage,
@@ -19,11 +20,12 @@ const Hero = ({
   subtitle: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [language, setLanguage] = useState("UZ");
   const pathname = usePathname();
 
+  const t = useTranslations('navbar');
+  const locale = useLocale()
+
   const toggleMenu = () => setIsOpen((prev) => !prev);
-  const changeLanguage = (lang: string) => setLanguage(lang);
 
   const menuVariants = {
     closed: {
@@ -56,12 +58,12 @@ const Hero = ({
   };
 
   const links = [
-    { text: "О компании", href: "/about" },
-    { text: "Сфера деятельности", href: "/services" },
-    { text: "Проекты", href: "/projects" },
-    { text: "Новости", href: "/news" },
-    { text: "Карьера", href: "/career" },
-    { text: "Контакты", href: "/contact" },
+    { text: t("about"), href: `/${locale}/about` },
+    { text: t("services"), href: `/${locale}/services` },
+    { text: t("projects"), href: `/${locale}/projects` },
+    { text: t("news"), href: `/${locale}/news` },
+    { text: t("career"), href: `/${locale}/career` },
+    { text: t("contacts"), href: `/${locale}/contact` },
   ];
 
   return (

@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
 import Image from "@/components/BluredImage";
+import { useLocale, useTranslations } from "next-intl";
 
 const AboutCompany = () => {
+  const t = useTranslations("home.about");
+  const locale = useLocale();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -24,9 +27,33 @@ const AboutCompany = () => {
   };
 
   const stats = [
-    { number: 750, label: "ПЕРСОНАЛ", sublabel: "ЧЕЛОВЕК" },
-    { number: 59, label: "ПРОЕКТЫ", sublabel: "И БОЛЬШЕ" },
-    { number: 20, label: "ПОСТАВЩИКИ", sublabel: "И БОЛЬШЕ" },
+    {
+      number: 750,
+      ru_label: "ПЕРСОНАЛ",
+      ru_sublabel: "ЧЕЛОВЕК",
+      en_label: "STAFF",
+      en_sublabel: "HUMAN",
+      uz_label: "XODIMLAR",
+      uz_sublabel: "INSON",
+    },
+    {
+      number: 59,
+      ru_label: "ПРОЕКТЫ",
+      ru_sublabel: "И БОЛЬШЕ",
+      en_label: "PROJECTS",
+      en_sublabel: "AND MORE",
+      uz_label: "LOYIHALAR",
+      uz_sublabel: "VA BOSHQALAR",
+    },
+    {
+      number: 20,
+      ru_label: "ПОСТАВЩИКИ",
+      ru_sublabel: "И БОЛЬШЕ",
+      en_label: "SUPPLIERS",
+      en_sublabel: "AND MORE",
+      uz_label: "TO'PLADIGANLAR",
+      uz_sublabel: "VA BOSHQALAR",
+    },
   ];
 
   return (
@@ -40,22 +67,16 @@ const AboutCompany = () => {
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
           <div>
             <h1 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10">
-              О КОМПАНИИ
+              {t("title")}
             </h1>
           </div>
           <div className="space-y-6 max-w-2xl">
             <motion.div variants={fadeInUp}>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">
-                Наша ключевая задача – быть признанными нашими клиентами, хорошо
-                зарекомендовав себя в качестве надежного EPC
+                {t("subtitle")}
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                (Инжиниринг, Снабжение и Строительство) подрядчика в сфере
-                строительных услуг и получение международного признания, как
-                надежного поставщика высококачественного оборудования. Учитывая
-                наши достижения, компания "MESMER" стремится расширить сферу
-                своей деятельности в соседних странах, таких как Таджикистан и
-                Кыргызстан
+                {t("description")}
               </p>
             </motion.div>
           </div>
@@ -81,8 +102,8 @@ const AboutCompany = () => {
                 />
               )}
             </div>
-            <div className="text-gray-800 font-medium">{stat.label}</div>
-            <div className="text-gray-500 text-sm">{stat.sublabel}</div>
+            <div className="text-gray-800 font-medium">{stat[`${locale as "ru" | "en" | "uz"}_label`]}</div>
+            <div className="text-gray-500 text-sm">{stat[`${locale as "ru" | "en" | "uz"}_sublabel`]}</div>
           </motion.div>
         ))}
       </div>
@@ -134,14 +155,10 @@ const AboutCompany = () => {
           <div className="space-y-6 max-w-2xl">
             <motion.div variants={fadeInUp}>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">
-                Наша миссия - оставаться ведущей многопрофильной компанией
+                {t("task.title")}
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Развивая долгосрочные партнерские взаимоотношения с клиентами по
-                всему миру, предоставляя инновационные решения, отвечающие
-                мировым стандартам услуг и высококачественную продукцию,
-                максимальную эффективность, большой технический опыт и
-                максимальную пользу от инвестиций.
+                {t("task.description")}
               </p>
             </motion.div>
           </div>
