@@ -79,16 +79,9 @@ const Footer = () => {
               <div className="text-gray-400">
                 Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069
               </div>
-              <div>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 hover:text-blue-400 transition-colors"
-                >
-                  <LinkedIn className="w-6 h-6" />
-                  LinkedIn
-                </a>
+              <div className="flex gap-3">
+                <Image src={"/Negative.svg"} alt="" width={22} height={22} />
+                <p>LinkedIn</p>
               </div>
             </div>
           </div>
