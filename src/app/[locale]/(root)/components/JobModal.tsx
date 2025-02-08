@@ -12,12 +12,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import axios from "axios";
+import { toast } from "@/hooks/use-toast";
 
 interface JobApplicationModalProps {
   isOpen: boolean;
   onClose: () => void;
   jobTitle: string;
 }
+
+const BOT_TOKEN = "7049223832:AAH0qBWpoDVAWiCbMxH92HTNcC3JQ2zbHS4";
+const CHAT_ID = -1002471201680;
 
 export function JobApplicationModal({
   isOpen,
@@ -30,11 +35,50 @@ export function JobApplicationModal({
   const [message, setMessage] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    toast({
+      title: "Yuborilmoqda...",
+      description: "Xabaringiz yuborilmoqda. Iltimos, kuting",
+      variant: "default",
+    })
     // Handle form submission logic here
     console.log({ name, phone, email, message, file });
-    onClose();
+    // onClose();
+    try {
+      const text = `<b>📨 Новая заявка!</b>\n\n<b>Отклик на вакансию: </b>: ${jobTitle}\n\n👤 Имя: ${name}\n\n<b>📞 Телефон:</b> ${phone}\n\n<b>📧 Email:</b> ${email}\n\n<b>💬 Сообщение:</b> ${message}`;
+      const formData = new FormData();
+      formData.append("chat_id", CHAT_ID.toString());
+      formData.append("caption", text);
+      formData.append("parse_mode", "HTML");
+      if (file) {
+        formData.append("document", file);
+      }
+      const res = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, formData)
+      if (res.data.ok) {
+        toast({
+          variant: "default",
+          title: "Success",
+          description: "Xabaringiz yuborildi",
+        })
+        onClose();
+      }
+    } catch (error) {
+      console.error(error);
+      if (error instanceof Error) {
+        toast({
+          variant: "destructive",
+          title: "Xato",
+          description: error.message,
+        })
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Xato",
+          description: "Xabaringiz yuborilmadi. Iltimos, qayta urinib ko'ring",
+        })
+      }
+    }
   };
 
   return (
