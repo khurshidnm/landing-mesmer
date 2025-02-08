@@ -1,6 +1,10 @@
 {
-    "HomePage": {
-      "title": "Salom dunyo!",
-      "about": "Biz haqimizda ma'lumot olsih"
-    }
+  "navbar": {
+    "about": "Biz haqimizda",
+    "services": "Xizmatlarimiz",
+    "projects": "Loyihalarimiz",
+    "news": "Yangiliklar",
+    "career": "Kareyera",
+    "contacts": "Bog'lanish"
   }
+}

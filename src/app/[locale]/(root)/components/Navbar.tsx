@@ -13,16 +13,29 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+
+function updateLocaleInUrl(locale: string, pathname: string): string {
+  const urlParts = pathname.split("/");
+  if (urlParts.length > 1) {
+      urlParts[1] = locale; // Ikkinchi segmentni (locale) almashtirish
+  }
+  return `/${urlParts.slice(1).join("/")}`;
+}
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [language, setLanguage] = useState("UZ");
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  // locale
+  const language = useLocale();
+  const t = useTranslations('navbar');
+
+  const router = useRouter();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
-  const changeLanguage = (lang: string) => setLanguage(lang);
+  const changeLanguage = (lang: string) => router.push(updateLocaleInUrl(lang.toLowerCase(), pathname));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,12 +77,12 @@ const Navbar = () => {
   };
 
   const links = [
-    { text: "О компании", href: "/about" },
-    { text: "Сфера деятельности", href: "/services" },
-    { text: "Проекты", href: "/projects" },
-    { text: "Новости", href: "/news" },
-    { text: "Карьера", href: "/career" },
-    { text: "Контакты", href: "/contact" },
+    { text: t("about"), href: `/${language}/about` },
+    { text: t("services"), href: `/${language}/services` },
+    { text: t("projects"), href: `/${language}/projects` },
+    { text: t("news"), href: `/${language}/news` },
+    { text: t("career"), href: `/${language}/career` },
+    { text: t("contacts"), href: `/${language}/contact` },
   ];
 
   return (
@@ -146,7 +159,7 @@ const Navbar = () => {
                       : "bg-transparent text-white border-white hover:bg-white hover:text-black"
                   } transition-colors`}
                 >
-                  {language}
+                  {language.toUpperCase()}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -154,7 +167,7 @@ const Navbar = () => {
                   isScrolled ? "bg-white" : "bg-white/10 backdrop-blur-md"
                 } border-white/20`}
               >
-                {["UZ", "RU", "ЎЗ"].map((lang) => (
+                {["uz", "ru", "en"].map((lang) => (
                   <DropdownMenuItem
                     key={lang}
                     onClick={() => changeLanguage(lang)}
@@ -164,7 +177,7 @@ const Navbar = () => {
                         : "text-white hover:bg-white/20"
                     } transition-colors`}
                   >
-                    {lang}
+                    {lang.toUpperCase()}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
