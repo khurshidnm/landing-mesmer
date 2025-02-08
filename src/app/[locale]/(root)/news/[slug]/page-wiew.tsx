@@ -3,29 +3,26 @@
 import Image from "@/components/BluredImage";
 import { motion } from "framer-motion";
 import Hero from "../../components/Hero";
-import { ProjectsItem } from "../page-wiew";
-import Gallery from "../../components/Gallery";
+import { NewsItem } from "@/types/news";
 import { useLocale } from "next-intl";
 
-export default function ProjectPage({ project }: { project: ProjectsItem }) {
+export default function NewsPage({ news }: { news: NewsItem }) {
   const locale = useLocale() as "uz" | "ru" | "en";
-  const localizedProject = project[locale];
+  const localizedNews = news[locale];
 
   return (
     <>
       <Hero
         title=""
-        subtitle={`Наши проекты / ${localizedProject?.title}`}
+        subtitle={`Новости / ${localizedNews?.title}`}
         backgroundImage="/our.png"
         height="500px"
       />
       <article className="min-h-screen bg-white container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto pt-8">
           <div className="border-l-4 border-blue-600 pl-6">
-            <h1 className="text-3xl font-bold text-black mb-2">О ПРОЕКТЕ</h1>
-            <h2 className="text-2xl text-gray-800">
-              {localizedProject?.main_title}
-            </h2>
+            <h1 className="text-3xl font-bold text-black mb-2">НОВОСТЬ</h1>
+            <h2 className="text-2xl text-gray-800">{localizedNews?.title}</h2>
           </div>
         </div>
 
@@ -36,8 +33,8 @@ export default function ProjectPage({ project }: { project: ProjectsItem }) {
           className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
         >
           <Image
-            src={project.cover}
-            alt={localizedProject?.title || "Проект"}
+            src={news.cover}
+            alt={localizedNews?.title || "Новость"}
             fill
             className="object-cover"
           />
@@ -56,26 +53,13 @@ export default function ProjectPage({ project }: { project: ProjectsItem }) {
                 <p
                   className="text-base sm:text-lg leading-relaxed"
                   dangerouslySetInnerHTML={{
-                    __html: localizedProject?.description || "",
+                    __html: localizedNews?.content || "",
                   }}
                 ></p>
-                <p className="text-base sm:text-lg leading-relaxed">
-                  Объем задач: {localizedProject?.volume_of_tasks}
-                </p>
-                <p className="text-base sm:text-lg leading-relaxed">
-                  Заказчик: {localizedProject?.customer}
-                </p>
-                <p className="text-base sm:text-lg leading-relaxed">
-                  Статус: {localizedProject?.status}
-                </p>
-                <p className="text-base sm:text-lg leading-relaxed">
-                  Сроки реализации: {localizedProject?.implementation_period}
-                </p>
               </motion.div>
             </div>
           </div>
         </div>
-        <Gallery photos={project.gallery} />
       </article>
     </>
   );

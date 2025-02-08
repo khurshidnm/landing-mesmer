@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { uz } from "date-fns/locale";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLocale } from "next-intl";
 
 interface NewsItem {
   _id: string;
@@ -27,10 +28,12 @@ interface NewsItem {
   };
   createdAt: Date;
   cover: string;
+  slug: string;
 }
 
 export function Cards({ news }: { news: NewsItem[] }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const locale = useLocale()  as "uz" | "ru" | "en";
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -45,12 +48,12 @@ export function Cards({ news }: { news: NewsItem[] }) {
               onHoverStart={() => setHoveredId(news?._id)}
               onHoverEnd={() => setHoveredId(null)}
             >
-              <Link href={`/news/${news?._id}`}>
+              <Link href={`/${locale}/news/${news?.slug}`}>
                 <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg">
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
                       src={news.cover || "/placeholder.svg"}
-                      alt={news.uz.title}
+                      alt={news?.[locale]?.title}
                       fill
                       className="object-cover"
                     />
@@ -80,12 +83,12 @@ export function Cards({ news }: { news: NewsItem[] }) {
             onHoverStart={() => setHoveredId(news?.[0]?._id)}
             onHoverEnd={() => setHoveredId(null)}
           >
-            <Link href={`/news/${news?.[0]?._id}`}>
+            <Link href={`/${locale}/news/${news?.[0]?.slug}`}>
               <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg">
                 <div className="relative aspect-[16/7] overflow-hidden">
                   <Image
                     src={news?.[0]?.cover || "/placeholder.svg"}
-                    alt={news?.[0]?.uz.title}
+                    alt={news?.[0]?.[locale]?.title}
                     fill
                     className="object-cover"
                   />
@@ -93,7 +96,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
                 </div>
                 <CardContent className="p-4">
                   <h3 className="text-lg font-semibold line-clamp-2 mb-2">
-                    {news?.[0]?.uz.title}
+                    {news?.[0]?.[locale]?.title}
                   </h3>
                   <p className="text-gray-500 text-sm">
                     {format(news?.[0]?.createdAt || new Date(), "d MMMM yyyy", {
@@ -101,7 +104,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
                     })}
                   </p>
                   <p className="text-gray-600 text-sm line-clamp-3">
-                    {news?.[0]?.uz.description}
+                    {news?.[0]?.[locale]?.description}
                   </p>
                 </CardContent>
               </Card>

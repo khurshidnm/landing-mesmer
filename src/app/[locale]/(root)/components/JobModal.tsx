@@ -41,7 +41,7 @@ export function JobApplicationModal({
       title: "Yuborilmoqda...",
       description: "Xabaringiz yuborilmoqda. Iltimos, kuting",
       variant: "default",
-    })
+    });
     // Handle form submission logic here
     console.log({ name, phone, email, message, file });
     // onClose();
@@ -54,13 +54,16 @@ export function JobApplicationModal({
       if (file) {
         formData.append("document", file);
       }
-      const res = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, formData)
+      const res = await axios.post(
+        `https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`,
+        formData
+      );
       if (res.data.ok) {
         toast({
           variant: "default",
           title: "Success",
           description: "Xabaringiz yuborildi",
-        })
+        });
         onClose();
       }
     } catch (error) {
@@ -70,20 +73,20 @@ export function JobApplicationModal({
           variant: "destructive",
           title: "Xato",
           description: error.message,
-        })
+        });
       } else {
         toast({
           variant: "destructive",
           title: "Xato",
           description: "Xabaringiz yuborilmadi. Iltimos, qayta urinib ko'ring",
-        })
+        });
       }
     }
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-w-[380px] md:max-w-[425px] h-auto min-h-[400px]">
         <DialogHeader>
           <DialogTitle>Отклик на вакансию: {jobTitle}</DialogTitle>
         </DialogHeader>
