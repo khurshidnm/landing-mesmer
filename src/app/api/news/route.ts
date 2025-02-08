@@ -2,6 +2,7 @@ import News from "@/database/news.model";
 import { authOptions } from "@/lib/auth-options";
 import { connectToDatabase } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -48,7 +49,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { title_uz, title_oz, title_ru, description_uz, description_oz, description_ru, content_uz, content_oz, content_ru, cover, slug } = await req.json();
+    const { title_uz, title_en, title_ru, description_uz, description_en, description_ru, content_uz, content_en, content_ru, cover, slug } = await req.json();
 
     const collection = await News.create({
       uz: {
@@ -56,10 +57,10 @@ export async function POST(req: Request) {
         description: description_uz,
         content: content_uz,
       },
-      oz: {
-        title: title_oz,
-        description: description_oz,
-        content: content_oz,
+      en: {
+        title: title_en,
+        description: description_en,
+        content: content_en,
       },
       ru: {
         title: title_ru,
@@ -69,6 +70,8 @@ export async function POST(req: Request) {
       cover,
       slug,
     });
+
+    revalidatePath("/admin/news")
 
     return NextResponse.json({
       message: "Hello world",

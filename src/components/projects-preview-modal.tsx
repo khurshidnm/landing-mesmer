@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import Image from "next/image"
+import Image from "@/components/BluredImage"
 import { ProjectsItem } from "@/types/projects"
 
 interface PreviewModalProps {

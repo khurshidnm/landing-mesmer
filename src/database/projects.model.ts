@@ -7,6 +7,11 @@ const projectsSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
+      main_title: {
+        type: String,
+        required: true,
+        default: ""
+      },
       description: {
         type: String,
         required: true,
@@ -28,10 +33,15 @@ const projectsSchema = new mongoose.Schema(
         required: true,
       },
     },
-    oz: {
+    en: {
       title: {
         type: String,
         required: true,
+      },
+      main_title: {
+        type: String,
+        required: true,
+        default: ""
       },
       description: {
         type: String,
@@ -58,6 +68,11 @@ const projectsSchema = new mongoose.Schema(
       title: {
         type: String,
         required: true,
+      },
+      main_title: {
+        type: String,
+        required: true,
+        default: ""
       },
       description: {
         type: String,

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
+import Image from "@/components/BluredImage"
 import { Eye, Pencil, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
@@ -19,10 +19,9 @@ import {
 import { PreviewModal } from "./projects-preview-modal"
 import type { ProjectsItem, ProjectsGridProps } from "@/types/projects"
 
-export function ProjectsGrid({ items, onPreview, onEdit, onDelete }: ProjectsGridProps) {
+export function ProjectsGrid({ items, onEdit, onDelete }: ProjectsGridProps) {
   const [selectedItem, setSelectedItem] = useState<ProjectsItem | null>(null)
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
-  const [isEditOpen, setIsEditOpen] = useState(false)
   const [itemToDelete, setItemToDelete] = useState<string | null>(null)
 
   const handlePreview = (item: ProjectsItem) => {
@@ -30,21 +29,11 @@ export function ProjectsGrid({ items, onPreview, onEdit, onDelete }: ProjectsGri
     setIsPreviewOpen(true)
   }
 
-  const handleEdit = (item: ProjectsItem) => {
-    setSelectedItem(item)
-    setIsEditOpen(true)
-  }
-
   const handleDelete = (slug: string) => {
     onDelete(slug)
     setItemToDelete(null)
   }
 
-  const handleSave = (updatedItem: ProjectsItem) => {
-    onEdit(updatedItem.slug)
-  }
-
-  console.log(items)
   return (
     <>
       <div className="container mx-auto p-4">
@@ -72,7 +61,7 @@ export function ProjectsGrid({ items, onPreview, onEdit, onDelete }: ProjectsGri
                   <Eye className="h-4 w-4" />
                   <span className="sr-only">Preview</span>
                 </Button>
-                <Button variant="outline" size="icon" onClick={() => handleEdit(item)}>
+                <Button variant="outline" size="icon" onClick={() => onEdit(item.slug)}>
                   <Pencil className="h-4 w-4" />
                   <span className="sr-only">Edit</span>
                 </Button>
@@ -93,7 +82,7 @@ export function ProjectsGrid({ items, onPreview, onEdit, onDelete }: ProjectsGri
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => handleDelete(item.slug)}>Delete</AlertDialogAction>
+                      <AlertDialogAction onClick={() => handleDelete(item._id)}>Delete</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>

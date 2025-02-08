@@ -93,28 +93,31 @@ export async function PUT(req: Request, { params }: any) {
     const { id } = await params;
     const {
       title_uz,
-      title_oz,
+      title_en,
       title_ru,
+      main_title_uz,
+      main_title_en,
+      main_title_ru,
       description_uz,
-      description_oz,
+      description_en,
       description_ru,
       status_uz,
-      status_oz,
+      status_en,
       status_ru,
       volume_of_tasks_uz,
-      volume_of_tasks_oz,
+      volume_of_tasks_en,
       volume_of_tasks_ru,
       customer_uz,
-      customer_oz,
+      customer_en,
       customer_ru,
       implementation_period_uz,
-      implementation_period_oz,
+      implementation_period_en,
       implementation_period_ru,
       cover,
       slug,
       gallery,
     } = await req.json();
-    const existNews = await Projects.findOne({_id: id});
+    const existNews = await Projects.findOne({slug: id});
 
     if (!existNews) {
       return NextResponse.json({
@@ -126,25 +129,28 @@ export async function PUT(req: Request, { params }: any) {
     
 
     const projects = await Projects.findOneAndUpdate({
-      _id: id},{
+      slug: id},{
       uz: {
         title: title_uz || existNews.uz.title,
+        main_title: main_title_uz,
         description: description_uz || existNews.uz.description,
         status: status_uz || existNews.uz.status,
         volume_of_tasks: volume_of_tasks_uz || existNews.uz.volume_of_tasks,
         customer: customer_uz || existNews.uz.customer,
         implementation_period: implementation_period_uz || existNews.uz.implementation_period,
       },
-      oz: {
-        title: title_oz || existNews.oz.title,
-        description: description_oz || existNews.oz.description,
-        status: status_oz || existNews.oz.status,
-        volume_of_tasks: volume_of_tasks_oz || existNews.oz.volume_of_tasks,
-        customer: customer_oz || existNews.oz.customer,
-        implementation_period: implementation_period_oz || existNews.oz.implementation_period,
+      en: {
+        title: title_en || existNews.en.title,
+        main_title: main_title_en,
+        description: description_en || existNews.en.description,
+        status: status_en || existNews.en.status,
+        volume_of_tasks: volume_of_tasks_en || existNews.en.volume_of_tasks,
+        customer: customer_en || existNews.en.customer,
+        implementation_period: implementation_period_en || existNews.en.implementation_period,
       },
       ru: {
         title: title_ru || existNews.ru.title,
+        main_title: main_title_ru,
         description: description_ru || existNews.ru.description,
         status: status_ru || existNews.ru.status,
         volume_of_tasks: volume_of_tasks_ru || existNews.ru.volume_of_tasks,

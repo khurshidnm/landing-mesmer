@@ -1,4 +1,5 @@
 export interface ProjectsItem {
+  _id: string;
     uz: {
       title: string;
       description: string;
@@ -7,7 +8,7 @@ export interface ProjectsItem {
       status: string;
       implementation_period: string;
     },
-    oz: {
+    en: {
       title: string;
       description: string;
       volume_of_tasks: string;
@@ -30,7 +31,6 @@ export interface ProjectsItem {
   
   export interface ProjectsGridProps {
     items: ProjectsItem[];
-    onPreview: (slug: string) => void;
     onEdit: (slug: string) => void;
     onDelete: (slug: string) => void;
   }

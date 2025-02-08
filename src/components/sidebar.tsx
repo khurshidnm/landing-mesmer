@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Newspaper, Briefcase, FolderKanban, Menu, LogOut } from "lucide-react";
+import { Newspaper, Briefcase, FolderKanban, Menu, LogOut, VerifiedIcon } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -32,6 +32,12 @@ const menuItems = [
     href: "/admin/vacancies",
     icon: Briefcase,
     description: "Manage job vacancies",
+  },
+  {
+    title: "Certificates",
+    href: "/admin/certificates",
+    icon: VerifiedIcon,
+    description: "Manage job certificates",
   },
 ];
 

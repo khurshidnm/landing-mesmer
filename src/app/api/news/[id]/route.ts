@@ -2,6 +2,7 @@ import News from "@/database/news.model";
 import { authOptions } from "@/lib/auth-options";
 import { connectToDatabase } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET(_: Request, { params }: any) {
@@ -49,7 +50,8 @@ export async function DELETE(_: Request, { params }: any) {
       );
     }
     const { id } = await params;
-    const news = await News.findByIdAndDelete(id);
+    const news = await News.findOneAndDelete({slug: id});
+    revalidatePath("/admin/news")
     return NextResponse.json({
       message: "News",
       errors: null,
@@ -91,20 +93,21 @@ export async function PUT(req: Request, { params }: any) {
     }
 
     const { id } = await params;
+    console.log(id)
     const {
       title_uz,
-      title_oz,
+      title_en,
       title_ru,
       description_uz,
-      description_oz,
+      description_en,
       description_ru,
       content_uz,
-      content_oz,
+      content_en,
       content_ru,
       cover,
       slug,
     } = await req.json();
-    const existNews = await News.findOne({_id: id});
+    const existNews = await News.findOne({slug: id});
 
     if (!existNews) {
       return NextResponse.json({
@@ -113,16 +116,16 @@ export async function PUT(req: Request, { params }: any) {
         data: null,
       });
     }
-    const news = await News.findOneAndReplace({_id: id}, {
+    const news = await News.findOneAndUpdate({slug: id}, {
       uz: {
         title: title_uz || existNews.uz.title,
         description: description_uz || existNews.uz.description,
         content: content_uz || existNews.uz.content,
       },
-      oz: {
-        title: title_oz || existNews.oz.title,
-        description: description_oz || existNews.oz.description,
-        content: content_oz || existNews.oz.content,
+      en: {
+        title: title_en || existNews.en.title,
+        description: description_en || existNews.en.description,
+        content: content_en || existNews.en.content,
       },
       ru: {
         title: title_ru || existNews.ru.title,
@@ -132,6 +135,7 @@ export async function PUT(req: Request, { params }: any) {
       cover: cover || existNews.cover,
       slug: slug || existNews.slug,
     }, {new: true});
+    revalidatePath("/admin/news")
     return NextResponse.json({
       message: "News",
       errors: null,

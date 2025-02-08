@@ -4,7 +4,7 @@ export interface NewsItem {
     description: string;
     content: string;
   };
-  oz: {
+  en: {
     title: string;
     description: string;
     content: string;
