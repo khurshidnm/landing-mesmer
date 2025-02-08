@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Briefcase, DollarSign } from "lucide-react";
 import Hero from "../components/Hero";
 import { JobApplicationModal } from "../components/JobModal";
+import { format } from "date-fns";
 
 interface JobListing {
   _id: number;
@@ -36,7 +37,7 @@ interface JobListing {
     responsibilities: string[];
   };
   salary: string;
-  date: string;
+  createdAt: string;
 }
 
 export default function JobListings({
@@ -148,7 +149,8 @@ export default function JobListings({
                     <div className="flex items-center gap-2 text-gray-500">
                       <Calendar className="w-4 h-4" />
                       <span className="text-xs">
-                        Дата публикации: {job.date}
+                        Дата публикации:{" "}
+                        {format(new Date(job.createdAt), "dd.MM.yyyy")}
                       </span>
                     </div>
                     <Button

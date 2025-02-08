@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react"; // Добавлен useRef и useEffect
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "@/components/BluredImage";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 export interface ProjectsItem {
   _id: string;
@@ -81,6 +82,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 },
   };
+  const locale = useLocale();
 
   return (
     <>
@@ -138,7 +140,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                   </div>
 
                   <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
-                    <Link href={`/projects/${project.slug}`}>
+                    <Link href={`/${locale}/projects/${project.slug}`}>
                       <Image
                         src={project.cover || "/placeholder.svg"}
                         alt={project.uz.title}

@@ -16,6 +16,7 @@ export interface NewsItem {
   };
   slug: string;
   cover: string;
+  locale?: string;
 }
 
 export interface NewsGridProps {

@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { uz } from "date-fns/locale";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLocale } from "next-intl";
 
 interface NewsItem {
   _id: string;
@@ -27,10 +28,12 @@ interface NewsItem {
   };
   createdAt: Date;
   cover: string;
+  slug: string;
 }
 
 export function Cards({ news }: { news: NewsItem[] }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const locale = useLocale();
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -45,7 +48,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
               onHoverStart={() => setHoveredId(news?._id)}
               onHoverEnd={() => setHoveredId(null)}
             >
-              <Link href={`/news/${news?._id}`}>
+              <Link href={`/${locale}/news/${news?.slug}`}>
                 <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg">
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
@@ -80,7 +83,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
             onHoverStart={() => setHoveredId(news?.[0]?._id)}
             onHoverEnd={() => setHoveredId(null)}
           >
-            <Link href={`/news/${news?.[0]?._id}`}>
+            <Link href={`/${locale}/news/${news?.[0]?.slug}`}>
               <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg">
                 <div className="relative aspect-[16/7] overflow-hidden">
                   <Image

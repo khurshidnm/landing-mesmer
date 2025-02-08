@@ -30,6 +30,7 @@ interface NewsItem {
   };
   createdAt: Date;
   cover: string;
+  slug: string;
 }
 
 const News = ({ news }: { news: NewsItem[] }) => {
