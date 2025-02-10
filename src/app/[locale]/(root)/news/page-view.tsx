@@ -44,7 +44,7 @@ const News = ({ news }: { news: NewsItem[] }) => {
         title="Новости"
         subtitle=""
       />
-      <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="rounded-none mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <Cards news={news} />
       </div>
       <Footer />

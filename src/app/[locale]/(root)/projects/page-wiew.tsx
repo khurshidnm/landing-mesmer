@@ -92,14 +92,14 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
         subtitle=""
         height="500px"
       />
-      <div className="mx-auto px-4 py-16 sm:px-6 lg:px-8 flex flex-col md:flex-row">
-        <div className="md:w-1/3  ">
+      <div className="mx-auto px-4  py-16 sm:px-6 lg:px-8 flex flex-col md:flex-row border ">
+        <div className="md:w-1/3 w-full   ">
           <h1 className="text-3xl md:text-4xl font-bold mb-12">
             ТЕКУЩИЕ И РЕАЛИЗОВАННЫЕ ПРОЕКТЫ
           </h1>
         </div>
 
-        <div className="md:w-2/3 overflow-y-auto">
+        <div className="md:w-2/3 overflow-y-auto w-full md:mr-[65px]">
           <motion.div
             variants={container}
             initial="hidden"
@@ -139,7 +139,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                     </div>
                   </div>
 
-                  <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden ">
                     <Link href={`/${locale}/projects/${project.slug}`}>
                       <Image
                         src={project.cover || "/placeholder.svg"}
@@ -196,7 +196,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-2 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <ChevronRight className="w-6 h-6" />
               </button>

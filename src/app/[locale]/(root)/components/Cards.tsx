@@ -33,12 +33,12 @@ interface NewsItem {
 
 export function Cards({ news }: { news: NewsItem[] }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const locale = useLocale()  as "uz" | "ru" | "en";
+  const locale = useLocale() as "uz" | "ru" | "en";
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-        <div className="md:col-span-5 grid grid-cols-1 md:grid-cols-4 gap-6 order-2">
+    <div className="   ">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 ">
+        <div className="md:col-span-5 grid grid-cols-1  rounded-none   md:grid-cols-4 gap-6 order-2">
           {news?.slice(1).map((news, index) => (
             <motion.div
               key={news._id}
@@ -49,8 +49,8 @@ export function Cards({ news }: { news: NewsItem[] }) {
               onHoverEnd={() => setHoveredId(null)}
             >
               <Link href={`/${locale}/news/${news?.slug}`}>
-                <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg">
-                  <div className="relative aspect-[16/9] overflow-hidden">
+                <Card className="overflow-hidden h-full rounded-none transition-all duration-300 ">
+                  <div className="relative aspect-[16/9] rounded-none overflow-hidden">
                     <Image
                       src={news.cover || "/placeholder.svg"}
                       alt={news?.[locale]?.title}
@@ -76,7 +76,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
         {news?.[0] && (
           <motion.div
             key={news?.[0]?._id}
-            className="md:col-span-3 md:col-start-3 order-1"
+            className="md:col-span-3 md:col-start-3  md:mr-[65px] order-1"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
@@ -84,7 +84,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
             onHoverEnd={() => setHoveredId(null)}
           >
             <Link href={`/${locale}/news/${news?.[0]?.slug}`}>
-              <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg">
+              <Card className="overflow-hidden h-full rounded-none transition-all duration-300 ">
                 <div className="relative aspect-[16/7] overflow-hidden">
                   <Image
                     src={news?.[0]?.cover || "/placeholder.svg"}
@@ -92,10 +92,10 @@ export function Cards({ news }: { news: NewsItem[] }) {
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 " />
                 </div>
-                <CardContent className="p-4">
-                  <h3 className="text-lg font-semibold line-clamp-2 mb-2">
+                <CardContent className="p-4 bg-white border-none  shadow-none mt-3 ">
+                  <h3 className="text-lg font-semibold  line-clamp-2 mb-2">
                     {news?.[0]?.[locale]?.title}
                   </h3>
                   <p className="text-gray-500 text-sm">

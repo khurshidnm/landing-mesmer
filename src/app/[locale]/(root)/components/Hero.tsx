@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "@/components/BluredImage";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X, } from "lucide-react";
+import { X } from "lucide-react";
 import Navbar from "./Navbar";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -22,8 +22,8 @@ const Hero = ({
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const t = useTranslations('navbar');
-  const locale = useLocale()
+  const t = useTranslations("navbar");
+  const locale = useLocale();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
@@ -71,13 +71,13 @@ const Hero = ({
       className="relative bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundImage})`, height }}
     >
-      <div className="absolute inset-0 bg-black/40 z-10"></div>
+      <div className="absolute inset-0   mx-auto bg-black/40 z-10"></div>
       <Navbar />
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="absolute bottom-[200px] md:bottom-20 left-0 right-0 md:left-8 text-white z-10 px-4"
+        className="absolute bottom-[200px] md:bottom-20 left-0 right-0 md:left-8  text-white z-10 "
       >
         <motion.p
           initial={{ y: 20, opacity: 0 }}
@@ -91,7 +91,7 @@ const Hero = ({
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight text-center md:text-left max-w-6xl"
+          className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight  text-center md:text-left max-w-6xl"
         >
           {title}
         </motion.h1>
@@ -105,7 +105,7 @@ const Hero = ({
             variants={menuVariants}
             className="fixed top-0 right-0 w-full sm:w-80 h-full bg-black/95 backdrop-blur-md z-50"
           >
-            <div className="flex flex-col h-full p-6">
+            <div className="flex flex-col h-full p-6 ">
               <div className="flex justify-between items-center mb-8">
                 <Image src="/logo.svg" width={80} height={20} alt="Logo" />
                 <button
@@ -115,7 +115,7 @@ const Hero = ({
                   <X size={24} className="text-white" />
                 </button>
               </div>
-              <nav className="flex flex-col space-y-6">
+              {/* <nav className="flex flex-col space-y-6">
                 {links.map((link, i) => (
                   <motion.div
                     key={link.text}
@@ -135,7 +135,7 @@ const Hero = ({
                     </Link>
                   </motion.div>
                 ))}
-              </nav>
+              </nav> */}
             </div>
           </motion.div>
         )}

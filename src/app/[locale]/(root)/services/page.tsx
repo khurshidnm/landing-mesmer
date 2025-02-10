@@ -128,7 +128,7 @@ const About = () => {
       <section className="container mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row items-start gap-8">
           <motion.div
-            className="w-full lg:w-1/2 aspect-video relative"
+            className="w-full hidden md:flex lg:w-1/2 aspect-video relative"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
@@ -164,7 +164,7 @@ const About = () => {
       </section>
 
       <motion.div
-        className="w-full h-[300px] relative my-8"
+        className="w-full md:h-[300px] h-[100px]  relative my-8"
         initial={{ scale: 1.1 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
@@ -181,7 +181,7 @@ const About = () => {
       <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-start gap-8">
-            <motion.div className="w-full lg:w-1/2"></motion.div>
+            <motion.div className="w-full hidden md:flex lg:w-1/2"></motion.div>
 
             <motion.div
               className="w-full lg:w-1/2 space-y-6"

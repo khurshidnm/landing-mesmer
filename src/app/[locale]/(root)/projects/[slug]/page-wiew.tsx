@@ -6,6 +6,7 @@ import Hero from "../../components/Hero";
 import { ProjectsItem } from "../page-wiew";
 import Gallery from "../../components/Gallery";
 import { useLocale } from "next-intl";
+import Footer from "../../components/Footer";
 
 export default function ProjectPage({ project }: { project: ProjectsItem }) {
   const locale = useLocale() as "uz" | "ru" | "en";
@@ -77,6 +78,7 @@ export default function ProjectPage({ project }: { project: ProjectsItem }) {
         </div>
         <Gallery photos={project.gallery} />
       </article>
+      <Footer />
     </>
   );
 }

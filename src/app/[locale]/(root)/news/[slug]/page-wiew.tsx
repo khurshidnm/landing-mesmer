@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Hero from "../../components/Hero";
 import { NewsItem } from "@/types/news";
 import { useLocale } from "next-intl";
+import Footer from "../../components/Footer";
 
 export default function NewsPage({ news }: { news: NewsItem }) {
   const locale = useLocale() as "uz" | "ru" | "en";
@@ -61,6 +62,7 @@ export default function NewsPage({ news }: { news: NewsItem }) {
           </div>
         </div>
       </article>
+      <Footer />
     </>
   );
 }

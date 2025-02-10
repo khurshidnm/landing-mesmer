@@ -66,11 +66,11 @@ export default function JobListings({
         backgroundImage="/contact.png"
         height="500px"
       />
-      <div className="flex flex-col justify-center items-center md:flex-row">
+      <div className="flex flex-col   container justify-between mt-5 mx-auto w-full items-center md:flex-row">
         <div className="w-full md:w-1/2"></div>
 
-        <div className="w-full md:w-1/2 px-8 py-12 md:mr-[200px] ">
-          <div className="grid gap-6 max-w-xl mx-auto">
+        <div className="w-full md:w-1/2     ">
+          <div className="grid gap-6 max-w-xl md:ml-[50px]">
             {vacancies.map((job: JobListing, index: number) => (
               <motion.div
                 key={job._id}
@@ -78,7 +78,7 @@ export default function JobListings({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="overflow-hidden border-none hover:shadow-md transition-shadow">
+                <Card className="overflow-hidden border-none rounded-none hover:shadow-md transition-shadow">
                   <CardHeader className="space-y-3 bg-gradient-to-r from-blue-50 to-white p-4">
                     <div className="space-y-2">
                       <div className="flex items-start justify-between">
@@ -90,7 +90,7 @@ export default function JobListings({
                             {job.ru.company}
                           </p>
                         </div>
-                        <div className="flex items-center text-blue-600">
+                        <div className="flex items-center rounded-none text-blue-600">
                           <DollarSign className="w-4 h-4 mr-1" />
                           <span className="font-medium text-sm">
                             {job.salary}
@@ -107,7 +107,7 @@ export default function JobListings({
                       <ul className="space-y-1">
                         {job.ru.conditions.map((condition, i) => (
                           <li key={i} className="flex items-start text-sm">
-                            <span className="mr-2 mt-1.5 h-1 w-1 rounded-full bg-blue-600 flex-shrink-0" />
+                            <span className="mr-2 mt-1.5 h-1 w-1  bg-blue-600 flex-shrink-0" />
                             <span className="text-gray-600">{condition}</span>
                           </li>
                         ))}
@@ -135,7 +135,7 @@ export default function JobListings({
                       <ul className="space-y-1">
                         {job.ru.responsibilities.map((responsibility, i) => (
                           <li key={i} className="flex items-start text-sm">
-                            <span className="mr-2 mt-1.5 h-1 w-1 rounded-full bg-blue-600 flex-shrink-0" />
+                            <span className="mr-2 mt-1.5 h-1 w-1 bg-blue-600 flex-shrink-0" />
                             <span className="text-gray-600">
                               {responsibility}
                             </span>
@@ -155,7 +155,7 @@ export default function JobListings({
                     </div>
                     <Button
                       size="sm"
-                      className="bg-blue-600 hover:bg-blue-700 text-white"
+                      className="bg-blue-600 hover:bg-blue-700 rounded-none text-white"
                       onClick={() => handleOpenModal(job)}
                     >
                       <Briefcase className="w-3 h-3 mr-2" />
@@ -170,7 +170,7 @@ export default function JobListings({
             <Button
               variant="outline"
               size="sm"
-              className="text-blue-600 border-blue-600 hover:bg-blue-50"
+              className="text-blue-600 rounded-none border-blue-600 hover:bg-blue-50"
             >
               ЕЩЕ ВАКАНСИИ
             </Button>

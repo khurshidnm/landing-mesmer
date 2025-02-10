@@ -19,7 +19,7 @@ import { useLocale, useTranslations } from "next-intl";
 function updateLocaleInUrl(locale: string, pathname: string): string {
   const urlParts = pathname.split("/");
   if (urlParts.length > 1) {
-      urlParts[1] = locale; // Ikkinchi segmentni (locale) almashtirish
+    urlParts[1] = locale; // Ikkinchi segmentni (locale) almashtirish
   }
   return `/${urlParts.slice(1).join("/")}`;
 }
@@ -30,12 +30,13 @@ const Navbar = () => {
   const pathname = usePathname();
   // locale
   const language = useLocale();
-  const t = useTranslations('navbar');
+  const t = useTranslations("navbar");
 
   const router = useRouter();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
-  const changeLanguage = (lang: string) => router.push(updateLocaleInUrl(lang.toLowerCase(), pathname));
+  const changeLanguage = (lang: string) =>
+    router.push(updateLocaleInUrl(lang.toLowerCase(), pathname));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,11 +91,11 @@ const Navbar = () => {
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-20 transition-colors duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-20 transition-colors duration-300  ${
         isScrolled ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
-      <nav className="px-4 lg:px-10 py-4">
+      <nav className="px-4 lg:px-10    mx-auto  py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 lg:gap-16">
             <Link href={"/"}>
@@ -106,7 +107,7 @@ const Navbar = () => {
                 className="w-[80px] md:w-[100px]"
               />
             </Link>
-            <div className="hidden lg:flex space-x-6">
+            <div className="hidden lg:flex w-full  px-10  space-x-6">
               {links.map((link) => (
                 <Link
                   key={link.text}

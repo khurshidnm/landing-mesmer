@@ -79,9 +79,7 @@ const About = () => {
                 className="object-cover w-full "
               />
             </div>
-            <p className="text-gray-700 leading-relaxed">
-              {t("description")}
-            </p>
+            <p className="text-gray-700 leading-relaxed">{t("description")}</p>
           </motion.div>
         </div>
       </section>
@@ -113,19 +111,17 @@ const About = () => {
             variants={fadeIn}
           >
             <div>
-              <h2 className="text-3xl font-bold mb-6">
-                {t("goals.title")}
-                </h2>
+              <h2 className="text-3xl font-bold mb-6">{t("goals.title")}</h2>
               <div className="relative w-full aspect-[16/9] mb-4">
                 <Image
                   src="/about4.png"
                   alt="Goals icon"
                   fill
                   className="object-cover"
-                  />
+                />
               </div>
               <p className="text-gray-700 leading-relaxed mb-8">
-                  {t("goals.description")}
+                {t("goals.description")}
               </p>
             </div>
 
@@ -159,7 +155,7 @@ const About = () => {
       <section className="container mx-auto px-6 py-10">
         <div className="flex flex-col lg:flex-row items-start gap-12">
           <motion.div
-            className="w-full lg:w-1/2 aspect-[4/3] relative"
+            className="w-full hidden md:flex lg:w-1/2 aspect-[4/3] relative"
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
@@ -190,7 +186,7 @@ const About = () => {
                 {t("quality.description")}
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed mb-4">
-                {[1,2,3,4].map((item) => (
+                {[1, 2, 3, 4].map((item) => (
                   <li key={item}>{t(`quality.list.label_${item}`)}</li>
                 ))}
               </ul>
