@@ -4,7 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Newspaper, Briefcase, FolderKanban, Menu, LogOut, VerifiedIcon } from "lucide-react";
+import {
+  Newspaper,
+  Briefcase,
+  FolderKanban,
+  Menu,
+  LogOut,
+  VerifiedIcon,
+} from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -85,15 +92,15 @@ export function Sidebar() {
               <SidebarItems pathname={pathname} />
             </div>
             <div className="p-4 w-full">
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className={cn("w-full")}
-            >
-              <LogOut className={cn("h-5 w-5 mr-2")} />
-              Chiqish
-            </Button>
-          </div>
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className={cn("w-full")}
+              >
+                <LogOut className={cn("h-5 w-5 mr-2")} />
+                Chiqish
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -124,7 +131,6 @@ function SidebarItems({ pathname }: { pathname: string | null }) {
           </nav>
         </div>
       </div>
-          
     </div>
   );
 }

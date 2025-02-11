@@ -26,7 +26,6 @@ export default function LoginPage() {
       username,
       password,
     });
-    // Bu yerda haqiqiy autentifikatsiya logikasi bo'lishi kerak
     if (res?.ok) {
       router.push("/admin");
     } else {

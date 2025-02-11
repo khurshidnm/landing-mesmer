@@ -60,7 +60,7 @@ export const authOptions: AuthOptions = {
         // @ts-ignore
         _id: token.sub,
       });
-      console.log(isExistingUser, "SDsd")
+      console.log(isExistingUser, "SDsd");
 
       // @ts-ignore
       session.user = {
