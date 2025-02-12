@@ -1,22 +1,25 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const ContactSchema = new Schema({
+const constantsSchema = new Schema({
   email: {
     type: String,
-    required: true,
+    required: false,
     unique: true,
     trim: true,
+    default: "example@gmail.com"
   },
   number: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
+    default: "+ 998 (55) 518 88 70"
   },
   location: {
     type: String,
-    required: true,
-    trim: true,
+    required: false,
+    default: ""
   },
 });
 
-export const Contact = model("Contact", ContactSchema);
+const Constants = mongoose.models.Constants || mongoose.model("Constants", constantsSchema);
+export default Constants;

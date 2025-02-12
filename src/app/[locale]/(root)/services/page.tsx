@@ -174,13 +174,13 @@ const About = () => {
           src="/servishero3.jpg.png"
           alt="Construction site panorama"
           fill
-          className="object-contain"
+          className="object-cover"
         />
       </motion.div>
 
       <section className="py-8 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-start gap-8">
+        <div className="container mx-auto">
+          <div className="flex flex-col lg:flex-row items-start gap-8 w-full">
             <motion.div className="w-full hidden md:flex lg:w-1/2"></motion.div>
 
             <motion.div

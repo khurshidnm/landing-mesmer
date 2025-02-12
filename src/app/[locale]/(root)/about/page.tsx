@@ -60,7 +60,7 @@ const About = () => {
       />
 
       <section className=" px-4 py-5 container mx-auto">
-        <div className="flex flex-col lg:flex-row items-start gap-12">
+        <div className="flex flex-col lg:flex-row items-start gap-12 w-full">
           <motion.div className="w-1/2"></motion.div>
 
           <motion.div

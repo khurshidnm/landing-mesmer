@@ -27,7 +27,7 @@ const standards = [
 ];
 
 interface Props {
-  certificates: Certificate[]
+  certificates: Certificate[];
 }
 
 const Advantages: FC<Props> = ({ certificates }) => {
@@ -55,9 +55,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
             <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">
               {t("sub_title")}
             </h2>
-            <p className="text-gray-600 leading-relaxed">
-              {t("description")}
-            </p>
+            <p className="text-gray-600 leading-relaxed">{t("description")}</p>
           </div>
         </div>
       </motion.div>
@@ -86,38 +84,43 @@ const Advantages: FC<Props> = ({ certificates }) => {
                   }}
                 />
               </div>
-              <p className="text-sm text-gray-600">{cert[locale as "ru" | "en" | "uz"].title}</p>
+              <p className="text-sm text-gray-600">
+                {cert[locale as "ru" | "en" | "uz"].title}
+              </p>
             </motion.div>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:hidden">
+        <div className="grid grid-cols-1 mx-auto  justify-center sm:grid-cols-2 gap-6 md:hidden">
           {certificates?.map((cert, index) => (
-            <motion.div
-              key={cert._id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
-              onClick={() => {
-                setPhotoIndex(index+1);
-                setIsOpen(true);
-                setTimeout(() => {
-                  setPhotoIndex(index);
-                }, 1000)
-              }}
-            >
-              <div className="relative aspect-[3/4] mb-4">
-                <Image
-                  src={cert.image}
-                  width={300}
-                  height={400}
-                  alt={cert.ru.title}
-                  className="object-contain cursor-pointer"
-                />
-              </div>
-              <p className="text-sm text-gray-600">{cert[locale as "ru" | "en" | "uz"]?.title}</p>
-            </motion.div>
+            <div className="w-full mx-auto" key={cert._id}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 mx-auto"
+                onClick={() => {
+                  setPhotoIndex(index + 1);
+                  setIsOpen(true);
+                  setTimeout(() => {
+                    setPhotoIndex(index);
+                  }, 1000);
+                }}
+              >
+                <div className="relative aspect-[3/4] mb-4 mx-auto">
+                  <Image
+                    src={cert.image}
+                    width={300}
+                    height={400}
+                    alt={cert.ru.title}
+                    className="object-contain cursor-pointer mx-auto"
+                  />
+                </div>
+                <p className="text-sm text-gray-600 text-center">
+                  {cert[locale as "ru" | "en" | "uz"]?.title}
+                </p>
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -126,10 +129,20 @@ const Advantages: FC<Props> = ({ certificates }) => {
         <Lightbox
           mainSrc={certificates[photoIndex].image}
           nextSrc={certificates[(photoIndex + 1) % certificates.length].image}
-          prevSrc={certificates[(photoIndex + certificates.length - 1) % certificates.length].image}
+          prevSrc={
+            certificates[
+              (photoIndex + certificates.length - 1) % certificates.length
+            ].image
+          }
           onCloseRequest={() => setIsOpen(false)}
-          onMovePrevRequest={() => setPhotoIndex((photoIndex + certificates.length - 1) % certificates.length)}
-          onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % certificates.length)}
+          onMovePrevRequest={() =>
+            setPhotoIndex(
+              (photoIndex + certificates.length - 1) % certificates.length
+            )
+          }
+          onMoveNextRequest={() =>
+            setPhotoIndex((photoIndex + 1) % certificates.length)
+          }
         />
       )}
     </div>

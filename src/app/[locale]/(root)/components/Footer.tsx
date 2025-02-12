@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LinkedinIcon as LinkedIn } from "lucide-react";
@@ -21,6 +21,25 @@ const Footer = () => {
     email: "",
     message: "",
   });
+  const [constants, setConstants] = useState({
+    number: "+ 998 (55) 518 88 70",
+    email: "info@mesmer.uz",
+    location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
+  });
+
+  useEffect(() => {
+    const fetchConstants = async () => {
+      try {
+        const res = await axios.get("/api/consts");
+        if (res.data) {
+          setConstants(res.data.data.constant);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchConstants()
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -54,7 +73,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-black text-white">
-      <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="container mx-auto py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
           {/* Contact Information */}
           <div>
@@ -65,7 +84,7 @@ const Footer = () => {
                   href="tel:+998555188870"
                   className="text-lg hover:text-blue-400 transition-colors"
                 >
-                  + 998 (55) 518 88 70
+                  {constants.number}
                 </a>
               </div>
               <div>
@@ -73,11 +92,11 @@ const Footer = () => {
                   href="mailto:info@mesmer.uz"
                   className="text-lg hover:text-blue-400 transition-colors"
                 >
-                  info@mesmer.uz
+                  {constants.email}
                 </a>
               </div>
               <div className="text-gray-400">
-                Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069
+                {constants.location}
               </div>
               <div className="flex gap-3">
                 <Image src={"/Negative.svg"} alt="" width={22} height={22} />

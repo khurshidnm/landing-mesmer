@@ -36,9 +36,9 @@ export function Cards({ news }: { news: NewsItem[] }) {
   const locale = useLocale() as "uz" | "ru" | "en";
 
   return (
-    <div className="   ">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 ">
-        <div className="md:col-span-5 grid grid-cols-1  rounded-none   md:grid-cols-4 gap-6 order-2">
+    <div className="w-full">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 w-full">
+        <div className="md:col-span-5 grid grid-cols-1 rounded-none md:grid-cols-4 gap-6 order-2 w-full">
           {news?.slice(1).map((news, index) => (
             <motion.div
               key={news._id}
@@ -76,7 +76,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
         {news?.[0] && (
           <motion.div
             key={news?.[0]?._id}
-            className="md:col-span-3 md:col-start-3  md:mr-[65px] order-1"
+            className="md:col-span-3 md:col-start-3 order-1"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}

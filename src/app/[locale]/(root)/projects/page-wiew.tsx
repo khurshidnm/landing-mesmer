@@ -92,14 +92,14 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
         subtitle=""
         height="500px"
       />
-      <div className="mx-auto px-4  py-16 sm:px-6 lg:px-8 flex flex-col md:flex-row border ">
+      <div className="mx-auto  container w-full py-16 flex flex-col md:flex-row  ">
         <div className="md:w-1/3 w-full   ">
           <h1 className="text-3xl md:text-4xl font-bold mb-12">
             ТЕКУЩИЕ И РЕАЛИЗОВАННЫЕ ПРОЕКТЫ
           </h1>
         </div>
 
-        <div className="md:w-2/3 overflow-y-auto w-full md:mr-[65px]">
+        <div className="md:w-2/3 overflow-y-auto w-full ">
           <motion.div
             variants={container}
             initial="hidden"

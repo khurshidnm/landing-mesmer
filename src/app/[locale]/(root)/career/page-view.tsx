@@ -66,10 +66,10 @@ export default function JobListings({
         backgroundImage="/contact.png"
         height="500px"
       />
-      <div className="flex flex-col   container justify-between mt-5 mx-auto w-full items-center md:flex-row">
+      <div className="flex flex-col container justify-between mt-5 mx-auto w-full items-center md:flex-row">
         <div className="w-full md:w-1/2"></div>
 
-        <div className="w-full md:w-1/2     ">
+        <div className="w-full md:w-1/2">
           <div className="grid gap-6 max-w-xl md:ml-[50px]">
             {vacancies.map((job: JobListing, index: number) => (
               <motion.div

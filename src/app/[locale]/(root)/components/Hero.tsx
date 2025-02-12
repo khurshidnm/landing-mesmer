@@ -73,11 +73,12 @@ const Hero = ({
     >
       <div className="absolute inset-0   mx-auto bg-black/40 z-10"></div>
       <Navbar />
+      <div className="conatiner mx-auto">
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="absolute bottom-[200px] md:bottom-20 left-0 right-0 md:left-8  text-white z-10 "
+        className="absolute bottom-[200px] md:bottom-20 left-0 right-0  text-white z-10 container mx-auto"
       >
         <motion.p
           initial={{ y: 20, opacity: 0 }}
@@ -96,6 +97,7 @@ const Hero = ({
           {title}
         </motion.h1>
       </motion.section>
+      </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div

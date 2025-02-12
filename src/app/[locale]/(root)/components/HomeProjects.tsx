@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "@/components/BluredImage";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, OctagonAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { use } from "react";
 
 const ProjectsSection = () => {
   const [ref, inView] = useInView({
@@ -27,6 +28,7 @@ const ProjectsSection = () => {
   };
 
   const t = useTranslations("home.projects");
+  const locale = useLocale()
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -67,7 +69,7 @@ const ProjectsSection = () => {
                 >{t("description")}
                 </motion.p>
                 <motion.div variants={fadeInUp} className="mt-8">
-                  <Link href={"/projects"}>
+                  <Link href={`/${locale}/projects`}>                                                                                   
                     <Button
                       className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-lg text-lg font-medium transition-colors duration-300"
                       onClick={() => (window.location.href = "/projects")}

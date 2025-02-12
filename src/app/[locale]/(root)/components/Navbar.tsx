@@ -15,6 +15,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import axios from "axios";
 
 function updateLocaleInUrl(locale: string, pathname: string): string {
   const urlParts = pathname.split("/");
@@ -33,6 +34,27 @@ const Navbar = () => {
   const t = useTranslations("navbar");
 
   const router = useRouter();
+
+
+  const [constants, setConstants] = useState({
+    number: "+ 998 (55) 518 88 70",
+    email: "info@mesmer.uz",
+    location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
+  });
+
+  useEffect(() => {
+    const fetchConstants = async () => {
+      try {
+        const res = await axios.get("/api/consts");
+        if (res.data) {
+          setConstants(res.data.data.constant);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchConstants()
+  }, []);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const changeLanguage = (lang: string) =>
@@ -95,7 +117,7 @@ const Navbar = () => {
         isScrolled ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
-      <nav className="px-4 lg:px-10    mx-auto  py-4">
+      <nav className="container mx-auto py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 lg:gap-16">
             <Link href={"/"}>
@@ -137,18 +159,20 @@ const Navbar = () => {
             }`}
           >
             <a
-              href="tel:+998555188870"
+              href={`tel:${constants.number}`}
               className="hover:text-gray-600 transition-colors flex items-center gap-2"
             >
               <Phone size={18} />
-              <span className="hidden lg:inline">+998 55 518 88 70</span>
+              <span className="hidden lg:inline">
+                {constants.number}
+              </span>
             </a>
             <a
-              href="mailto:info@mesmer.uz"
+              href={`mailto:${constants.email}`}
               className="hover:text-gray-600 transition-colors flex items-center gap-2"
             >
               <Mail size={18} />
-              <span className="hidden lg:inline">info@mesmer.uz</span>
+              <span className="hidden lg:inline">{constants.email}</span>
             </a>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

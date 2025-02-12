@@ -34,9 +34,24 @@ const Partners = () => {
         <div className="overflow-hidden relative mix-blend-darken">
           <motion.div
             className="flex flex-nowrap min-w-max"
-            animate={{ x: ["0%", "-100%"] }}
+            animate={{ x: ["0%", "-50%"] }}
             transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
           >
+            {[...partners, ...partners].map((src, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 w-28 h-28 mx-4 flex items-center justify-center"
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={src}
+                    alt={`Partner logo ${index + 1}`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            ))}
             {[...partners, ...partners].map((src, index) => (
               <div
                 key={index}

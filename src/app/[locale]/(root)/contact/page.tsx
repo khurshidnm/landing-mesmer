@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const socialLinks = [
   { icon: Telegram, href: "#", label: "Telegram" },
@@ -44,6 +44,26 @@ const Contact = () => {
     email: "",
     message: "",
   });
+
+  const [constants, setConstants] = useState({
+    number: "+ 998 (55) 518 88 70",
+    email: "info@mesmer.uz",
+    location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
+  });
+
+  useEffect(() => {
+    const fetchConstants = async () => {
+      try {
+        const res = await axios.get("/api/consts");
+        if (res.data) {
+          setConstants(res.data.data.constant);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchConstants()
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -109,8 +129,8 @@ const Contact = () => {
                   КОНТАКТЫ
                 </h2>
                 <div className="space-y-3">
-                  <p className="text-xl text-gray-900">+998 (71) 123 45 67</p>
-                  <p className="text-xl text-gray-900">messmercy@gmail.com</p>
+                  <p className="text-xl text-gray-900">{constants.number}</p>
+                  <p className="text-xl text-gray-900">{constants.email}</p>
                 </div>
               </div>
 
@@ -143,12 +163,13 @@ const Contact = () => {
 
       <div className="container mx-auto px-4 py-8">
         <p className="text-sm text-gray-600 text-center mb-16">
-          Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069
+          {constants.location}
         </p>
 
-        <section className="container mx-auto px-4 py-8">
-          <div className="flex flex-col lg:flex-row items-start gap-8">
-            <motion.div
+
+        <section className="container mx-auto h-[350px] mb-16 px-4 py-8 ">
+        <div className="flex flex-col lg:flex-row items-start gap-8">
+        <motion.div
               className="w-full lg:w-1/2"
               initial="initial"
               whileInView="animate"
@@ -156,8 +177,8 @@ const Contact = () => {
               variants={fadeIn}
             ></motion.div>
 
-            <motion.div
-              className="w-full lg:w-1/2 space-y-6"
+<motion.div
+              className="w-full lg:w-1/3 space-y-6"
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
@@ -207,8 +228,9 @@ const Contact = () => {
                 </form>
               </div>
             </motion.div>
-          </div>
-        </section>
+        </div>
+      </section>
+   
       </div>
       <Footer />
     </div>

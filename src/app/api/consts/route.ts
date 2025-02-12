@@ -1,4 +1,4 @@
-import { Contact } from "@/database/consts.model";
+import Constants from "@/database/consts.model";
 import { connectToDatabase } from "@/lib/mongoose";
 import { NextResponse } from "next/server";
 
@@ -6,13 +6,24 @@ export async function GET() {
   try {
     await connectToDatabase();
 
-    const contacts = await Contact.find({});
+    const constant = await Constants.findOne({});
+
+    if (!constant) {
+      const new_constant = await Constants.create({});
+      return NextResponse.json({
+        message: "constants created",
+        errors: null,
+        data: {
+          constant: new_constant,
+        },
+      })
+    }
 
     return NextResponse.json({
-      message: "Contacts retrieved",
+      message: "constants retrieved",
       errors: null,
       data: {
-        contacts,
+        constant,
       },
     });
   } catch (error) {
@@ -28,23 +39,24 @@ export async function PUT(req: Request) {
   try {
     await connectToDatabase();
 
-    const { id, ...updateData } = await req.json();
-    const updatedContact = await Contact.findByIdAndUpdate(id, updateData, {
+    const {...updateData } = await req.json();
+    const constant = await Constants.findOneAndUpdate({}, updateData, {
       new: true,
     });
 
-    if (!updatedContact) {
-      return NextResponse.json(
-        { message: "Contact not found", errors: null },
-        { status: 404 }
-      );
+    if (!constant) {
+      return NextResponse.json({
+        message: "Something went wrong",
+        errors: null,
+        data: null,
+      })
     }
 
     return NextResponse.json({
       message: "Contact updated",
       errors: null,
       data: {
-        updatedContact,
+        constant,
       },
     });
   } catch (error) {

@@ -20,8 +20,8 @@ export default function ProjectPage({ project }: { project: ProjectsItem }) {
         backgroundImage="/our.png"
         height="500px"
       />
-      <article className="min-h-screen bg-white container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="container mx-auto pt-8">
+      <article className="min-h-screen bg-white container mx-auto">
+        <div className="pt-8">
           <div className="border-l-4 border-blue-600 pl-6">
             <h1 className="text-3xl font-bold text-black mb-2">О ПРОЕКТЕ</h1>
             <h2 className="text-2xl text-gray-800">
