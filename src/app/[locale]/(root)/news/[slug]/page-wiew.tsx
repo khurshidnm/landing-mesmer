@@ -4,25 +4,27 @@ import Image from "@/components/BluredImage";
 import { motion } from "framer-motion";
 import Hero from "../../components/Hero";
 import { NewsItem } from "@/types/news";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Footer from "../../components/Footer";
 
 export default function NewsPage({ news }: { news: NewsItem }) {
   const locale = useLocale() as "uz" | "ru" | "en";
   const localizedNews = news[locale];
 
+  const t = useTranslations("news")
+
   return (
     <>
       <Hero
         title=""
-        subtitle={`Новости / ${localizedNews?.title}`}
+        subtitle={`${t("title")} / ${localizedNews?.title}`}
         backgroundImage="/our.png"
         height="500px"
       />
       <article className="min-h-screen bg-white container mx-auto">
         <div className="pt-8">
           <div className="border-l-4 border-blue-600 pl-6">
-            <h1 className="text-3xl font-bold text-black mb-2">НОВОСТЬ</h1>
+            <h1 className="text-3xl font-bold text-black mb-2">{t("single")}</h1>
             <h2 className="text-2xl text-gray-800">{localizedNews?.title}</h2>
           </div>
         </div>

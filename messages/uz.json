@@ -5,7 +5,9 @@
     "projects": "Loyihalar",
     "news": "Yangiliklar",
     "career": "Karyera",
-    "contacts": "Aloqa"
+    "contacts": "Aloqa",
+    "license": "Litsenziya bo'yicha takliflar",
+    "rules": "Shartnoma qoidalari"
   },
   "home": {
     "hero": {
@@ -106,5 +108,42 @@
       "title": "Ekspluatatsiya va texnik xizmat ko‘rsatish",
       "description": "Uskunalarning xavfsizligi va ishonchliligini ta’minlash ob’ekt ekspluatatsiyasida muhim ahamiyat kasb etadi. Bu maqsadga erishish uchun \"MESMER\" loyihalarning barcha bosqichlarida – texnik-iqtisodiy tadqiqotlar, loyihalash, muhandislik, xarid qilish, qurilish va tijorat ekspluatatsiyasida ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taklif etadi. \"MESMER\" mijozlarning ehtiyojlariga mos ravishda ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taqdim etadi, jumladan: ekspluatatsiyaga tayyorgarlik – rejalashtirish, tizim ishlab chiqish va o‘qitish; maslahat xizmatlari – daromadni optimallashtirish, ishonchlilik va xavfsizlikni oshirish; shuningdek, turli texnik xizmat ko‘rsatish rejalarini ishlab chiqish va amalga oshirish. Bundan tashqari, ekspluatatsiya ma’lumotlarini to‘plash va tahlil qilish orqali mumkin bo‘lgan nosozliklarni oldindan bashorat qilish hamda ob’ekt va uskunalarning ish samaradorligini oshirish uchun ilg‘or texnologiyalarni qo‘llash imkoniyati mavjud."
     }
+  },
+  "career": {
+    "title": "Bo'sh ish o'rinlari",
+    "view_more": "KO'PROQ ISHLAR",
+    "terms": "Shartlar",
+    "requirements": "Talablar",
+    "responsibility": "mas'uliyat",
+    "created_at": "Nashr qilingan sana",
+    "respond": "RESPOND"
+  },
+  "news": {
+    "title": "Yangiliklar",
+    "single": "Yangilik"
+  },
+  "contact": {
+    "title": "Biz bilan bog'laning",
+    "form": {
+      "title": "FORMANI TO'LDIRING",
+      "name": "Ism",
+      "phone": "Telefon raqami",
+      "email": "Elektron pochta",
+      "message": "Xabar",
+      "send": "Yuborish"
+    },
+    "contacts": "KONTAKTLAR"
+  },
+  "projects": {
+    "title": "Bizning loyihalarimiz",
+    "main_title": "JORIY VA TUGARILGAN LOYIHALAR",
+    "project": {
+      "task": "Vazifa hajmi",
+      "customer": "Mijoz",
+      "status": "Status",
+      "implementation": "amalga oshirish muddati"
+    },
+    "single": "LOYIHA HAQIDA",
+    "gallery": "GALLERY"
   }
 }

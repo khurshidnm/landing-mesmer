@@ -117,7 +117,7 @@ const Navbar = () => {
         isScrolled ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
-      <nav className="container mx-auto py-4">
+      <nav className="container mx-auto py-4 whitespace-nowrap">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 lg:gap-16">
             <Link href={"/"}>
@@ -163,7 +163,7 @@ const Navbar = () => {
               className="hover:text-gray-600 transition-colors flex items-center gap-2"
             >
               <Phone size={18} />
-              <span className="hidden lg:inline">
+              <span className="hidden lg:inline ">
                 {constants.number}
               </span>
             </a>

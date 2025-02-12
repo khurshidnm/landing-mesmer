@@ -14,6 +14,7 @@ import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const socialLinks = [
   { icon: Telegram, href: "#", label: "Telegram" },
@@ -50,6 +51,8 @@ const Contact = () => {
     email: "info@mesmer.uz",
     location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
   });
+
+  const t = useTranslations("contact")
 
   useEffect(() => {
     const fetchConstants = async () => {
@@ -99,7 +102,7 @@ const Contact = () => {
   return (
     <div className="bg-white">
       <Hero
-        title="Контакты"
+        title={t("contacts").toUpperCase().slice(0, 1) + t("contacts").toLocaleLowerCase().slice(1)}
         subtitle=""
         backgroundImage="/contact.png"
         height="500px"
@@ -120,13 +123,13 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-[56px] mb-10 font-normal leading-tight text-gray-900">
-              Свяжитесь с нами
+              {t("title")}
             </h1>
 
             <div className="flex gap-5 border-b">
               <div className="space-y-8 ">
                 <h2 className="text-sm font-medium tracking-wider text-gray-900 uppercase">
-                  КОНТАКТЫ
+              {t("contacts")}
                 </h2>
                 <div className="space-y-3">
                   <p className="text-xl text-gray-900">{constants.number}</p>
@@ -186,14 +189,14 @@ const Contact = () => {
             >
               <div className="w-full mx-auto">
                 <h2 className="text-sm font-medium uppercase tracking-wider text-gray-500 mb-8 text-center">
-                  ЗАПОЛНИТЕ ФОРМУ
+                  {t("form.title")}
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <Input
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Имя"
+                    placeholder={t("form.name")}
                     className="w-full border-gray-300 rounded-none px-4 py-3 text-gray-900 placeholder-gray-500"
                   />
                   <Input
@@ -201,7 +204,7 @@ const Contact = () => {
                     type="tel"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="Номер телефона"
+                    placeholder={t("form.phone")}
                     className="w-full border-gray-300 rounded-none px-4 py-3 text-gray-900 placeholder-gray-500"
                   />
                   <Input
@@ -209,21 +212,21 @@ const Contact = () => {
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="Электронная почта"
+                    placeholder={t("form.email")}
                     className="w-full border-gray-300 rounded-none px-4 py-3 text-gray-900 placeholder-gray-500"
                   />
                   <Textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Сообщение"
+                    placeholder={t("form.message")}
                     className="w-full min-h-[120px] border-gray-300 rounded-none px-4 py-3 text-gray-900 placeholder-gray-500"
-                  />
+                    />
                   <Button
                     type="submit"
                     className="w-full bg-[#1A56DB] text-white py-6 rounded-none"
-                  >
-                    ОТПРАВИТЬ
+                    >
+                    {t("form.send")}
                   </Button>
                 </form>
               </div>

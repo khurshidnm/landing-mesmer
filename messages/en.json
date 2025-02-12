@@ -5,7 +5,9 @@
     "projects": "Projects",
     "news": "News",
     "career": "Career",
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "license": "License Proposals",
+    "rules": "Rules of the agreement"
   },
   "home": {
     "hero": {
@@ -106,5 +108,42 @@
       "title": "Operation and Maintenance",
       "description": "Ensuring the safety and reliability of equipment plays a crucial role in facility operations. To achieve this goal, \"MESMER\" offers a wide range of operation and maintenance services at all project stages – from feasibility studies to design, engineering, procurement, construction, and commercial operation. \"MESMER\" provides operation and maintenance services tailored to its clients' needs, including preparation for operation, such as planning, system development, and training; consulting services, such as profit optimization, reliability, and safety improvement; as well as full-cycle planning, implementation, and execution of various maintenance types. Additionally, through data collection and operational analysis, potential failures can be predicted, allowing us to apply the latest technologies to enhance facility and equipment efficiency."
     }
+  },
+  "career": {
+    "title": "Jobs",
+    "view_more": "MORE JOBS",
+    "terms": "Terms",
+    "requirements": "Requirements",
+    "responsibilities": "Responsibilities",
+    "created_at": "Date of publication",
+    "respond": "RESPOND"
+  },
+  "news": {
+    "title": "News",
+    "single": "News"
+  },
+  "contact": {
+    "title": "Contact us",
+    "form": {
+      "title": "FILL OUT THE FORM",
+      "name": "Name",
+      "phone": "Phone number",
+      "email": "Email",
+      "message": "Message",
+      "send": "SEND"
+    },
+    "contacts": "CONTACTS"
+  },
+  "projects": {
+    "title": "Our projects",
+    "main_title": "CURRENT AND COMPLETED PROJECTS",
+    "project": {
+      "task": "Task volume",
+      "customer": "Customer",
+      "status": "Status",
+      "implementation": "Implementation period"
+    },
+    "single": "ABOUT THE PROJECT",
+    "gallery": "GALLERY"
   }
 }

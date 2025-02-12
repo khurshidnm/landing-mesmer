@@ -2,14 +2,9 @@
 
 import React from "react";
 import Hero from "../components/Hero";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import Image from "@/components/BluredImage";
-import Link from "next/link";
 import Footer from "../components/Footer";
-import { NewsGrid } from "@/components/news-grid";
-import { Card } from "@/components/ui/card";
 import { Cards } from "../components/Cards";
+import { useTranslations } from "next-intl";
 
 interface NewsItem {
   _id: string;
@@ -34,14 +29,13 @@ interface NewsItem {
 }
 
 const News = ({ news }: { news: NewsItem[] }) => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
+const t = useTranslations("news")
   return (
     <div>
       <Hero
         backgroundImage="/news.png"
         height="500px"
-        title="Новости"
+        title={t("title")}
         subtitle=""
       />
       <div className="rounded-none mx-auto container py-16">

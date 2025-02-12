@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LinkedinIcon as LinkedIn } from "lucide-react";
 import axios from "axios";
+import { useTranslations } from "next-intl";
 
 interface FormData {
   name: string;
@@ -26,6 +27,9 @@ const Footer = () => {
     email: "info@mesmer.uz",
     location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
   });
+  
+  const contactsLang = useTranslations("contact")
+  const navbarLang = useTranslations("navbar")
 
   useEffect(() => {
     const fetchConstants = async () => {
@@ -77,7 +81,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
           {/* Contact Information */}
           <div>
-            <h2 className="text-2xl font-bold mb-8">КОНТАКТЫ</h2>
+            <h2 className="text-2xl font-bold mb-8">{contactsLang("title")}</h2>
             <div className="space-y-6">
               <div>
                 <a
@@ -115,7 +119,7 @@ const Footer = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Имя"
+                  placeholder={contactsLang("form.name")}
                   required
                   className="w-full px-4 py-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
                 />
@@ -126,7 +130,7 @@ const Footer = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="Номер телефона"
+                  placeholder={contactsLang("form.phone")}
                   required
                   className="w-full px-4 py-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
                 />
@@ -137,7 +141,7 @@ const Footer = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="Электронная почта"
+                  placeholder={contactsLang("form.email")}
                   required
                   className="w-full px-4 py-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
                 />
@@ -147,7 +151,7 @@ const Footer = () => {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Сообщение"
+                  placeholder={contactsLang("form.message")}
                   required
                   rows={4}
                   className="w-full px-4 py-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors resize-none"
@@ -181,34 +185,34 @@ const Footer = () => {
                 href="/about"
                 className="hover:text-white transition-colors"
               >
-                О компании
+                {navbarLang("about")}
               </Link>
               <Link
                 href="/services"
                 className="hover:text-white transition-colors"
               >
-                Услуги
+                {navbarLang("services")}
               </Link>
               <Link
                 href="/projects"
                 className="hover:text-white transition-colors"
               >
-                Проекты
+                {navbarLang("projects")}
               </Link>
               <Link
                 href="/careers"
                 className="hover:text-white transition-colors"
               >
-                Вакансии
+                {navbarLang("career")}
               </Link>
               <Link href="/news" className="hover:text-white transition-colors">
-                Новости
+              {navbarLang("news")}
               </Link>
               <Link
                 href="/contacts"
                 className="hover:text-white transition-colors"
               >
-                Контакты
+                {navbarLang("contacts")}
               </Link>
             </nav>
             <div className="text-right text-sm text-gray-400">
@@ -218,13 +222,13 @@ const Footer = () => {
                   href="/license"
                   className="hover:text-white transition-colors"
                 >
-                  Предложения по лицензиям
+                  {navbarLang("license")}
                 </Link>
                 <Link
                   href="/terms"
                   className="hover:text-white transition-colors"
-                >
-                  Правила соглашения
+                  >
+                  {navbarLang("rules")}
                 </Link>
               </div>
             </div>

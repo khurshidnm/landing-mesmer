@@ -5,25 +5,26 @@ import { motion } from "framer-motion";
 import Hero from "../../components/Hero";
 import { ProjectsItem } from "../page-wiew";
 import Gallery from "../../components/Gallery";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Footer from "../../components/Footer";
 
 export default function ProjectPage({ project }: { project: ProjectsItem }) {
   const locale = useLocale() as "uz" | "ru" | "en";
   const localizedProject = project[locale];
+  const t = useTranslations("projects")
 
   return (
     <>
       <Hero
         title=""
-        subtitle={`Наши проекты / ${localizedProject?.title}`}
+        subtitle={`${t("title")} / ${localizedProject?.title}`}
         backgroundImage="/our.png"
         height="500px"
       />
       <article className="min-h-screen bg-white container mx-auto">
         <div className="pt-8">
           <div className="border-l-4 border-blue-600 pl-6">
-            <h1 className="text-3xl font-bold text-black mb-2">О ПРОЕКТЕ</h1>
+            <h1 className="text-3xl font-bold text-black mb-2">{t("single")}</h1>
             <h2 className="text-2xl text-gray-800">
               {localizedProject?.main_title}
             </h2>
@@ -61,16 +62,16 @@ export default function ProjectPage({ project }: { project: ProjectsItem }) {
                   }}
                 ></p>
                 <p className="text-base sm:text-lg leading-relaxed">
-                  Объем задач: {localizedProject?.volume_of_tasks}
+                  {t("project.task")}: {localizedProject?.volume_of_tasks}
                 </p>
                 <p className="text-base sm:text-lg leading-relaxed">
-                  Заказчик: {localizedProject?.customer}
+                {t("project.customer")}: {localizedProject?.customer}
                 </p>
                 <p className="text-base sm:text-lg leading-relaxed">
-                  Статус: {localizedProject?.status}
+                {t("project.status")}: {localizedProject?.status}
                 </p>
                 <p className="text-base sm:text-lg leading-relaxed">
-                  Сроки реализации: {localizedProject?.implementation_period}
+                {t("project.implementation")}: {localizedProject?.implementation_period}
                 </p>
               </motion.div>
             </div>

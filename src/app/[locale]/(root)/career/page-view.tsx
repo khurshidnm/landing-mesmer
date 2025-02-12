@@ -12,6 +12,8 @@ import { Calendar, Briefcase, DollarSign } from "lucide-react";
 import Hero from "../components/Hero";
 import { JobApplicationModal } from "../components/JobModal";
 import { format } from "date-fns";
+import Footer from "../components/Footer";
+import { useTranslations } from "next-intl";
 
 interface JobListing {
   _id: number;
@@ -58,10 +60,12 @@ export default function JobListings({
     setSelectedJob(null);
   };
 
+  const t = useTranslations("career")
+
   return (
     <>
       <Hero
-        title="Вакансии"
+        title={t("title")}
         subtitle=""
         backgroundImage="/contact.png"
         height="500px"
@@ -102,7 +106,7 @@ export default function JobListings({
                   <CardContent className="space-y-4 p-4">
                     <div className="space-y-2">
                       <h4 className="text-sm font-medium text-gray-900">
-                        Условия:
+                        {t("terms")}:
                       </h4>
                       <ul className="space-y-1">
                         {job.ru.conditions.map((condition, i) => (
@@ -116,7 +120,7 @@ export default function JobListings({
 
                     <div className="space-y-2">
                       <h4 className="text-sm font-medium text-gray-900">
-                        Требования:
+                        {t("requirements")}:
                       </h4>
                       <ul className="space-y-1">
                         {job.ru.requirements.map((requirement, i) => (
@@ -130,7 +134,7 @@ export default function JobListings({
 
                     <div className="space-y-2">
                       <h4 className="text-sm font-medium text-gray-900">
-                        Обязанности:
+                        {t("responsibilities")}:
                       </h4>
                       <ul className="space-y-1">
                         {job.ru.responsibilities.map((responsibility, i) => (
@@ -149,7 +153,7 @@ export default function JobListings({
                     <div className="flex items-center gap-2 text-gray-500">
                       <Calendar className="w-4 h-4" />
                       <span className="text-xs">
-                        Дата публикации:{" "}
+                        {t("created_at")}:{" "}
                         {format(new Date(job.createdAt), "dd.MM.yyyy")}
                       </span>
                     </div>
@@ -157,9 +161,9 @@ export default function JobListings({
                       size="sm"
                       className="bg-blue-600 hover:bg-blue-700 rounded-none text-white"
                       onClick={() => handleOpenModal(job)}
-                    >
+                      >
                       <Briefcase className="w-3 h-3 mr-2" />
-                      ОТКЛИКНУТЬСЯ
+                      {t("respond")}
                     </Button>
                   </CardFooter>
                 </Card>
@@ -172,7 +176,7 @@ export default function JobListings({
               size="sm"
               className="text-blue-600 rounded-none border-blue-600 hover:bg-blue-50"
             >
-              ЕЩЕ ВАКАНСИИ
+              {t("view_more")}
             </Button>
           </div>
         </div>
@@ -184,6 +188,8 @@ export default function JobListings({
           jobTitle={selectedJob.ru.title}
         />
       )}
+      <div className="py-6"></div>
+      <Footer />
     </>
   );
 }

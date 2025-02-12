@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export interface ProjectsItem {
   _id: string;
@@ -83,19 +83,20 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
     show: { opacity: 1, y: 0 },
   };
   const locale = useLocale();
+  const t = useTranslations("projects")
 
   return (
     <>
       <Hero
         backgroundImage="/projects.jpg.png"
-        title="Наши проекты"
+        title={t("title")}
         subtitle=""
         height="500px"
       />
       <div className="mx-auto  container w-full py-16 flex flex-col md:flex-row  ">
         <div className="md:w-1/3 w-full   ">
           <h1 className="text-3xl md:text-4xl font-bold mb-12">
-            ТЕКУЩИЕ И РЕАЛИЗОВАННЫЕ ПРОЕКТЫ
+          {t("main_title")}
           </h1>
         </div>
 
@@ -125,7 +126,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 mb-2">
-                        Объем задач:
+                        {t("project.task")}:
                       </h3>
                       <p className="text-sm">
                         {project.uz.implementation_period}
@@ -133,7 +134,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                     </div>
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 mb-2">
-                        Заказчик:
+                        {t("project.customer")}:
                       </h3>
                       <p className="text-sm">{project.uz.customer}</p>
                     </div>
@@ -152,11 +153,11 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
 
                   <div className="flex justify-between items-center flex-wrap text-sm">
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-500">Статус:</span>
+                      <span className="text-gray-500">{t("project.status")}:</span>
                       <span>{project.uz.status}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-500">Период реализации:</span>
+                      <span className="text-gray-500">{t("project.implementation")}:</span>
                       <span>{project.uz.implementation_period}</span>
                     </div>
                   </div>

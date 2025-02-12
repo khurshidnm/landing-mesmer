@@ -5,18 +5,21 @@ import Image from "@/components/BluredImage";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 
 export default function Gallery({photos}: {photos: string[]}) {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
+  const t = useTranslations("projects")
+
   return (
     <section className="py-12 bg-white">
       <div className="container mx-auto px-4">
         {/* Title with left border */}
         <div className="border-l-4 border-blue-600 pl-6 mb-12">
-          <h2 className="text-3xl font-bold text-black">ГАЛЕРЕЯ</h2>
+          <h2 className="text-3xl font-bold text-black">{t("gallery")}</h2>
         </div>
 
         {/* Photo Grid */}
