@@ -35,7 +35,6 @@ const Navbar = () => {
 
   const router = useRouter();
 
-
   const [constants, setConstants] = useState({
     number: "+ 998 (55) 518 88 70",
     email: "info@mesmer.uz",
@@ -53,7 +52,7 @@ const Navbar = () => {
         console.error(error);
       }
     };
-    fetchConstants()
+    fetchConstants();
   }, []);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
@@ -119,17 +118,17 @@ const Navbar = () => {
     >
       <nav className="container mx-auto py-4 whitespace-nowrap">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 lg:gap-16">
+          <div className="flex items-center gap-4 lg:gap-8">
             <Link href={"/"}>
               <Image
                 src={isScrolled ? "/blacklogo.svg" : "/logo.svg"}
                 width={100}
                 height={25}
                 alt="Logo"
-                className="w-[80px] md:w-[100px]"
+                className="w-[80px] md:w-[100px] object-cover min-w-[80px]"
               />
             </Link>
-            <div className="hidden lg:flex w-full  px-10  space-x-6">
+            <div className="hidden lg:flex w-full space-x-6">
               {links.map((link) => (
                 <Link
                   key={link.text}
@@ -163,9 +162,7 @@ const Navbar = () => {
               className="hover:text-gray-600 transition-colors flex items-center gap-2"
             >
               <Phone size={18} />
-              <span className="hidden lg:inline ">
-                {constants.number}
-              </span>
+              <span className="hidden lg:inline ">{constants.number}</span>
             </a>
             <a
               href={`mailto:${constants.email}`}
