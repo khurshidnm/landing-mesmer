@@ -118,14 +118,14 @@ const Navbar = () => {
     >
       <nav className="container mx-auto py-4 whitespace-nowrap">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 lg:gap-8">
+          <div className="flex items-center lg:gap-8">
             <Link href={"/"}>
               <Image
                 src={isScrolled ? "/blacklogo.svg" : "/logo.svg"}
                 width={100}
                 height={25}
                 alt="Logo"
-                className="w-[80px] md:w-[100px] object-cover min-w-[80px]"
+                className="w-[80px] md:w-[140px] object-cover min-w-[80px]"
               />
             </Link>
             <div className="hidden lg:flex w-full space-x-6">

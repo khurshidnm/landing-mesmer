@@ -27,9 +27,9 @@ const Footer = () => {
     email: "info@mesmer.uz",
     location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
   });
-  
-  const contactsLang = useTranslations("contact")
-  const navbarLang = useTranslations("navbar")
+
+  const contactsLang = useTranslations("contact");
+  const navbarLang = useTranslations("navbar");
 
   useEffect(() => {
     const fetchConstants = async () => {
@@ -42,7 +42,7 @@ const Footer = () => {
         console.error(error);
       }
     };
-    fetchConstants()
+    fetchConstants();
   }, []);
 
   const handleChange = (
@@ -99,12 +99,12 @@ const Footer = () => {
                   {constants.email}
                 </a>
               </div>
-              <div className="text-gray-400">
-                {constants.location}
-              </div>
+              <div className="text-gray-400">{constants.location}</div>
               <div className="flex gap-3">
                 <Image src={"/Negative.svg"} alt="" width={22} height={22} />
-                <p>LinkedIn</p>
+                <a href="https://www.linkedin.com/company/mesmer-llc/">
+                  LinkedIn
+                </a>
               </div>
             </div>
           </div>
@@ -206,7 +206,7 @@ const Footer = () => {
                 {navbarLang("career")}
               </Link>
               <Link href="/news" className="hover:text-white transition-colors">
-              {navbarLang("news")}
+                {navbarLang("news")}
               </Link>
               <Link
                 href="/contacts"
@@ -218,18 +218,12 @@ const Footer = () => {
             <div className="text-right text-sm text-gray-400">
               <p>© 2024 MESMER-EAST LLC</p>
               <div className="mt-2 space-x-4">
-                <Link
-                  href="/license"
-                  className="hover:text-white transition-colors"
-                >
-                  {navbarLang("license")}
-                </Link>
-                <Link
-                  href="/terms"
-                  className="hover:text-white transition-colors"
-                  >
-                  {navbarLang("rules")}
-                </Link>
+                <div className="hover:text-white transition-colors">
+                  <a href="/MESMER RULES.pdf">{navbarLang("license")}</a>
+                </div>
+                <div className="hover:text-white transition-colors">
+                  <a href="/MESMER RULES.pdf"> {navbarLang("rules")}</a>
+                </div>
               </div>
             </div>
           </div>
