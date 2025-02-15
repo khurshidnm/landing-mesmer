@@ -116,7 +116,30 @@
     "requirements": "Requirements",
     "responsibilities": "Responsibilities",
     "created_at": "Date of publication",
-    "respond": "RESPOND"
+    "respond": "RESPOND",
+    "message": {
+      "loading": {
+        "title": "Sending...",
+        "description": "Your message is being sent. Please wait..."
+      },
+      "success": {
+        "title": "success",
+        "description": "Your message has been sent."
+      },
+      "error": {
+        "title": "Error",
+        "description": "Your message has not been sent. Please try again."
+      }
+    },
+    "modal": {
+      "title": "Reply to a vacancy",
+      "name": "Name",
+      "phone": "Phone number",
+      "email": "Email",
+      "file": "Attach file",
+      "message": "Message",
+      "send": "Send"
+    }
   },
   "news": {
     "title": "News",

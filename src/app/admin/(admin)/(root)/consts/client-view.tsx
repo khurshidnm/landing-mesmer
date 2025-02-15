@@ -14,11 +14,9 @@ import { useRouter } from "next/navigation";
 export default function Home({
   constants,
 }: {
-  constants: { email: string; number: string; location: string };
+  constants: { email: string; number: string; location: string, logo: string };
 }) {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -31,7 +29,7 @@ export default function Home({
       const res = await axios.put("/api/consts", {
         number: update.phoneNumber || null,
         email: update.email || null,
-        location: update.location || null
+        location: update.location || null,
       });
       if (res.data) {
         window.location.reload()

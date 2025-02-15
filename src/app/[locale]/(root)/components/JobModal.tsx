@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { toast } from "@/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
 interface JobApplicationModalProps {
   isOpen: boolean;
@@ -35,11 +36,13 @@ export function JobApplicationModal({
   const [message, setMessage] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
+  const t = useTranslations("career")
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     toast({
-      title: "Yuborilmoqda...",
-      description: "Xabaringiz yuborilmoqda. Iltimos, kuting",
+      title: t("message.loading.title"),
+      description: t("message.loading.description"),
       variant: "default",
     });
     // Handle form submission logic here
@@ -61,8 +64,8 @@ export function JobApplicationModal({
       if (res.data.ok) {
         toast({
           variant: "default",
-          title: "Success",
-          description: "Xabaringiz yuborildi",
+          title: t("message.success.title"),
+          description: t("message.success.description"),
         });
         onClose();
       }
@@ -77,8 +80,8 @@ export function JobApplicationModal({
       } else {
         toast({
           variant: "destructive",
-          title: "Xato",
-          description: "Xabaringiz yuborilmadi. Iltimos, qayta urinib ko'ring",
+          title: t("message.error.title"),
+          description: t("message.error.description"),
         });
       }
     }
@@ -88,11 +91,11 @@ export function JobApplicationModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[380px] md:max-w-[425px] h-auto min-h-[400px]">
         <DialogHeader>
-          <DialogTitle>Отклик на вакансию: {jobTitle}</DialogTitle>
+          <DialogTitle>{t("modal.title")}: {jobTitle}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="name">Имя</Label>
+            <Label htmlFor="name">{t("modal.name")}</Label>
             <Input
               id="name"
               value={name}
@@ -101,7 +104,7 @@ export function JobApplicationModal({
             />
           </div>
           <div>
-            <Label htmlFor="phone">Номер телефона</Label>
+            <Label htmlFor="phone">{t("modal.phone")}</Label>
             <Input
               id="phone"
               type="tel"
@@ -111,7 +114,7 @@ export function JobApplicationModal({
             />
           </div>
           <div>
-            <Label htmlFor="email">Электронная почта</Label>
+            <Label htmlFor="email">{t("modal.email")}</Label>
             <Input
               id="email"
               type="email"
@@ -121,7 +124,7 @@ export function JobApplicationModal({
             />
           </div>
           <div>
-            <Label htmlFor="cv">Закрепить файл (CV)</Label>
+            <Label htmlFor="cv">{t("modal.file")} (CV)</Label>
             <Input
               id="cv"
               type="file"
@@ -130,7 +133,7 @@ export function JobApplicationModal({
             />
           </div>
           <div>
-            <Label htmlFor="message">Сообщение</Label>
+            <Label htmlFor="message">{t("modal.message")}</Label>
             <Textarea
               id="message"
               value={message}
@@ -139,7 +142,7 @@ export function JobApplicationModal({
           </div>
           <DialogFooter>
             <Button type="submit" className="bg-blue-600">
-              Отправить
+            {t("modal.send")}
             </Button>
           </DialogFooter>
         </form>

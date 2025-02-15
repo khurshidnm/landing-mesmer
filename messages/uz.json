@@ -114,9 +114,32 @@
     "view_more": "KO'PROQ ISHLAR",
     "terms": "Shartlar",
     "requirements": "Talablar",
-    "responsibility": "Mas'uliyat",
+    "responsibilities": "Mas'uliyat",
     "created_at": "Nashr qilingan sana",
-    "respond": "JAVOB BERISH"
+    "respond": "JAVOB BERISH",
+    "message": {
+      "loading": {
+        "title": "Yuborilmoqda...",
+        "description": "Xabaringiz yuborilmoqda. Iltimos, kuting"
+      },
+      "success": {
+        "title": "Muvaffaqiyatli",
+        "description": "Xabaringiz muvaffaqiyatli yuborildi."
+      },
+      "error": {
+        "title": "Xato",
+        "description": "Xabaringiz yuborilmadi. Iltimos, qayta urinib ko'ring"
+      }
+    },
+    "modal": {
+      "title": "Bo'sh lavozimga javob",
+      "name": "Ism",
+      "phone": "Telefon raqami",
+      "email": "Elektron pochta",
+      "file": "Faylni biriktirish",
+      "message": "Xabar",
+      "send": "Yuborish"
+    }
   },
   "news": {
     "title": "Yangiliklar",

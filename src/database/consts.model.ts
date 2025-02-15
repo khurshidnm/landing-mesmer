@@ -19,6 +19,11 @@ const constantsSchema = new Schema({
     required: false,
     default: ""
   },
+  logo: {
+    type: String,
+    required: false,
+    default: "/blacklogo.svg"
+  }
 });
 
 const Constants = mongoose.models.Constants || mongoose.model("Constants", constantsSchema);
