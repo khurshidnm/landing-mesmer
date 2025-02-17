@@ -7,7 +7,10 @@
     "career": "Karyera",
     "contacts": "Aloqa",
     "license": "Litsenziya bo'yicha takliflar",
-    "rules": "Shartnoma qoidalari"
+    "rules": "Shartnoma qoidalari",
+    "contact_title": "Biz bilan bog'laning",
+    "send": "Yuborish",
+    "sending": "Yuborilmoqda..."
   },
   "home": {
     "hero": {
@@ -71,6 +74,10 @@
         "label_4": "Materiallardan foydalanish ustidan qat’iy nazorat"
       },
       "sub_description": "Kompaniyamiz muvaffaqiyati butun jamoamizning samarali ishiga bog‘liq, shuning uchun biz xodimlarimizni rivojlantirish va ish jarayonlarimizni takomillashtirishga doimiy ravishda sarmoya kiritamiz. Biz xizmat va mahsulotlarimiz sifatini doimiy ravishda oshirishga intilamiz, shunda mijozlarimizning talablarini qondirib, ularning kutganidan ham yuqori natijalarga erishamiz."
+    },
+    "partners": {
+      "title": "Bizning hamkorlarimiz",
+      "description": "\"MESMER\" jahonning yetakchi texnologiya va injiniring kompaniyalari bilan hamkorlik qiladi. Bizning hamkorlarimiz o'z sohalarida tan olingan yetakchilar bo'lib, ularning innovatsion yechimlari murakkab loyihalarni yuqori sifatda amalga oshirishga yordam beradi."
     }
   },
   "services": {

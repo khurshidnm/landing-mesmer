@@ -17,11 +17,11 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 const socialLinks = [
-  { icon: Telegram, href: "#", label: "Telegram" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/company/mesmer-llc/",
+    label: "LinkedIn",
+  },
 ];
 
 interface FormData {
@@ -52,7 +52,7 @@ const Contact = () => {
     location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
   });
 
-  const t = useTranslations("contact")
+  const t = useTranslations("contact");
 
   useEffect(() => {
     const fetchConstants = async () => {
@@ -65,7 +65,7 @@ const Contact = () => {
         console.error(error);
       }
     };
-    fetchConstants()
+    fetchConstants();
   }, []);
 
   const handleChange = (
@@ -102,7 +102,10 @@ const Contact = () => {
   return (
     <div className="bg-white">
       <Hero
-        title={t("contacts").toUpperCase().slice(0, 1) + t("contacts").toLocaleLowerCase().slice(1)}
+        title={
+          t("contacts").toUpperCase().slice(0, 1) +
+          t("contacts").toLocaleLowerCase().slice(1)
+        }
         subtitle=""
         backgroundImage="/contact.png"
         height="500px"
@@ -129,7 +132,7 @@ const Contact = () => {
             <div className="flex gap-5 border-b">
               <div className="space-y-8 ">
                 <h2 className="text-sm font-medium tracking-wider text-gray-900 uppercase">
-              {t("contacts")}
+                  {t("contacts")}
                 </h2>
                 <div className="space-y-3">
                   <p className="text-xl text-gray-900">{constants.number}</p>
@@ -142,6 +145,7 @@ const Contact = () => {
                   <motion.a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
                     className="text-gray-900 hover:text-gray-600 transition-colors"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
@@ -169,10 +173,9 @@ const Contact = () => {
           {constants.location}
         </p>
 
-
-        <section className="container mx-auto h-[350px] mb-16 px-4 py-8 ">
-        <div className="flex flex-col lg:flex-row items-start gap-8">
-        <motion.div
+        <section className="container mx-auto h-[350px] mb-16 py-8 lg:px-0">
+          <div className="flex flex-col lg:flex-row items-start gap-8">
+            <motion.div
               className="w-full lg:w-1/2"
               initial="initial"
               whileInView="animate"
@@ -180,8 +183,8 @@ const Contact = () => {
               variants={fadeIn}
             ></motion.div>
 
-<motion.div
-              className="w-full lg:w-1/3 space-y-6"
+            <motion.div
+              className="w-full lg:w-1/2 space-y-6"
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
@@ -221,19 +224,18 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder={t("form.message")}
                     className="w-full min-h-[120px] border-gray-300 rounded-none px-4 py-3 text-gray-900 placeholder-gray-500"
-                    />
+                  />
                   <Button
                     type="submit"
                     className="w-full bg-[#1A56DB] text-white py-6 rounded-none"
-                    >
+                  >
                     {t("form.send")}
                   </Button>
                 </form>
               </div>
             </motion.div>
-        </div>
-      </section>
-   
+          </div>
+        </section>
       </div>
       <Footer />
     </div>

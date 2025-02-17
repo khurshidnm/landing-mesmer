@@ -111,7 +111,7 @@ const Footer = () => {
 
           {/* Contact Form */}
           <div>
-            <h2 className="text-2xl font-bold mb-8">СВЯЖИТЕСЬ С НАМИ</h2>
+            <h2 className="text-2xl font-bold mb-8">{navbarLang("contact_title")}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
@@ -162,7 +162,7 @@ const Footer = () => {
                 disabled={isSubmitting}
                 className="px-8 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
               >
-                {isSubmitting ? "Отправка..." : "Отправить"}
+                {isSubmitting ? navbarLang("sending") : navbarLang("send")}
               </button>
             </form>
           </div>

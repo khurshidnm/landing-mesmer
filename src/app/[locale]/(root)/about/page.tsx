@@ -211,13 +211,8 @@ const About = () => {
               variants={fadeIn}
             >
               <div>
-                <h2 className="text-3xl font-bold mb-6">Наши партнеры</h2>
-                <p className="text-gray-700 leading-relaxed">
-                  «MESMER» сотрудничает с ведущими мировыми технологическими и
-                  инженерными компаниями. Наши партнеры – это признанные лидеры
-                  в своих отраслях, чьи инновационные решения помогают
-                  реализовывать сложные проекты с высоким качеством.
-                </p>
+                <h2 className="text-3xl font-bold mb-6">{t("partners.title")}</h2>
+                <p className="text-gray-700 leading-relaxed">{t("partners.description")}</p>
               </div>
             </motion.div>
           </div>

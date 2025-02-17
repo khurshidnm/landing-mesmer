@@ -7,7 +7,10 @@
     "career": "Career",
     "contacts": "Contacts",
     "license": "License Proposals",
-    "rules": "Rules of the agreement"
+    "rules": "Rules of the agreement",
+    "send": "Send",
+    "contact_title": "Contact Us",
+    "sending": "Yuborilmoqda..."
   },
   "home": {
     "hero": {
@@ -71,6 +74,10 @@
         "label_4": "Strict control over material usage"
       },
       "sub_description": "The company's success depends on the well-coordinated work of the entire team, so we continuously invest in the development of our employees and the improvement of our processes. We strive for continuous improvement in the quality of our services and products to meet our clients' needs and exceed their expectations."
+    },
+    "partners": {
+      "title": "Our partners",
+      "description": "«MESMER» cooperates with the world's leading technology and engineering companies. Our partners are recognized leaders in their industries, whose innovative solutions help to implement complex projects with high quality."
     }
   },
   "services": {

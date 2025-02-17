@@ -82,7 +82,7 @@ export default function JobListings({
         <div className="w-full md:w-1/2"></div>
 
         <div className="w-full md:w-1/2">
-          <div className="grid gap-6 max-w-xl md:ml-[50px]">
+          <div className="grid gap-6 w-full">
             {filteredVacancies.map((job: JobListing, index: number) => (
               <motion.div
                 key={job._id}
