@@ -156,3 +156,20 @@ h6.rich-text-editor {
 .scroll-hide::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 10s linear infinite;
+}
+
+.animate-scroll.pause {
+  animation-play-state: paused;
+}
