@@ -111,7 +111,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
               <motion.div
                 key={project._id}
                 variants={item}
-                className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start"
+                className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start" 
                 ref={index === 0 ? firstProjectRef : null}
               >
                 <div className="md:col-span-3">
