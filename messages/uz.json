@@ -8,14 +8,14 @@
     "contacts": "Aloqa",
     "license": "Litsenziya bo'yicha takliflar",
     "rules": "Shartnoma qoidalari",
-    "contact_title": "Biz bilan bog'laning",
+    "contact_title": "Kontaktlar",
     "send": "Yuborish",
     "sending": "Yuborilmoqda..."
   },
   "home": {
     "hero": {
       "title": "ENERGETIKA, SUV TA'MINOTI VA EKOLOGIK INFRATUZILMA",
-      "subtitle": "SEGMENTLARIGA IXTISOSLASHGANMIZ"
+      "subtitle": "Uchta bozor segmentlariga ixtisoslashganmiz:"
     },
     "partners": {
       "trust_us": "Bizga ishonishadi"
@@ -23,7 +23,7 @@
     "about": {
       "title": "Kompaniya haqida",
       "subtitle": "Bizning asosiy maqsadimiz – mijozlarimiz tomonidan ishonchli EPC",
-      "description": "(Muhandislik, ta'minot va qurilish) pudratchisi sifatida e'tirof etilish va yuqori sifatli uskunalar yetkazib beruvchi sifatida xalqaro miqyosda tan olinishi. Erishgan yutuqlarimizni inobatga olgan holda, \"MESMER\" kompaniyasi o‘z faoliyat doirasini qo‘shni davlatlarda, jumladan Tojikiston va Qirg‘izistonda kengaytirishga intilmoqda.",
+      "description": "(Muhandislik, ta'minot va qurilish) pudratchisi sifatida e'tirof etilish va yuqori sifatli uskunalar yetkazib beruvchi sifatida xalqaro miqyosda tan olinishi. Erishgan yutuqlarimizni inobatga olgan holda, MESMER kompaniyasi o‘z faoliyat doirasini qo‘shni davlatlarda, jumladan Tojikiston va Qirg‘izistonda kengaytirishga intilmoqda.",
       "task": {
         "title": "Bizning vazifamiz – ko‘p tarmoqli yetakchi kompaniya bo‘lib qolish",
         "description": "Dunyo bo‘ylab mijozlar bilan uzoq muddatli hamkorlikni rivojlantirish, innovatsion yechimlar taqdim etish, xizmat ko‘rsatishning xalqaro standartlariga javob berish, yuqori sifatli mahsulotlar yetkazib berish, maksimal samaradorlik, katta texnik tajriba va investitsiyalardan eng yuqori foyda olish."
@@ -39,7 +39,7 @@
     },
     "goals": {
       "title": "Barqaror rivojlanishga o‘z hissamizni qo‘shamiz",
-      "description": "\"MESMER\" kompaniyasi BMTning barqaror rivojlanish bo‘yicha 7 ta maqsadini amalga oshirishga hissa qo‘shishga intiladi."
+      "description": "MESMER kompaniyasi BMTning barqaror rivojlanish bo‘yicha 7 ta maqsadini amalga oshirishga hissa qo‘shishga intiladi."
     },
     "projects": {
       "title": "Loyihalar",
@@ -51,22 +51,22 @@
   "about": {
     "main_title": "Kompaniya haqida",
     "title": "Biz haqimizda qisqacha",
-    "description": "\"MESMER\" – xalqaro bozorda keng qamrovli muhandislik va tijorat xizmatlarini taklif qiluvchi ko‘p tarmoqli kompaniya. Biz loyihalash, uskunalar yetkazib berish, qurilish va loyiha boshqaruvini o‘z ichiga olamiz. 2006-yilda tashkil etilgan kompaniyamiz malakali mutaxassislarni birlashtirib, ularning boy amaliy tajribasiga tayangan holda ishlaydi. Biz ichimlik suvi tozalash, kanalizatsiya tizimlari, suv ta’minoti, sug‘orish va melioratsiya loyihalarida qo‘llaniladigan innovatsion texnologik yechimlarni taklif etamiz.",
+    "description": "MESMER – xalqaro bozorda keng qamrovli muhandislik va tijorat xizmatlarini taklif qiluvchi ko‘p tarmoqli kompaniya. Biz loyihalash, uskunalar yetkazib berish, qurilish va loyiha boshqaruvini o‘z ichiga olamiz. 2003-yilda tashkil etilgan kompaniyamiz malakali mutaxassislarni birlashtirib, ularning boy amaliy tajribasiga tayangan holda ishlaydi. Biz ichimlik suvi tozalash, kanalizatsiya tizimlari, suv ta’minoti, sug‘orish va melioratsiya loyihalarida qo‘llaniladigan innovatsion texnologik yechimlarni taklif etamiz.",
     "goals": {
       "title": "Maqsad va vazifalar",
       "description": "Biz dunyo bo‘ylab mijozlar bilan uzoq muddatli hamkorlikni yo‘lga qo‘ygan holda yetakchi ko‘p tarmoqli kompaniya bo‘lib qolishga intilamiz. Bizning missiyamiz – innovatsion yechimlarni taqdim etish, xalqaro standartlarga mos xizmat va mahsulot sifatini ta’minlash, maksimal samaradorlik, texnik tajriba va investitsiyalardan yuqori daromad olishdir."
     },
     "competition": {
       "title": "Halol raqobat",
-      "description": "\"MESMER\" kompaniyasi tender va tanlovlarda faol ishtirok etib, halol raqobat tamoyillariga qat’iy rioya qiladi. Biz raqobatchilar, mijozlar va yetkazib beruvchilar bilan munosabatlarda ochiqlik va shaffoflikni ta’minlashga kafolat beramiz. Halol raqobat standartlariga rioya qilish bizga hamkorlar ishonchini mustahkamlash va biznesni rivojlantirish hamda uzoq muddatli maqsadlarga erishishga yordam beradi."
+      "description": "MESMER kompaniyasi tender va tanlovlarda faol ishtirok etib, halol raqobat tamoyillariga qat’iy rioya qiladi. Biz raqobatchilar, mijozlar va yetkazib beruvchilar bilan munosabatlarda ochiqlik va shaffoflikni ta’minlashga kafolat beramiz. Halol raqobat standartlariga rioya qilish bizga hamkorlar ishonchini mustahkamlash va biznesni rivojlantirish hamda uzoq muddatli maqsadlarga erishishga yordam beradi."
     },
     "ethics": {
       "title": "Yetkazib beruvchilar, hamkorlar va mijozlar bilan hamkorlik",
-      "description": "\"MESMER\" kompaniyasi yuqori axloqiy tamoyillarga amal qilgan holda barcha shartnoma majburiyatlarini aniq bajaradi va hamkorlar hamda mijozlar bilan shaffof munosabatlarni ta’minlaydi. Biz uzoq muddatli munosabatlarni qadrlaymiz va ishonch hamda o‘zaro hurmatga asoslangan o‘zaro manfaatli hamkorlikka intilamiz."
+      "description": "MESMER kompaniyasi yuqori axloqiy tamoyillarga amal qilgan holda barcha shartnoma majburiyatlarini aniq bajaradi va hamkorlar hamda mijozlar bilan shaffof munosabatlarni ta’minlaydi. Biz uzoq muddatli munosabatlarni qadrlaymiz va ishonch hamda o‘zaro hurmatga asoslangan o‘zaro manfaatli hamkorlikka intilamiz."
     },
     "quality": {
       "title": "Sifat nazorati",
-      "description": "\"MESMER\" kompaniyasi muhandislik va qurilish sohalarida o‘n yildan ortiq tajribaga ega. Shu vaqt davomida biz katta tajriba va bilimlarni to‘pladik, bu esa bizga xizmat va mahsulotlarimizning yuqori sifatini kafolatlash imkonini beradi. Biz loyihalashdan tortib, obyektni foydalanishga topshirishgacha bo‘lgan barcha bosqichlarda qat’iy sifat nazorati tizimini joriy etdik.",
+      "description": "MESMER kompaniyasi muhandislik va qurilish sohalarida o‘n yildan ortiq tajribaga ega. Shu vaqt davomida biz katta tajriba va bilimlarni to‘pladik, bu esa bizga xizmat va mahsulotlarimizning yuqori sifatini kafolatlash imkonini beradi. Biz loyihalashdan tortib, obyektni foydalanishga topshirishgacha bo‘lgan barcha bosqichlarda qat’iy sifat nazorati tizimini joriy etdik.",
       "list": {
         "label_1": "Sifat standartlariga mosligini muntazam tekshirish",
         "label_2": "Zamonaviy texnologiyalar va uskunalardan foydalanish",
@@ -77,15 +77,15 @@
     },
     "partners": {
       "title": "Bizning hamkorlarimiz",
-      "description": "\"MESMER\" jahonning yetakchi texnologiya va injiniring kompaniyalari bilan hamkorlik qiladi. Bizning hamkorlarimiz o'z sohalarida tan olingan yetakchilar bo'lib, ularning innovatsion yechimlari murakkab loyihalarni yuqori sifatda amalga oshirishga yordam beradi."
+      "description": "MESMER jahonning yetakchi texnologiya va injiniring kompaniyalari bilan hamkorlik qiladi. Bizning hamkorlarimiz o'z sohalarida tan olingan yetakchilar bo'lib, ularning innovatsion yechimlari murakkab loyihalarni yuqori sifatda amalga oshirishga yordam beradi."
     }
   },
   "services": {
     "main_title": "Xizmatlar",
     "title": "Biz nima bilan shug‘ullanamiz?",
-    "description": "\"MESMER\" o‘zining sho‘ba korxonalari va xalqaro hamkorlari bilan hamkorlikda ichki, mintaqaviy va xalqaro bozorlar uchun bosh pudratchi sifatida xizmat ko‘rsatishga tayyor. Biz quyidagi xizmatlarni taqdim etamiz:",
+    "description": "MESMER o‘zining sho‘ba korxonalari va xalqaro hamkorlari bilan hamkorlikda ichki, mintaqaviy va xalqaro bozorlar uchun bosh pudratchi sifatida xizmat ko‘rsatishga tayyor. Biz quyidagi xizmatlarni taqdim etamiz:",
     "tecnologies": {
-      "title": "\"MESMER\" eng ilg‘or texnologiyalarni taqdim etadi:",
+      "title": "MESMER eng ilg‘or texnologiyalarni taqdim etadi:",
       "list": {
         "label_1": "Jahon darajasidagi boshqaruv ko‘nikmalari",
         "label_2": "Marketing va biznesni rivojlantirish",
@@ -105,15 +105,15 @@
     },
     "delivery": {
       "title": "Uskunalar xaridi",
-      "description": "Uskunalarni xarid qilish/ yetkazib berish va muhandislik-loyihalash ishlari \"MESMER\" kompaniyasining asosiy yo‘nalishlaridan biridir. Belgilangan maqsadlarga erishish uchun biz qurilish sohasidagi yuqori malakali professionallar, loyihalash, boshqaruv bo‘limlari va boshqa mutaxassislar bilan hamkorlik qilamiz."
+      "description": "Uskunalarni xarid qilish, yetkazib berish va muhandislik-loyihalash ishlari MESMER kompaniyasining asosiy yo‘nalishlaridan biridir. Belgilangan maqsadlarga erishish uchun biz qurilish sohasidagi yuqori malakali professionallar, loyihalash, boshqaruv bo‘limlari va boshqa mutaxassislar bilan hamkorlik qilamiz."
     },
     "experience": {
       "title": "Amaliy tajribamizga asoslanib, uskunalar yetkazib berish uchun to‘liq javobgarlikni o‘z zimmamizga olamiz:",
-      "description": "\"MESMER\" muhandislik va qurilish sohalarida o‘n yildan ortiq tajribaga ega. Shu vaqt ichida biz katta tajriba va bilimlarga ega bo‘ldik, bu esa xizmat va mahsulotlarimizning yuqori sifatini kafolatlash imkonini beradi. Biz loyihalashdan tortib, obyektni foydalanishga topshirishgacha bo‘lgan barcha bosqichlarda qat’iy sifat nazorati tizimini joriy etdik."
+      "description": "MESMER muhandislik va qurilish sohalarida o‘n yildan ortiq tajribaga ega. Shu vaqt ichida biz katta tajriba va bilimlarga ega bo‘ldik, bu esa xizmat va mahsulotlarimizning yuqori sifatini kafolatlash imkonini beradi. Biz loyihalashdan tortib, obyektni foydalanishga topshirishgacha bo‘lgan barcha bosqichlarda qat’iy sifat nazorati tizimini joriy etdik."
     },
     "maintenance": {
       "title": "Ekspluatatsiya va texnik xizmat ko‘rsatish",
-      "description": "Uskunalarning xavfsizligi va ishonchliligini ta’minlash ob’ekt ekspluatatsiyasida muhim ahamiyat kasb etadi. Bu maqsadga erishish uchun \"MESMER\" loyihalarning barcha bosqichlarida – texnik-iqtisodiy tadqiqotlar, loyihalash, muhandislik, xarid qilish, qurilish va tijorat ekspluatatsiyasida ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taklif etadi. \"MESMER\" mijozlarning ehtiyojlariga mos ravishda ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taqdim etadi, jumladan: ekspluatatsiyaga tayyorgarlik – rejalashtirish, tizim ishlab chiqish va o‘qitish; maslahat xizmatlari – daromadni optimallashtirish, ishonchlilik va xavfsizlikni oshirish; shuningdek, turli texnik xizmat ko‘rsatish rejalarini ishlab chiqish va amalga oshirish. Bundan tashqari, ekspluatatsiya ma’lumotlarini to‘plash va tahlil qilish orqali mumkin bo‘lgan nosozliklarni oldindan bashorat qilish hamda ob’ekt va uskunalarning ish samaradorligini oshirish uchun ilg‘or texnologiyalarni qo‘llash imkoniyati mavjud."
+      "description": "Uskunalarning xavfsizligi va ishonchliligini ta’minlash ob’ekt ekspluatatsiyasida muhim ahamiyat kasb etadi. Bu maqsadga erishish uchun MESMER loyihalarning barcha bosqichlarida – texnik-iqtisodiy tadqiqotlar, loyihalash, muhandislik, xarid qilish, qurilish va tijorat ekspluatatsiyasida ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taklif etadi. \"MESMER\" mijozlarning ehtiyojlariga mos ravishda ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taqdim etadi, jumladan: ekspluatatsiyaga tayyorgarlik – rejalashtirish, tizim ishlab chiqish va o‘qitish; maslahat xizmatlari – daromadni optimallashtirish, ishonchlilik va xavfsizlikni oshirish; shuningdek, turli texnik xizmat ko‘rsatish rejalarini ishlab chiqish va amalga oshirish. Bundan tashqari, ekspluatatsiya ma’lumotlarini to‘plash va tahlil qilish orqali mumkin bo‘lgan nosozliklarni oldindan bashorat qilish hamda ob’ekt va uskunalarning ish samaradorligini oshirish uchun ilg‘or texnologiyalarni qo‘llash imkoniyati mavjud."
     }
   },
   "career": {
