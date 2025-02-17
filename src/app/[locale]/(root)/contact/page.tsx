@@ -1,12 +1,5 @@
 "use client";
 import Hero from "../components/Hero";
-import {
-  TextIcon as Telegram,
-  Instagram,
-  Facebook,
-  Linkedin,
-  Twitter,
-} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -15,10 +8,12 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "@/components/BluredImage";
+import Link from "next/link";
 
 const socialLinks = [
   {
-    icon: Linkedin,
+    icon: "/Negative.svg",
     href: "https://www.linkedin.com/company/mesmer-llc/",
     label: "LinkedIn",
   },
@@ -142,17 +137,33 @@ const Contact = () => {
 
               <div className="flex items-center gap-8">
                 {socialLinks.map((social) => (
-                  <motion.a
+                  <Link
                     key={social.label}
                     href={social.href}
                     target="_blank"
-                    className="text-gray-900 hover:text-gray-600 transition-colors"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
+                    className=""
                     aria-label={social.label}
                   >
-                    <social.icon className="w-6 h-6" />
-                  </motion.a>
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clipPath="url(#clip0_698_366)">
+                        <path
+                          d="M20.3715 0H1.62422C0.726172 0 0 0.708984 0 1.58555V20.4102C0 21.2867 0.726172 22 1.62422 22H20.3715C21.2695 22 22 21.2867 22 20.4145V1.58555C22 0.708984 21.2695 0 20.3715 0ZM6.52695 18.7473H3.26133V8.2457H6.52695V18.7473ZM4.89414 6.81484C3.8457 6.81484 2.99922 5.96836 2.99922 4.92422C2.99922 3.88008 3.8457 3.03359 4.89414 3.03359C5.93828 3.03359 6.78477 3.88008 6.78477 4.92422C6.78477 5.96406 5.93828 6.81484 4.89414 6.81484ZM18.7473 18.7473H15.4859V13.6426C15.4859 12.4266 15.4645 10.8582 13.7887 10.8582C12.0914 10.8582 11.8336 12.1859 11.8336 13.5566V18.7473H8.57656V8.2457H11.7047V9.68086H11.7477C12.1816 8.85586 13.2473 7.98359 14.8328 7.98359C18.1371 7.98359 18.7473 10.1578 18.7473 12.9852V18.7473Z"
+                          fill="black"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_698_366">
+                          <rect width="22" height="22" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </Link>
                 ))}
               </div>
             </div>

@@ -6,16 +6,16 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 const partners = [
-  "/partners/partner (1).svg",
-  "/partners/partner (2).svg",
-  "/partners/partner (3).svg",
-  "/partners/partner (4).svg",
-  "/partners/partner (5).svg",
-  "/partners/partner (6).svg",
-  "/partners/partner (7).svg",
-  "/partners/partner (8).svg",
-  "/partners/partner (9).svg",
-  "/partners/partner (10).svg",
+  "/partners/abb.svg",
+  "/partners/andritz.svg",
+  "/partners/danfos.svg",
+  "/partners/faf.svg",
+  "/partners/grundfos.svg",
+  "/partners/hawle.svg",
+  "/partners/kronhe.svg",
+  "/partners/ksb.svg",
+  "/partners/kubota.svg",
+  "/partners/lutz_jesco.svg",
 ];
 
 const Partners = () => {
@@ -39,7 +39,7 @@ const Partners = () => {
                     src={src}
                     alt={`Partner logo ${index + 1}`}
                     fill
-                    className="object-contain"
+                    className="object-contain filter !grayscale hover:!grayscale-0 transition-all duration-300"
                   />
                 </div>
               </div>

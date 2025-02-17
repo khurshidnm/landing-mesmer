@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LinkedinIcon as LinkedIn } from "lucide-react";
 import axios from "axios";
 import { useTranslations } from "next-intl";
 
@@ -101,7 +100,7 @@ const Footer = () => {
               </div>
               <div className="text-gray-400">{constants.location}</div>
               <div className="flex gap-3">
-                <Image src={"/Negative.svg"} alt="" width={22} height={22} />
+                <img src={"/Negative.svg"} alt="" className="text-white" width={22} height={22} />
                 <a href="https://www.linkedin.com/company/mesmer-llc/">
                   LinkedIn
                 </a>
