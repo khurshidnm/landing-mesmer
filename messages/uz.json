@@ -1,6 +1,6 @@
 {
   "navbar": {
-    "about": "Kompaniya haqida test2",
+    "about": "Kompaniya haqida",
     "services": "Xizmatlar",
     "projects": "Loyihalar",
     "news": "Yangiliklar",
@@ -8,7 +8,7 @@
     "contacts": "Aloqa",
     "license": "Litsenziya bo'yicha takliflar",
     "rules": "Shartnoma qoidalari",
-    "contact_title": "BIZ BILAN BOG'LANING",
+    "contact_title": "FORMANI TO'LDIRING",
     "send": "Yuborish",
     "sending": "Yuborilmoqda..."
   },
@@ -153,7 +153,7 @@
     "single": "Yangilik"
   },
   "contact": {
-    "title": "Biz bilan bog'laning",
+    "title": "BIZ BILAN BOG'LANING",
     "form": {
       "title": "FORMANI TO'LDIRING",
       "name": "Ism",
