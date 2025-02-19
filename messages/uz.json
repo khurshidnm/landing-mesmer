@@ -168,10 +168,10 @@
     "title": "Bizning loyihalarimiz",
     "main_title": "JORIY VA TUGARILGAN LOYIHALAR",
     "project": {
-      "task": "Vazifa hajmi",
+      "task": "Ish ko'lami",
       "customer": "Mijoz",
       "status": "Status",
-      "implementation": "amalga oshirish muddati"
+      "implementation": "Amalga oshirish/oshirilgan muddati"
     },
     "single": "LOYIHA HAQIDA",
     "gallery": "GALLERY"
