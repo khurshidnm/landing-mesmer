@@ -84,7 +84,7 @@ export const metadata = {
       "Discover innovative construction and engineering solutions with MESMER, a top EPC contractor in Uzbekistan specializing in sustainable infrastructure projects.",
     images: [
       {
-        url: "/banner.png",
+        url: "https://mesmer.uz/banner.png",
         width: 1200,
         height: 630,
         alt: "MESMER Banner",
