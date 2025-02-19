@@ -13,33 +13,29 @@ import Hero from "../components/Hero";
 import { JobApplicationModal } from "../components/JobModal";
 import { format } from "date-fns";
 import Footer from "../components/Footer";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface JobListing {
   _id: number;
-  uz: {
-    title: string;
-    company: string;
-    conditions: string[];
-    requirements: string[];
-    responsibilities: string[];
-  };
-  ru: {
-    title: string;
-    company: string;
-    conditions: string[];
-    requirements: string[];
-    responsibilities: string[];
-  };
-  en: {
-    title: string;
-    company: string;
-    conditions: string[];
-    requirements: string[];
-    responsibilities: string[];
-  };
+  uz: LocaleData;
+  ru: LocaleData;
+  en: LocaleData;
   salary: string;
   createdAt: string;
+}
+
+interface LocaleData {
+  title: string;
+  company: string;
+  conditions: string[];
+  requirements: string[];
+  responsibilities: string[];
+}
+
+function isValidLocale(
+  locale: string
+): locale is keyof Pick<JobListing, "uz" | "ru" | "en"> {
+  return ["uz", "ru", "en"].includes(locale);
 }
 
 export default function JobListings({
@@ -54,13 +50,16 @@ export default function JobListings({
     setSelectedJob(job);
     setIsModalOpen(true);
   };
+  const locale = useLocale();
+  const safeLocale = isValidLocale(locale) ? locale : "en";
+  console.log(locale);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedJob(null);
   };
 
-  const t = useTranslations("career")
+  const t = useTranslations("career");
 
   return (
     <>
@@ -88,14 +87,27 @@ export default function JobListings({
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="text-lg font-semibold text-gray-900">
-                            {job.ru.title}
+                            {
+                              job[
+                                safeLocale as keyof Pick<
+                                  JobListing,
+                                  "uz" | "ru" | "en"
+                                >
+                              ].title
+                            }
                           </h3>
                           <p className="text-sm text-gray-600">
-                            {job.ru.company}
+                            {
+                              job[
+                                safeLocale as keyof Pick<
+                                  JobListing,
+                                  "uz" | "ru" | "en"
+                                >
+                              ].company
+                            }
                           </p>
                         </div>
                         <div className="flex items-center rounded-none text-blue-600">
-                          <DollarSign className="w-4 h-4 mr-1" />
                           <span className="font-medium text-sm">
                             {job.salary}
                           </span>
@@ -109,7 +121,12 @@ export default function JobListings({
                         {t("terms")}:
                       </h4>
                       <ul className="space-y-1">
-                        {job.ru.conditions.map((condition, i) => (
+                        {job[
+                          safeLocale as keyof Pick<
+                            JobListing,
+                            "uz" | "ru" | "en"
+                          >
+                        ].conditions.map((condition, i) => (
                           <li key={i} className="flex items-start text-sm">
                             <span className="mr-2 mt-1.5 h-1 w-1  bg-blue-600 flex-shrink-0" />
                             <span className="text-gray-600">{condition}</span>
@@ -123,7 +140,12 @@ export default function JobListings({
                         {t("requirements")}:
                       </h4>
                       <ul className="space-y-1">
-                        {job.ru.requirements.map((requirement, i) => (
+                        {job[
+                          safeLocale as keyof Pick<
+                            JobListing,
+                            "uz" | "ru" | "en"
+                          >
+                        ].requirements.map((requirement, i) => (
                           <li key={i} className="flex items-start text-sm">
                             <span className="mr-2 mt-1.5 h-1 w-1 rounded-full bg-blue-600 flex-shrink-0" />
                             <span className="text-gray-600">{requirement}</span>
@@ -137,7 +159,12 @@ export default function JobListings({
                         {t("responsibilities")}:
                       </h4>
                       <ul className="space-y-1">
-                        {job.ru.responsibilities.map((responsibility, i) => (
+                        {job[
+                          safeLocale as keyof Pick<
+                            JobListing,
+                            "uz" | "ru" | "en"
+                          >
+                        ].responsibilities.map((responsibility, i) => (
                           <li key={i} className="flex items-start text-sm">
                             <span className="mr-2 mt-1.5 h-1 w-1 bg-blue-600 flex-shrink-0" />
                             <span className="text-gray-600">
@@ -161,7 +188,7 @@ export default function JobListings({
                       size="sm"
                       className="bg-blue-600 hover:bg-blue-700 rounded-none text-white"
                       onClick={() => handleOpenModal(job)}
-                      >
+                    >
                       <Briefcase className="w-3 h-3 mr-2" />
                       {t("respond")}
                     </Button>
@@ -185,7 +212,11 @@ export default function JobListings({
         <JobApplicationModal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          jobTitle={selectedJob.ru.title}
+          jobTitle={
+            selectedJob[
+              safeLocale as keyof Pick<JobListing, "uz" | "ru" | "en">
+            ].title
+          }
         />
       )}
       <div className="py-6"></div>
