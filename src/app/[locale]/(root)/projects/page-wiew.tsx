@@ -140,6 +140,15 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                     </div>
                   </div>
 
+                  <div className="relative aspect-[16/9] w-full overflow-hidden ">
+                      <Image
+                        src={project.cover || "/placeholder.svg"}
+                        alt={project.uz.title}
+                        fill
+                        className="object-cover"
+                      />
+                  </div>
+                  
                   {/* <div className="relative aspect-[16/9] w-full overflow-hidden ">
                     <Link href={`/${locale}/projects/${project.slug}`}>
                       <Image
