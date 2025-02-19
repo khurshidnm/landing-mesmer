@@ -129,7 +129,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                         {t("project.task")}:
                       </h3>
                       <p className="text-sm">
-                        {project.uz.implementation_period}
+                        {project.uz.volume_of_tasks}
                       </p>
                     </div>
                     <div>
@@ -140,7 +140,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                     </div>
                   </div>
 
-                  <div className="relative aspect-[16/9] w-full overflow-hidden ">
+                  {/* <div className="relative aspect-[16/9] w-full overflow-hidden ">
                     <Link href={`/${locale}/projects/${project.slug}`}>
                       <Image
                         src={project.cover || "/placeholder.svg"}
@@ -149,7 +149,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                         className="object-cover"
                       />
                     </Link>
-                  </div>
+                  </div> */}
 
                   <div className="flex justify-between items-center flex-wrap text-sm">
                     <div className="flex items-center gap-2">
