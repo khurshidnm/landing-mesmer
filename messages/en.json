@@ -7,12 +7,15 @@
     "career": "Career",
     "contacts": "Contacts",
     "license": "License Proposals",
-    "rules": "Rules of the agreement"
+    "rules": "Rules of the agreement",
+    "send": "Send",
+    "contact_title": "FILL THE FORM",
+    "sending": "Sending..."
   },
   "home": {
     "hero": {
-      "title": "Specialized in three market segments:",
-      "subtitle": "Energy, water supply, and environmental infrastructure"
+      "title": "ENERGY, WATER SUPPLY, AND ENVIRONMENTAL INFRASTRUCTURE",
+      "subtitle": "Specialized in three market segments:"
     },
     "partners": {
       "trust_us": "Trusted by many"
@@ -20,7 +23,7 @@
     "about": {
       "title": "About Us",
       "subtitle": "Our key goal is to be recognized by our clients as a reliable EPC",
-      "description": "(Engineering, Procurement, and Construction) contractor in the construction sector and to gain international recognition as a trusted supplier of high-quality equipment. Considering our achievements, \"MESMER\" aims to expand its business operations in neighboring countries such as Tajikistan and Kyrgyzstan.",
+      "description": "(Engineering, Procurement, and Construction) contractor in the construction sector and to gain international recognition as a trusted supplier of high-quality equipment. Considering our achievements, MESMER aims to expand its business operations in neighboring countries such as Tajikistan and Kyrgyzstan.",
       "task": {
         "title": "Our mission – to remain a leading multidisciplinary company",
         "description": "Developing long-term partnerships with clients worldwide, providing innovative solutions that meet global service standards, delivering high-quality products, ensuring maximum efficiency, extensive technical expertise, and the best return on investment."
@@ -36,7 +39,7 @@
     },
     "goals": {
       "title": "Contributing to sustainable development",
-      "description": "\"MESMER\" strives to support the implementation of seven of the UN Sustainable Development Goals."
+      "description": "MESMER strives to support the implementation of seven of the UN Sustainable Development Goals."
     },
     "projects": {
       "title": "Projects",
@@ -48,22 +51,22 @@
   "about": {
     "main_title": "About Us",
     "title": "About Us Briefly",
-    "description": "\"MESMER\" is a multidisciplinary company offering a wide range of engineering and commercial services in the international market. We cover design, equipment supply, construction, and project management. Founded in 2006, our company brings together qualified specialists who have undergone training and possess extensive practical experience. We provide innovative technological solutions that we apply in drinking water purification projects, sewage systems, water supply, irrigation, and land reclamation.",
+    "description": "MESMER is a multidisciplinary company offering a wide range of engineering and commercial services in the international market. We cover design, equipment supply, construction, and project management. Founded in 2003, our company brings together qualified specialists who have undergone training and possess extensive practical experience. We provide innovative technological solutions that we apply in drinking water purification projects, sewage systems, water supply, irrigation, and land reclamation.",
     "goals": {
       "title": "Goals and Objectives",
       "description": "We strive to remain a leading multidisciplinary company by establishing long-term partnerships with clients worldwide. Our mission is to provide innovative solutions that meet global standards, ensuring high-quality services and products, maximum efficiency, technical expertise, and significant returns on investment."
     },
     "competition": {
       "title": "Fair Competition",
-      "description": "\"MESMER\" actively participates in tenders and competitions, strictly adhering to the principles of fair competition. We guarantee transparency and openness in our relationships with competitors, clients, and suppliers. Adhering to fair competition standards allows us to strengthen partner trust and ensure fair competition in the market, contributing to business growth and achieving long-term goals."
+      "description": "MESMER actively participates in tenders and competitions, strictly adhering to the principles of fair competition. We guarantee transparency and openness in our relationships with competitors, clients, and suppliers. Adhering to fair competition standards allows us to strengthen partner trust and ensure fair competition in the market, contributing to business growth and achieving long-term goals."
     },
     "ethics": {
       "title": "Collaboration with Suppliers, Partners, and Clients",
-      "description": "\"MESMER\" adheres to high ethical standards, strictly fulfilling all contractual obligations and ensuring transparency in all relationships with partners and clients. We value long-term relationships and strive for mutually beneficial cooperation based on trust and mutual respect."
+      "description": "MESMER adheres to high ethical standards, strictly fulfilling all contractual obligations and ensuring transparency in all relationships with partners and clients. We value long-term relationships and strive for mutually beneficial cooperation based on trust and mutual respect."
     },
     "quality": {
       "title": "Quality Control",
-      "description": "\"MESMER\" has more than a decade of experience in the engineering and construction industries. Over this time, we have accumulated extensive experience and knowledge, allowing us to guarantee the high quality of our services and products. We have implemented a strict quality control system at all stages of the project, from design to project completion.",
+      "description": "MESMER has more than a decade of experience in the engineering and construction industries. Over this time, we have accumulated extensive experience and knowledge, allowing us to guarantee the high quality of our services and products. We have implemented a strict quality control system at all stages of the project, from design to project completion.",
       "list": {
         "label_1": "Regular inspections for compliance with quality standards",
         "label_2": "Use of advanced technologies and equipment",
@@ -71,14 +74,18 @@
         "label_4": "Strict control over material usage"
       },
       "sub_description": "The company's success depends on the well-coordinated work of the entire team, so we continuously invest in the development of our employees and the improvement of our processes. We strive for continuous improvement in the quality of our services and products to meet our clients' needs and exceed their expectations."
+    },
+    "partners": {
+      "title": "Our partners",
+      "description": "«MESMER» cooperates with the world's leading technology and engineering companies. Our partners are recognized leaders in their industries, whose innovative solutions help to implement complex projects with high quality."
     }
   },
   "services": {
     "main_title": "Services",
     "title": "What Do We Do?",
-    "description": "\"MESMER,\" in collaboration with its subsidiaries and international partners, is ready to act as a general contractor in domestic, regional, and international markets. We provide the following range of services:",
+    "description": "MESMER, in collaboration with its subsidiaries and international partners, is ready to act as a general contractor in domestic, regional, and international markets. We provide the following range of services:",
     "tecnologies": {
-      "title": "\"MESMER\" provides the most advanced technologies:",
+      "title": "MESMER provides the most advanced technologies:",
       "list": {
         "label_1": "World-class management skills",
         "label_2": "Marketing and business development",
@@ -98,15 +105,15 @@
     },
     "delivery": {
       "title": "Equipment Procurement",
-      "description": "Procurement and supply of equipment, along with engineering and design work, are key components of \"MESMER\" company’s activities. To achieve our goals, we collaborate with a well-organized and highly qualified team of professionals in the construction industry, as well as with specialists in design, management, and other fields."
+      "description": "Procurement and supply of equipment, along with engineering and design work, are key components of MESMER company’s activities. To achieve our goals, we collaborate with a well-organized and highly qualified team of professionals in the construction industry, as well as with specialists in design, management, and other fields."
     },
     "experience": {
       "title": "Relying on Practical Experience, We Take Full Responsibility for Equipment Supply:",
-      "description": "\"MESMER\" has more than a decade of experience in engineering and construction industries. During this time, we have accumulated valuable expertise and knowledge, allowing us to guarantee the high quality of our services and products. We have implemented a strict quality control system at all stages of the project, from design to final commissioning."
+      "description": "MESMER has more than a decade of experience in engineering and construction industries. During this time, we have accumulated valuable expertise and knowledge, allowing us to guarantee the high quality of our services and products. We have implemented a strict quality control system at all stages of the project, from design to final commissioning."
     },
     "maintenance": {
       "title": "Operation and Maintenance",
-      "description": "Ensuring the safety and reliability of equipment plays a crucial role in facility operations. To achieve this goal, \"MESMER\" offers a wide range of operation and maintenance services at all project stages – from feasibility studies to design, engineering, procurement, construction, and commercial operation. \"MESMER\" provides operation and maintenance services tailored to its clients' needs, including preparation for operation, such as planning, system development, and training; consulting services, such as profit optimization, reliability, and safety improvement; as well as full-cycle planning, implementation, and execution of various maintenance types. Additionally, through data collection and operational analysis, potential failures can be predicted, allowing us to apply the latest technologies to enhance facility and equipment efficiency."
+      "description": "Ensuring the safety and reliability of equipment plays a crucial role in facility operations. To achieve this goal, MESMER offers a wide range of operation and maintenance services at all project stages – from feasibility studies to design, engineering, procurement, construction, and commercial operation. MESMER provides operation and maintenance services tailored to its clients' needs, including preparation for operation, such as planning, system development, and training; consulting services, such as profit optimization, reliability, and safety improvement; as well as full-cycle planning, implementation, and execution of various maintenance types. Additionally, through data collection and operational analysis, potential failures can be predicted, allowing us to apply the latest technologies to enhance facility and equipment efficiency."
     }
   },
   "career": {
@@ -116,14 +123,37 @@
     "requirements": "Requirements",
     "responsibilities": "Responsibilities",
     "created_at": "Date of publication",
-    "respond": "RESPOND"
+    "respond": "RESPOND",
+    "message": {
+      "loading": {
+        "title": "Sending...",
+        "description": "Your message is being sent. Please wait..."
+      },
+      "success": {
+        "title": "success",
+        "description": "Your message has been sent."
+      },
+      "error": {
+        "title": "Error",
+        "description": "Your message has not been sent. Please try again."
+      }
+    },
+    "modal": {
+      "title": "Reply to a vacancy",
+      "name": "Name",
+      "phone": "Phone number",
+      "email": "Email",
+      "file": "Attach file",
+      "message": "Message",
+      "send": "Send"
+    }
   },
   "news": {
     "title": "News",
     "single": "News"
   },
   "contact": {
-    "title": "Contact us",
+    "title": "CONTACT US",
     "form": {
       "title": "FILL OUT THE FORM",
       "name": "Name",

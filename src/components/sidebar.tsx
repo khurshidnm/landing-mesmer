@@ -11,6 +11,7 @@ import {
   Menu,
   LogOut,
   VerifiedIcon,
+  Settings2,
 } from "lucide-react";
 import {
   Sheet,
@@ -45,6 +46,12 @@ const menuItems = [
     href: "/admin/certificates",
     icon: VerifiedIcon,
     description: "Manage job certificates",
+  },
+  {
+    title: "Site Settings",
+    href: "/admin/consts",
+    icon: Settings2,
+    description: "Manage website settings",
   },
 ];
 

@@ -21,6 +21,7 @@ export function CertificateCard({ certificate, onEdit, onDelete }: CertificateCa
             objectFit="cover"
           />
         </div>
+        <br />
         <div className="mt-2 space-y-1">
           <h3 className="text-lg font-semibold">{certificate.en.title}</h3>
           <p className="text-sm text-gray-500">{certificate.uz.title}</p>

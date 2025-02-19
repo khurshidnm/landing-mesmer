@@ -2,72 +2,49 @@
 
 import React from "react";
 import Image from "@/components/BluredImage";
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 const partners = [
-  "/partners/partner (1).svg",
-  "/partners/partner (2).svg",
-  "/partners/partner (3).svg",
-  "/partners/partner (4).svg",
-  "/partners/partner (5).svg",
-  "/partners/partner (6).svg",
-  "/partners/partner (7).svg",
-  "/partners/partner (8).svg",
-  "/partners/partner (9).svg",
-  "/partners/partner (10).svg",
+  "/partners/abb.svg",
+  "/partners/andritz.svg",
+  "/partners/danfos.svg",
+  "/partners/faf.svg",
+  "/partners/grundfos.svg",
+  "/partners/hawle.svg",
+  "/partners/kronhe.svg",
+  "/partners/ksb.svg",
+  "/partners/kubota.svg",
+  "/partners/lutz_jesco.svg",
 ];
 
 const Partners = () => {
   const t = useTranslations("home.partners");
+  const [hovered, setHovered] = React.useState(false);
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20">
       <div className="container mx-auto px-4">
-        <motion.h2
-          className="text-3xl font-bold text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <h2 className="text-3xl font-bold text-center mb-12">
           {t("trust_us")}
-        </motion.h2>
-        <div className="overflow-hidden relative mix-blend-darken">
-          <motion.div
-            className="flex flex-nowrap min-w-max"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
-          >
+        </h2>
+        <div className="overflow-hidden relative">
+          <div className={cn("flex min-w-max animate-scroll", hovered && "pause")} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             {[...partners, ...partners].map((src, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-28 h-28 mx-4 flex items-center justify-center"
+                className="w-28 h-28 mx-4 flex items-center justify-center"
               >
                 <div className="relative w-full h-full">
                   <Image
                     src={src}
                     alt={`Partner logo ${index + 1}`}
                     fill
-                    className="object-contain"
+                    className="object-contain filter !grayscale hover:!grayscale-0 transition-all duration-300"
                   />
                 </div>
               </div>
             ))}
-            {[...partners, ...partners].map((src, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-28 h-28 mx-4 flex items-center justify-center"
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={src}
-                    alt={`Partner logo ${index + 1}`}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-            ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

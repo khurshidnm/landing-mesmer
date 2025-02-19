@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -43,8 +43,16 @@ export default function JobListings({
 }: {
   vacancies: JobListing[];
 }) {
+  const [limit, setLimit] = useState(3);
+  const [total, setTotal] = useState(vacancies.length);
+  const [filteredVacancies, setFilteredVacancies] = useState(vacancies.slice(0, limit));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<JobListing | null>(null);
+
+  useEffect(() => {
+    setFilteredVacancies(vacancies.slice(0, limit));
+    setTotal(vacancies.length);
+  }, [vacancies, limit]);
 
   const handleOpenModal = (job: JobListing) => {
     setSelectedJob(job);
@@ -73,8 +81,8 @@ export default function JobListings({
         <div className="w-full md:w-1/2"></div>
 
         <div className="w-full md:w-1/2">
-          <div className="grid gap-6 max-w-xl md:ml-[50px]">
-            {vacancies.map((job: JobListing, index: number) => (
+          <div className="grid gap-6 w-full">
+            {filteredVacancies.map((job: JobListing, index: number) => (
               <motion.div
                 key={job._id}
                 initial={{ opacity: 0, y: 20 }}
@@ -202,6 +210,9 @@ export default function JobListings({
               variant="outline"
               size="sm"
               className="text-blue-600 rounded-none border-blue-600 hover:bg-blue-50"
+              onClick={() => setLimit(limit + 3)}
+              // disabled with total and limit
+              disabled={total <= limit}
             >
               {t("view_more")}
             </Button>

@@ -37,42 +37,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 w-full">
-        <div className="md:col-span-5 grid grid-cols-1 rounded-none md:grid-cols-4 gap-6 order-2 w-full">
-          {news?.slice(1).map((news, index) => (
-            <motion.div
-              key={news._id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              onHoverStart={() => setHoveredId(news?._id)}
-              onHoverEnd={() => setHoveredId(null)}
-            >
-              <Link href={`/${locale}/news/${news?.slug}`}>
-                <Card className="overflow-hidden h-full rounded-none transition-all duration-300 ">
-                  <div className="relative aspect-[16/9] rounded-none overflow-hidden">
-                    <Image
-                      src={news.cover || "/placeholder.svg"}
-                      alt={news?.[locale]?.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="text-lg font-semibold line-clamp-2 mb-2">
-                      {news?.uz?.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm">
-                      {format(news?.createdAt || new Date(), "d MMMM yyyy", {
-                        locale: uz,
-                      })}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+      <div className="w-full md:w-1/2 md:ml-auto mb-6">
         {news?.[0] && (
           <motion.div
             key={news?.[0]?._id}
@@ -111,6 +76,43 @@ export function Cards({ news }: { news: NewsItem[] }) {
             </Link>
           </motion.div>
         )}
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+        <div className="md:col-span-5 grid grid-cols-1 rounded-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 order-2 w-full">
+          {news?.slice(1).map((news, index) => (
+            <motion.div
+              key={news._id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              onHoverStart={() => setHoveredId(news?._id)}
+              onHoverEnd={() => setHoveredId(null)}
+            >
+              <Link href={`/${locale}/news/${news?.slug}`}>
+                <Card className="overflow-hidden h-full rounded-none transition-all duration-300 ">
+                  <div className="relative aspect-[16/9] rounded-none overflow-hidden">
+                    <Image
+                      src={news.cover || "/placeholder.svg"}
+                      alt={news?.[locale]?.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="text-lg font-semibold line-clamp-2 mb-2">
+                      {news?.uz?.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      {format(news?.createdAt || new Date(), "d MMMM yyyy", {
+                        locale: uz,
+                      })}
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

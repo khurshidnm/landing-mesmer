@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { LinkedinIcon as LinkedIn } from "lucide-react";
 import axios from "axios";
 import { useTranslations } from "next-intl";
 
@@ -101,7 +100,7 @@ const Footer = () => {
               </div>
               <div className="text-gray-400">{constants.location}</div>
               <div className="flex gap-3">
-                <Image src={"/Negative.svg"} alt="" width={22} height={22} />
+                <img src={"/Negative.svg"} alt="" className="text-white" width={22} height={22} />
                 <a href="https://www.linkedin.com/company/mesmer-llc/">
                   LinkedIn
                 </a>
@@ -111,7 +110,7 @@ const Footer = () => {
 
           {/* Contact Form */}
           <div>
-            <h2 className="text-2xl font-bold mb-8">СВЯЖИТЕСЬ С НАМИ</h2>
+            <h2 className="text-2xl font-bold mb-8">{navbarLang("contact_title")}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
@@ -162,7 +161,7 @@ const Footer = () => {
                 disabled={isSubmitting}
                 className="px-8 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
               >
-                {isSubmitting ? "Отправка..." : "Отправить"}
+                {isSubmitting ? navbarLang("sending") : navbarLang("send")}
               </button>
             </form>
           </div>
