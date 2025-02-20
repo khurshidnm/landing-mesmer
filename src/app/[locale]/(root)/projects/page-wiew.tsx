@@ -63,11 +63,18 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
   const firstProjectRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (currentPage > 1) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [currentPage]);
+
+  {/*
+  useEffect(() => {
     if (firstProjectRef.current) {
       firstProjectRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentPage]);
-
+  */}
   const container = {
     hidden: { opacity: 0 },
     show: {
