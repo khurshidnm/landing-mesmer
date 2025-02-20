@@ -74,7 +74,7 @@ export default function JobListings({
       <Hero
         title={t("title")}
         subtitle=""
-        backgroundImage="/contact.png"
+        backgroundImage="/vacancy.png"
         height="500px"
       />
       <div className="flex flex-col container justify-between mt-5 mx-auto w-full items-center md:flex-row">
