@@ -21,7 +21,7 @@ const HomePage: FC<Props> = ({certificates}) => {
   return (
     <div>
       <Hero
-        backgroundImage={"/heroImg.png"}
+        backgroundImage={"/hero.png"}
         height={"100vh"}
         subtitle={t("subtitle")}
         title={t("title")}
