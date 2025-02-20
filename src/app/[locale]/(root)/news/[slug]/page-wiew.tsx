@@ -26,6 +26,7 @@ export default function NewsPage({ news }: { news: NewsItem }) {
           <div className="border-l-4 border-blue-600 pl-6">
             <h1 className="text-3xl font-bold text-black mb-2">{t("single")}</h1>
             <h2 className="text-2xl text-gray-800">{localizedNews?.title}</h2>
+            <br />
           </div>
         </div>
 
@@ -44,7 +45,9 @@ export default function NewsPage({ news }: { news: NewsItem }) {
         </motion.div>
 
         <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/2"></div>
+          
+          {/* <div className="lg:w-1/2"></div> */}
+          
           <div className="container mx-auto py-8 sm:py-12">
             <div className="grid grid-cols-1 gap-8 sm:gap-12">
               <motion.div
