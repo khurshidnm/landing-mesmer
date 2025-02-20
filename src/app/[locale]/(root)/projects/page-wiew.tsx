@@ -88,7 +88,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
   return (
     <>
       <Hero
-        backgroundImage="/projects.jpg.png"
+        backgroundImage="/projects.png"
         title={t("title")}
         subtitle=""
         height="500px"
