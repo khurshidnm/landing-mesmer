@@ -31,7 +31,7 @@ const About = () => {
       <Hero
         title={t("main_title")}
         subtitle=""
-        backgroundImage="/servis.png"
+        backgroundImage="/services.png"
         height="500px"
       />
 
