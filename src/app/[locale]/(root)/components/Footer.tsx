@@ -215,15 +215,20 @@ const Footer = () => {
               </Link>
             </nav>
             <div className="text-right text-sm text-gray-400">
-              <p>© 2024 MESMER-EAST LLC</p>
+              <p>© 2025 MESMER-EAST LLC</p>
+              
+              {/*
               <div className="mt-2 space-x-4">
+                
                 <div className="hover:text-white transition-colors">
                   <a href="/MESMER RULES.pdf">{navbarLang("license")}</a>
                 </div>
                 <div className="hover:text-white transition-colors">
                   <a href="/MESMER RULES.pdf"> {navbarLang("rules")}</a>
-                </div>
+                </div> 
               </div>
+              */}
+              
             </div>
           </div>
         </div>
