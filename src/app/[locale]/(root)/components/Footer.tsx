@@ -185,34 +185,34 @@ const Footer = () => {
             </div>
             <nav className="flex flex-wrap gap-x-6 gap-y-3 justify-center text-sm text-gray-400">
               <Link
-                href="ru/about"
+                href="/about"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("about")}
               </Link>
               <Link
-                href="ru/services"
+                href="/services"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("services")}
               </Link>
               <Link
-                href="ru/projects"
+                href="/projects"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("projects")}
               </Link>
               <Link
-                href="ru/careers"
+                href="/careers"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("career")}
               </Link>
-              <Link href="ru/news" className="hover:text-white transition-colors">
+              <Link href="/news" className="hover:text-white transition-colors">
                 {navbarLang("news")}
               </Link>
               <Link
-                href="ru/contacts"
+                href="/contacts"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("contacts")}
