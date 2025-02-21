@@ -140,7 +140,12 @@ const Footer = () => {
                   {constants.email}
                 </a>
               </div>
-              <div className="text-gray-400">{constants.location}</div>
+
+              <div className="text-gray-400">
+                {constants.location[locale as keyof typeof constants.location]}
+              </div>
+
+              {/*<div className="text-gray-400">{constants.location}</div> */}
               <div className="flex gap-3">
                 <img src={"/Negative.svg"} alt="" className="text-white" width={22} height={22} />
                 <a href="https://www.linkedin.com/company/mesmer-llc/">
