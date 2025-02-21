@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
-import { useTranslations } from "next-intl";
-
+import { useLocale, useTranslations } from "next-intl";
 
 interface FormData {
   name: string;
@@ -22,15 +21,17 @@ const Footer = () => {
     email: "",
     message: "",
   });
-  
+
   const [constants, setConstants] = useState({
     number: "+ 998 (55) 518 88 70",
     email: "info@mesmer.uz",
     location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
   });
-  
+
   const contactsLang = useTranslations("contact");
   const navbarLang = useTranslations("navbar");
+  const location = useTranslations("location");
+  const locale = useLocale();
 
   useEffect(() => {
     const fetchConstants = async () => {
@@ -45,7 +46,7 @@ const Footer = () => {
     };
     fetchConstants();
   }, []);
-  
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -100,21 +101,32 @@ const Footer = () => {
                   {constants.email}
                 </a>
               </div>
-              
+
               <div className="text-gray-400">{constants.location}</div>
-              
+
               <div className="flex gap-3">
-                <img src={"/Negative.svg"} alt="" className="text-white" width={22} height={22} />
+                <img
+                  src={"/Negative.svg"}
+                  alt=""
+                  className="text-white"
+                  width={22}
+                  height={22}
+                />
                 <a href="https://www.linkedin.com/company/mesmer-llc/">
                   LinkedIn
                 </a>
+              </div>
+              <div>
+                <p>{location("title")}</p>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
           <div>
-            <h2 className="text-2xl font-bold mb-8">{navbarLang("contact_title")}</h2>
+            <h2 className="text-2xl font-bold mb-8">
+              {navbarLang("contact_title")}
+            </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
@@ -185,34 +197,37 @@ const Footer = () => {
             </div>
             <nav className="flex flex-wrap gap-x-6 gap-y-3 justify-center text-sm text-gray-400">
               <Link
-                href="/about"
+                href={`/${locale}/about`}
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("about")}
               </Link>
               <Link
-                href="/services"
+                href={`/${locale}/services`}
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("services")}
               </Link>
               <Link
-                href="/projects"
+                href={`/${locale}/projects`}
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("projects")}
               </Link>
               <Link
-                href="/careers"
+                href={`/${locale}/career`}
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("career")}
               </Link>
-              <Link href="/news" className="hover:text-white transition-colors">
+              <Link
+                href={`/${locale}/news`}
+                className="hover:text-white transition-colors"
+              >
                 {navbarLang("news")}
               </Link>
               <Link
-                href="/contacts"
+                href={`/${locale}/contact`}
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("contacts")}
@@ -220,7 +235,7 @@ const Footer = () => {
             </nav>
             <div className="text-right text-sm text-gray-400">
               <p>© 2025 MESMER-EAST LLC</p>
-              
+
               {/*
               <div className="mt-2 space-x-4">
                 
@@ -232,7 +247,6 @@ const Footer = () => {
                 </div> 
               </div>
               */}
-              
             </div>
           </div>
         </div>
