@@ -84,6 +84,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
                   }}
                 />
               </div>
+              <br />
               <p className="text-sm text-gray-600">
                 {cert[locale as "ru" | "en" | "uz"].title}
               </p>

@@ -28,7 +28,8 @@ const ProjectsSection = () => {
   };
 
   const t = useTranslations("home.projects");
-  const locale = useLocale()
+  const locale = useLocale();
+  console.log(locale);
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -50,7 +51,7 @@ const ProjectsSection = () => {
                 <motion.p
                   variants={fadeInUp}
                   className="text-xl md:text-2xl leading-relaxed"
-                  >
+                >
                   {t("sub_title")}
                 </motion.p>
 
@@ -66,14 +67,12 @@ const ProjectsSection = () => {
                 <motion.p
                   variants={fadeInUp}
                   className="text-gray-600 leading-relaxed"
-                >{t("description")}
+                >
+                  {t("description")}
                 </motion.p>
                 <motion.div variants={fadeInUp} className="mt-8">
-                  <Link href={`/${locale}/projects`}>                                                                                   
-                    <Button
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-lg text-lg font-medium transition-colors duration-300"
-                      onClick={() => (window.location.href = "/projects")}
-                    >
+                  <Link href={`/${locale}/projects`} passHref>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-lg text-lg font-medium transition-colors duration-300">
                       {t("button")}
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>

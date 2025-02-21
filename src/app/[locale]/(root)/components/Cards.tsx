@@ -100,7 +100,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
                   </div>
                   <CardContent className="p-4">
                     <h3 className="text-lg font-semibold line-clamp-2 mb-2">
-                      {news?.uz?.title}
+                      {news?.[locale]?.title}
                     </h3>
                     <p className="text-gray-500 text-sm">
                       {format(news?.createdAt || new Date(), "d MMMM yyyy", {

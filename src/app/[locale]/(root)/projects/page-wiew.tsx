@@ -68,13 +68,15 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
     }
   }, [currentPage]);
 
-  {/*
+  {
+    /*
   useEffect(() => {
     if (firstProjectRef.current) {
       firstProjectRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentPage]);
-  */}
+  */
+  }
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -89,8 +91,8 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 },
   };
-  const locale = useLocale();
-  const t = useTranslations("projects")
+  const locale = useLocale() as "uz" | "en" | "ru";
+  const t = useTranslations("projects");
 
   return (
     <>
@@ -103,7 +105,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
       <div className="mx-auto  container w-full py-16 flex flex-col md:flex-row  ">
         <div className="md:w-1/3 w-full   ">
           <h1 className="text-3xl md:text-4xl font-bold mb-12">
-          {t("main_title")}
+            {t("main_title")}
           </h1>
         </div>
 
@@ -118,7 +120,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
               <motion.div
                 key={project._id}
                 variants={item}
-                className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start" 
+                className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start"
                 ref={index === 0 ? firstProjectRef : null}
               >
                 <div className="md:col-span-3">
@@ -128,7 +130,9 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                 </div>
 
                 <div className="md:col-span-9 space-y-6">
-                  <h2 className="text-2xl font-semibold">{project.uz.title}</h2>
+                  <h2 className="text-2xl font-semibold">
+                    {project?.[locale]?.title}
+                  </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -136,31 +140,31 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                         {t("project.task")}:
                       </h3>
                       <p className="text-sm">
-                        {project.uz.volume_of_tasks}
+                        {project?.[locale]?.volume_of_tasks}
                       </p>
                     </div>
                     <div>
                       <h3 className="text-sm font-medium text-gray-500 mb-2">
                         {t("project.customer")}:
                       </h3>
-                      <p className="text-sm">{project.uz.customer}</p>
+                      <p className="text-sm">{project?.[locale]?.customer}</p>
                     </div>
                   </div>
 
                   <div className="relative aspect-[16/9] w-full overflow-hidden ">
-                      <Image
-                        src={project.cover || "/placeholder.svg"}
-                        alt={project.uz.title}
-                        fill
-                        className="object-cover"
-                      />
+                    <Image
+                      src={project.cover || "/placeholder.svg"}
+                      alt={project?.[locale]?.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  
+
                   {/* <div className="relative aspect-[16/9] w-full overflow-hidden ">
                     <Link href={`/${locale}/projects/${project.slug}`}>
                       <Image
                         src={project.cover || "/placeholder.svg"}
-                        alt={project.uz.title}
+                        alt={project?.[locale]?.title}
                         fill
                         className="object-cover"
                       />
@@ -169,12 +173,16 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
 
                   <div className="flex justify-between items-center flex-wrap text-sm">
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-500">{t("project.status")}:</span>
-                      <span>{project.uz.status}</span>
+                      <span className="text-gray-500">
+                        {t("project.status")}:
+                      </span>
+                      <span>{project[locale].status}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-gray-500">{t("project.implementation")}:</span>
-                      <span>{project.uz.implementation_period}</span>
+                      <span className="text-gray-500">
+                        {t("project.implementation")}:
+                      </span>
+                      <span>{project?.[locale]?.implementation_period}</span>
                     </div>
                   </div>
                 </div>
