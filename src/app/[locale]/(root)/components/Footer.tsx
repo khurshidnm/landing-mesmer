@@ -181,34 +181,34 @@ const Footer = () => {
             </div>
             <nav className="flex flex-wrap gap-x-6 gap-y-3 justify-center text-sm text-gray-400">
               <Link
-                href="/about"
+                href="ru/about"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("about")}
               </Link>
               <Link
-                href="/services"
+                href="ru/services"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("services")}
               </Link>
               <Link
-                href="/projects"
+                href="ru/projects"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("projects")}
               </Link>
               <Link
-                href="/careers"
+                href="ru/careers"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("career")}
               </Link>
-              <Link href="/news" className="hover:text-white transition-colors">
+              <Link href="ru/news" className="hover:text-white transition-colors">
                 {navbarLang("news")}
               </Link>
               <Link
-                href="/contacts"
+                href="ru/contacts"
                 className="hover:text-white transition-colors"
               >
                 {navbarLang("contacts")}
