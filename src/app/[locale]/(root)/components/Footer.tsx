@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/router";
 
 
 interface FormData {
@@ -14,8 +13,6 @@ interface FormData {
   email: string;
   message: string;
 }
-
-const { locale } = useRouter();
 
 const Footer = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,58 +23,21 @@ const Footer = () => {
     message: "",
   });
   
-  {/* 
   const [constants, setConstants] = useState({
     number: "+ 998 (55) 518 88 70",
     email: "info@mesmer.uz",
     location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
   });
-  */}
-  
-  const [constants, setConstants] = useState({
-    number: "+ 998 (55) 518 88 70",
-    email: "info@mesmer.uz",
-    location: {
-      en: "Tashkent, Almazar district, Shiroq street, 100. ZIP 100069",
-      ru: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
-      uz: "Toshkent, Olmazor tumani, Shiroq ko‘chasi, 100. Pochta indeksi 100069"
-    }
-  });
   
   const contactsLang = useTranslations("contact");
   const navbarLang = useTranslations("navbar");
 
-  {/* Contact Form 
   useEffect(() => {
     const fetchConstants = async () => {
       try {
         const res = await axios.get("/api/consts");
         if (res.data) {
           setConstants(res.data.data.constant);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchConstants();
-  }, []);
-  */}
-
-
-  useEffect(() => {
-    const fetchConstants = async () => {
-      try {
-        const res = await axios.get("/api/consts");
-        if (res.data) {
-          setConstants({
-            number: res.data.data.constant.number,
-            email: res.data.data.constant.email,
-            location: {
-              en: res.data.data.constant.location_en,
-              ru: res.data.data.constant.location_ru,
-              uz: res.data.data.constant.location_uz,
-            }
-          });
         }
       } catch (error) {
         console.error(error);
@@ -140,12 +100,9 @@ const Footer = () => {
                   {constants.email}
                 </a>
               </div>
-
-              <div className="text-gray-400">
-                {constants.location[locale as keyof typeof constants.location]}
-              </div>
-
-              {/*<div className="text-gray-400">{constants.location}</div> */}
+              
+              <div className="text-gray-400">{constants.location}</div>
+              
               <div className="flex gap-3">
                 <img src={"/Negative.svg"} alt="" className="text-white" width={22} height={22} />
                 <a href="https://www.linkedin.com/company/mesmer-llc/">
