@@ -7,9 +7,10 @@ import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+//import { useTranslations } from "next-intl";
 import Image from "@/components/BluredImage";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 
 const socialLinks = [
   {
@@ -48,6 +49,7 @@ const Contact = () => {
   });
 
   const t = useTranslations("contact");
+  const location = useTranslations("location");
 
   useEffect(() => {
     const fetchConstants = async () => {
@@ -132,6 +134,7 @@ const Contact = () => {
                 <div className="space-y-3">
                   <p className="text-xl text-gray-900">{constants.number}</p>
                   <p className="text-xl text-gray-900">{constants.email}</p>
+                  <p>{location("title")}</p>
                 </div>
               </div>
 
