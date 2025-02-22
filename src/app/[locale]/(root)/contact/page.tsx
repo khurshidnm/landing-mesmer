@@ -134,7 +134,8 @@ const Contact = () => {
                 <div className="space-y-3">
                   <p className="text-xl text-gray-900">{constants.number}</p>
                   <p className="text-xl text-gray-900">{constants.email}</p>
-                  <p>{location("title")}</p>
+                  <p className="text-xl text-gray-900">{location("title")}</p>
+                  <br />
                 </div>
               </div>
 
