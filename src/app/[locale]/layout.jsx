@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { Provider } from "./provider";
 import { Toaster } from "@/components/ui/toaster";
+import Script from "next/script"; // Step 1:
 
 // next-intl
 import { NextIntlClientProvider } from "next-intl";
@@ -126,6 +127,27 @@ export default async function LocaleLayout({ children, params }) {
 
   return (
     <html lang={locale} suppressHydrationWarning={true}>
+
+      <head>
+        {/* Step 2: */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-5NRZXYKKXW"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-5NRZXYKKXW');
+            `,
+          }}
+        />
+      </head>
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
