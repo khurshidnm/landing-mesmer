@@ -183,8 +183,9 @@ const Contact = () => {
         ></iframe>
       </div>
 
+      {/*
       <div className="container mx-auto px-4 py-8">
-        <p className="text-sm text-gray-600 text-center mb-16">
+         <p className="text-sm text-gray-600 text-center mb-16">
           {constants.location}
         </p>
 
@@ -252,6 +253,8 @@ const Contact = () => {
           </div>
         </section>
       </div>
+      */}
+      
       <Footer />
     </div>
   );
