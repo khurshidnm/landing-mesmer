@@ -22,9 +22,9 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title:
-    "MESMER - One of the Leading Construction & Engineering Company in Uzbekistan",
+    "MESMER - Leading Construction & Engineering Company in Uzbekistan",
   description:
-    "MESMER is one of Uzbekistan's top construction and engineering companies, specializing in infrastructure, water management, and EPC projects. With 20+ years of expertise, we deliver innovative and sustainable solutions. Contact us today!",
+    "MESMER delivers expert EPC solutions in infrastructure and water management across Uzbekistan, backed by 20+ years of innovation and reliability.",
   keywords: [
     "construction company Uzbekistan",
     "engineering company Uzbekistan",
@@ -80,7 +80,7 @@ export const metadata = {
   robots: "index, follow",
   openGraph: {
     title:
-      "MESMER - One of the Leading Construction & Engineering Company in Uzbekistan",
+      "MESMER - Leading Construction & Engineering Company in Uzbekistan",
     description:
       "Discover innovative construction and engineering solutions with MESMER, a top EPC contractor in Uzbekistan specializing in sustainable infrastructure projects.",
     images: [
