@@ -77,7 +77,8 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const BOT_TOKEN = "7049223832:AAH0qBWpoDVAWiCbMxH92HTNcC3JQ2zbHS4";
+      //const BOT_TOKEN = "7049223832:AAH0qBWpoDVAWiCbMxH92HTNcC3JQ2zbHS4";
+      const BOT_TOKEN = "7848580576:AAE4Jgf2a0nj_I2kxkTMDScH8igTrHdj4cg";
       const CHAT_ID = -1002471201680;
 
       const message = `📨 Новая заявка!\n\n👤 Имя: ${formData.name}\n📞 Телефон: ${formData.phone}\n📧 Email: ${formData.email}\n💬 Сообщение: ${formData.message}`;
