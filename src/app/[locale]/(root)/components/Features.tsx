@@ -1,13 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import Image from "@/components/BluredImage";
-import ImageNext from "next/image";
-import { FC, useState } from "react";
+import { type FC, useState, useRef, useEffect } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import { Certificate } from "@/types/certificates";
+import type { Certificate } from "@/types/certificates";
 import { useLocale, useTranslations } from "next-intl";
 
 const standards = [
@@ -33,9 +31,49 @@ interface Props {
 const Advantages: FC<Props> = ({ certificates }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const t = useTranslations("home.features");
   const locale = useLocale();
+
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      isDragging.current = true;
+      startX.current = e.pageX - scrollContainer.offsetLeft;
+      scrollLeft.current = scrollContainer.scrollLeft;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current) return;
+      e.preventDefault();
+      const x = e.pageX - scrollContainer.offsetLeft;
+      const walk = (x - startX.current) * 2; // Умножьте на 2 для более быстрого скролла
+      scrollContainer.scrollLeft = scrollLeft.current - walk;
+    };
+
+    const handleMouseUp = () => {
+      isDragging.current = false;
+    };
+
+    scrollContainer.addEventListener("mousedown", handleMouseDown);
+    scrollContainer.addEventListener("mousemove", handleMouseMove);
+    scrollContainer.addEventListener("mouseup", handleMouseUp);
+    scrollContainer.addEventListener("mouseleave", handleMouseUp);
+
+    return () => {
+      scrollContainer.removeEventListener("mousedown", handleMouseDown);
+      scrollContainer.removeEventListener("mousemove", handleMouseMove);
+      scrollContainer.removeEventListener("mouseup", handleMouseUp);
+      scrollContainer.removeEventListener("mouseleave", handleMouseUp);
+    };
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -62,7 +100,10 @@ const Advantages: FC<Props> = ({ certificates }) => {
 
       {/* SLIDER FAOLIYAT */}
       <div className="relative">
-        <div className="hidden md:flex space-x-6 overflow-x-auto scroll-hide pb-4">
+        <div
+          ref={scrollContainerRef}
+          className="hidden md:flex space-x-6 overflow-x-auto scroll-hide pb-4"
+        >
           {certificates?.map((cert, index) => (
             <motion.div
               key={cert._id}
@@ -73,7 +114,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
             >
               <div className="relative aspect-[3/4] mb-4">
                 <Image
-                  src={cert.image}
+                  src={cert.image || "/placeholder.svg"}
                   width={300}
                   height={400}
                   alt={cert.ru.title}
@@ -110,7 +151,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
               >
                 <div className="relative aspect-[3/4] mb-4 mx-auto">
                   <Image
-                    src={cert.image}
+                    src={cert.image || "/placeholder.svg"}
                     width={300}
                     height={400}
                     alt={cert.ru.title}
