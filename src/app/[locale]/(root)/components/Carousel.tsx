@@ -145,11 +145,11 @@ const BusinessActivities = () => {
                 layout="position"
                 className="ml-2 sm:ml-4 flex-shrink-0"
               >
-                <ArrowUpRight
+              {/* <ArrowUpRight
                   className={`w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ${
                     activeId === activity.id ? "text-white" : "text-gray-400"
                   }`}
-                />
+                /> */}
               </motion.div>
             </motion.div>
           </motion.div>
