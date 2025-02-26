@@ -28,9 +28,9 @@ const partners = [
   "/our-partners/partner19.svg",
   "/our-partners/partner20.svg",
   "/our-partners/partner21.svg",
-  "/partners/nord.svg",
-  "/partners/auma.svg",
-  "/partners/azertexnolayn.svg",
+  "/our-partners/partner22.svg",
+  "/our-partners/partner23.svg",
+  "/our-partners/partner24.svg",
 ];
 
 const About = () => {
