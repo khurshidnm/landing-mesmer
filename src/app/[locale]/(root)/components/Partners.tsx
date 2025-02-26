@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 const partners = [
+  "/partners/siemens.svg",
   "/partners/abb.svg",
   "/partners/andritz.svg",
   "/partners/danfos.svg",
@@ -16,6 +17,19 @@ const partners = [
   "/partners/ksb.svg",
   "/partners/kubota.svg",
   "/partners/lutz_jesco.svg",
+  "/partners/prominent.svg",
+  "/partners/qarmet.svg",
+  "/partners/sany.svg",
+  "/partners/schneider_electric.svg",
+  "/partners/xylem.svg",
+  "/partners/sulzer.svg",
+  "/partners/weg.svg",
+  "/partners/wika.svg",
+  "/partners/wilo.svg",
+  "/partners/xcmg.svg",
+  "/partners/norg.svg",
+  "/partners/aumo.svg",
+  "/partners/azertexnolayn.svg",
 ];
 
 const Partners = () => {
