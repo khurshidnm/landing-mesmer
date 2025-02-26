@@ -27,9 +27,9 @@ const partners = [
   "/partners/wika.svg",
   "/partners/wilo.svg",
   "/partners/xcmg.svg",
-  "/partners/nord.svg",
-  "/partners/auma.svg",
-  "/partners/azertexnolayn.svg",
+  "/partners/partner22.svg",
+  "/partners/partner23.svg",
+  "/partners/partner24.svg",
 ];
 
 const Partners = () => {
@@ -46,7 +46,7 @@ const Partners = () => {
             {[...partners, ...partners].map((src, index) => (
               <div
                 key={index}
-                className="w-28 h-28 mx-4 flex items-center justify-center"
+                className="w-40 h-40 mx-4 flex items-center justify-center"
               >
                 <div className="relative w-full h-full">
                   <Image
