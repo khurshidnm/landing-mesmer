@@ -28,7 +28,7 @@ const partners = [
   "/partners/wilo.svg",
   "/partners/xcmg.svg",
   "/partners/nord.svg",
-  "/partners/aumo.svg",
+  "/partners/auma.svg",
   "/partners/azertexnolayn.svg",
 ];
 
