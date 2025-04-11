@@ -1,15 +1,31 @@
 import { getProjects } from "@/app/admin/(admin)/(root)/projects/server-action";
-import React from "react";
 import ProjectsList from "./page-wiew";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
-const ProjectsPage = async () => {
-  const projects = await getProjects();
+
+const ProjectsPage = async ({
+  searchParams,
+}: {
+  searchParams: { page?: string; limit?: string };
+}) => {
+  // Get pagination parameters from URL or use defaults
+  const page = searchParams.page ? Number.parseInt(searchParams.page) : 1;
+  const limit = searchParams.limit ? Number.parseInt(searchParams.limit) : 10;
+
+  // Validate page number
+  if (page < 1) {
+    redirect("?page=1");
+  }
+
+  // Fetch projects with pagination
+  const data = await getProjects(undefined, page, limit); // slug = undefined
+  const { projects, pagination } = JSON.parse(data);
 
   return (
     <div>
-      <ProjectsList projects={JSON.parse(projects)} />
+      <ProjectsList projects={projects} pagination={pagination} />
     </div>
   );
 };

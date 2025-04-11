@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "@/components/BluredImage";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
-import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export interface ProjectsItem {
   _id: string;
@@ -50,33 +50,26 @@ export interface ProjectsGridProps {
   onDelete: (slug: string) => void;
 }
 
-const ITEMS_PER_PAGE = 5;
-
-const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
-
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentProjects = projects.slice(startIndex, endIndex);
-
+const ProjectsList = ({
+  projects,
+  pagination,
+}: {
+  projects: ProjectsItem[];
+  pagination: {
+    totalPages: number;
+    currentPage: number;
+    totalItems: number;
+  };
+}) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const firstProjectRef = useRef<HTMLDivElement>(null);
 
+  // Scroll to top when page changes
   useEffect(() => {
-    if (currentPage > 1) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  }, [currentPage]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pagination.currentPage]);
 
-  {
-    /*
-  useEffect(() => {
-    if (firstProjectRef.current) {
-      firstProjectRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [currentPage]);
-  */
-  }
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -91,8 +84,16 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 },
   };
+
   const locale = useLocale() as "uz" | "en" | "ru";
   const t = useTranslations("projects");
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <>
@@ -102,14 +103,14 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
         subtitle=""
         height="500px"
       />
-      <div className="mx-auto  container w-full py-16 flex flex-col md:flex-row  ">
-        <div className="md:w-1/3 w-full   ">
+      <div className="mx-auto container w-full py-16 flex flex-col md:flex-row">
+        <div className="md:w-1/3 w-full">
           <h1 className="text-3xl md:text-4xl font-bold mb-12">
             {t("main_title")}
           </h1>
         </div>
 
-        <div className="md:w-2/3 overflow-y-auto w-full ">
+        <div className="md:w-2/3 overflow-y-auto w-full">
           <motion.div
             variants={container}
             initial="hidden"
@@ -151,7 +152,7 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                     </div>
                   </div>
 
-                  <div className="relative aspect-[16/9] w-full overflow-hidden ">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden">
                     <Image
                       src={project.cover || "/placeholder.svg"}
                       alt={project?.[locale]?.title}
@@ -159,17 +160,6 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
                       className="object-cover"
                     />
                   </div>
-
-                  {/* <div className="relative aspect-[16/9] w-full overflow-hidden ">
-                    <Link href={`/${locale}/projects/${project.slug}`}>
-                      <Image
-                        src={project.cover || "/placeholder.svg"}
-                        alt={project?.[locale]?.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </Link>
-                  </div> */}
 
                   <div className="flex justify-between items-center flex-wrap text-sm">
                     <div className="flex items-center gap-2">
@@ -190,23 +180,23 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
             ))}
           </motion.div>
 
-          {totalPages > 1 && (
+          {pagination.totalPages > 1 && (
             <div className="mt-12 flex justify-center items-center gap-4">
               <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
+                onClick={() => handlePageChange(pagination.currentPage - 1)}
+                disabled={pagination.currentPage === 1}
                 className="p-2 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
 
               <div className="flex items-center gap-2">
-                {Array.from({ length: totalPages }, (_, i) => (
+                {Array.from({ length: pagination.totalPages }, (_, i) => (
                   <button
                     key={i + 1}
-                    onClick={() => setCurrentPage(i + 1)}
+                    onClick={() => handlePageChange(i + 1)}
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                      currentPage === i + 1
+                      pagination.currentPage === i + 1
                         ? "bg-blue-600 text-white"
                         : "hover:bg-gray-100"
                     }`}
@@ -217,10 +207,8 @@ const ProjectsList = ({ projects }: { projects: ProjectsItem[] }) => {
               </div>
 
               <button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(pagination.currentPage + 1)}
+                disabled={pagination.currentPage === pagination.totalPages}
                 className="p-2 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <ChevronRight className="w-6 h-6" />
