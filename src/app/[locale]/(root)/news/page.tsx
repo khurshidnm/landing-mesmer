@@ -6,14 +6,13 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 // ✅ Correct props type
-interface PageProps {
+interface PaginationProps {
   searchParams?: {
     page?: string;
     limit?: string;
   };
 }
-
-const NewsPage = async ({ searchParams }: PageProps) => {
+const NewsPage = async ({ searchParams }: PaginationProps) => {
   // Get pagination parameters from URL or use defaults
   const page = searchParams?.page ? Number.parseInt(searchParams.page) : 1;
   const limit = searchParams?.limit ? Number.parseInt(searchParams.limit) : 10;
