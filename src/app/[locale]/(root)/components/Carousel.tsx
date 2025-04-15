@@ -78,7 +78,7 @@ const BusinessActivities = () => {
       </h1>
 
       <div className="space-y-2 sm:space-y-3">
-        {activities.map((activity) => (
+        {activities?.map((activity) => (
           <motion.div
             key={activity.id}
             layout

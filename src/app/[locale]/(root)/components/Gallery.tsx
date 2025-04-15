@@ -24,7 +24,7 @@ export default function Gallery({photos}: {photos: string[]}) {
 
         {/* Photo Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {photos.map((photo, index) => (
+          {photos?.map((photo, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}

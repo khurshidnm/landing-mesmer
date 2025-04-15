@@ -5,10 +5,14 @@ import ProjectPage from "./page-wiew";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const page = async (props: { params: Promise<{slug: string}> }) => {
+const page = async (props: { params: Promise<{ slug: string }> }) => {
   const params = await props.params;
   // @next-codemod-ignore
-  const projects = await getProjects(params.slug);
+  const projects = await getProjects({
+    page: 1,
+    limit: 10,
+    slug: params.slug,
+  });
 
   return <ProjectPage project={JSON.parse(projects)} />;
 };

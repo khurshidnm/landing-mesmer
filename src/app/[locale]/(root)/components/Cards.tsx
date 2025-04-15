@@ -32,6 +32,7 @@ interface NewsItem {
 }
 
 export function Cards({ news }: { news: NewsItem[] }) {
+  console.log(news)
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const locale = useLocale() as "uz" | "ru" | "en";
 
@@ -90,7 +91,7 @@ export function Cards({ news }: { news: NewsItem[] }) {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
         <div className="md:col-span-5 grid grid-cols-1 rounded-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 order-2 w-full">
-          {otherNews.map((news, index) => (
+          {otherNews?.map((news, index) => (
             <motion.div
               key={news._id}
               initial={{ opacity: 0, y: 20 }}

@@ -118,7 +118,7 @@ const Hero = ({
                 </button>
               </div>
               {/* <nav className="flex flex-col space-y-6">
-                {links.map((link, i) => (
+                {links?.map((link, i) => (
                   <motion.div
                     key={link.text}
                     custom={i}

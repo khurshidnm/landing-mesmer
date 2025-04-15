@@ -92,7 +92,7 @@ const About = () => {
                 {t("tecnologies.title")}
               </h2>
               <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                {[1, 2, 3, 4].map((item) => (
+                {[1, 2, 3, 4]?.map((item) => (
                   <li key={item}>{t(`tecnologies.list.label_${item}`)}</li>
                 ))}
               </ul>
@@ -109,7 +109,7 @@ const About = () => {
                 {t("engineering.list.title")}
               </p>
               <ul className="list-disc pl-5 space-y-2 text-gray-700 mt-2">
-                {[1, 2, 3].map((item) => (
+                {[1, 2, 3]?.map((item) => (
                   <li key={item}>{t(`engineering.list.label_${item}`)}</li>
                 ))}
               </ul>

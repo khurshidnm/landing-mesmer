@@ -43,7 +43,7 @@ const Partners = () => {
         </h2>
         <div className="overflow-hidden relative">
           <div className={cn("flex min-w-max animate-scroll", hovered && "pause")} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-            {[...partners, ...partners].map((src, index) => (
+            {[...partners, ...partners]?.map((src, index) => (
               <div
                 key={index}
                 className="w-40 h-40 mx-4 flex items-center justify-center"

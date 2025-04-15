@@ -45,7 +45,7 @@ export default function EditVacancyDialog({ vacancy, onClose, onSave }: EditVaca
           <DialogTitle>Edit Vacancy</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          {["en", "uz", "ru"].map((lang) => (
+          {["en", "uz", "ru"]?.map((lang) => (
             <div key={lang} className="grid gap-2">
               <h3 className="font-semibold capitalize">{lang}</h3>
               <Input

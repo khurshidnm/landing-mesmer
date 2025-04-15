@@ -137,7 +137,7 @@ export function RichTextEditor({
     >
       {/* Toolbar */}
       <div className="rich-text-editor flex flex-wrap gap-2 border-b p-2">
-        {[1, 2, 3, 4, 5, 6].map((level) => (
+        {[1, 2, 3, 4, 5, 6]?.map((level) => (
           <button
             key={level}
             onClick={() =>

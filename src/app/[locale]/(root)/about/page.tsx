@@ -191,7 +191,7 @@ const About = () => {
                 {t("quality.description")}
               </p>
               <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed mb-4">
-                {[1, 2, 3, 4].map((item) => (
+                {[1, 2, 3, 4]?.map((item) => (
                   <li key={item}>{t(`quality.list.label_${item}`)}</li>
                 ))}
               </ul>
@@ -229,7 +229,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {partners.map((partner, index) => (
+            {partners?.map((partner, index) => (
               <div
                 key={index}
                 className="relative aspect-square border p-4 flex items-center justify-center bg-white hover:bg-gray-50 transition-colors"

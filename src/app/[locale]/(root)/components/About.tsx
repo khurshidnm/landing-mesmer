@@ -84,7 +84,7 @@ const AboutCompany = () => {
       </motion.div>
 
       <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        {stats.map((stat, index) => (
+        {stats?.map((stat, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
@@ -122,7 +122,7 @@ const AboutCompany = () => {
             src: "/work3.png",
             alt: "Business handshake",
           },
-        ].map((image, index) => (
+        ]?.map((image, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, scale: 0.95 }}

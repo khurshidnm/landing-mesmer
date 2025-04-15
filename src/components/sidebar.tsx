@@ -121,7 +121,7 @@ function SidebarItems({ pathname }: { pathname: string | null }) {
       <div className="px-3 py-2">
         <div className="space-y-1">
           <nav className="space-y-1">
-            {menuItems.map((item) => (
+            {menuItems?.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

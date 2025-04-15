@@ -19,7 +19,7 @@ export function ImageGallery({ images, setImages }: ImageGalleryProps) {
     if (files && files.length > 0) {
       setIsUploading(true)
       try {
-        const uploadPromises = Array.from(files).map(async (file) => {
+        const uploadPromises = Array.from(files)?.map(async (file) => {
           const formData = new FormData()
           formData.append("file", file)
           const response = await axios.post("/api/upload", formData, {
@@ -64,7 +64,7 @@ export function ImageGallery({ images, setImages }: ImageGalleryProps) {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-4">
-        {images.map((image, index) => (
+        {images?.map((image, index) => (
           <div key={index} className="relative">
             <img
               src={image || "/placeholder.svg"}

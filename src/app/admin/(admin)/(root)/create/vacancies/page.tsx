@@ -139,10 +139,10 @@ export default function VacanciesPage() {
           }
         />
       </div>
-      {["conditions", "requirements", "responsibilities"].map((field) => (
+      {["conditions", "requirements", "responsibilities"]?.map((field) => (
         <div key={field} className="space-y-2">
           <Label>{field.charAt(0).toUpperCase() + field.slice(1)}</Label>
-          {eval(lang)[field].map((item: string, index: number) => (
+          {eval(lang)[field]?.map((item: string, index: number) => (
             <div key={index} className="flex items-center gap-2 mb-2">
               <Input
                 value={item}

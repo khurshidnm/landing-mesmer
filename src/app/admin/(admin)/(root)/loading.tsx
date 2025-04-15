@@ -38,7 +38,7 @@ export default function PageLoading() {
           <span>{Math.round(progress)}%</span>
         </div>
         <div className="flex justify-center space-x-2">
-          {[0, 1, 2].map((index) => (
+          {[0, 1, 2]?.map((index) => (
             <div
               key={index}
               className={`w-3 h-3 rounded-full ${

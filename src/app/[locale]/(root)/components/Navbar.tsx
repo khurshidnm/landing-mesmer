@@ -129,7 +129,7 @@ const Navbar = () => {
               />
             </Link>
             <div className="hidden lg:flex w-full space-x-6">
-              {links.map((link) => (
+              {links?.map((link) => (
                 <Link
                   key={link.text}
                   href={link.href}
@@ -189,7 +189,7 @@ const Navbar = () => {
                   isScrolled ? "bg-white" : "bg-white/10 backdrop-blur-md"
                 } border-white/20`}
               >
-                {["uz", "ru", "en"].map((lang) => (
+                {["uz", "ru", "en"]?.map((lang) => (
                   <DropdownMenuItem
                     key={lang}
                     onClick={() => changeLanguage(lang)}
@@ -234,7 +234,7 @@ const Navbar = () => {
                 <X size={24} />
               </button>
               <div className="space-y-4">
-                {links.map((link, i) => (
+                {links?.map((link, i) => (
                   <motion.div
                     key={link.text}
                     variants={linkVariants}

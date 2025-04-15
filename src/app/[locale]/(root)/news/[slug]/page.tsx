@@ -8,7 +8,11 @@ export const revalidate = 0;
 const page = async (props: { params: Promise<{ slug: string }> }) => {
   const params = await props.params;
   // @next-codemod-ignore
-  const news = await getNews(params.slug);
+  const news = await getNews({
+    page: 1,
+    limit: 10,
+    slug: params.slug,
+  });
 
   return <NewsPage news={JSON.parse(news)} />;
 };

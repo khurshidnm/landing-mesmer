@@ -141,7 +141,7 @@ const Contact = () => {
               </div>
 
               <div>
-                {socialLinks.map((social) => (
+                {socialLinks?.map((social) => (
                   <Link
                     key={social.label}
                     href={social.href}

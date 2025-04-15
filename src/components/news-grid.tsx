@@ -21,6 +21,7 @@ import type { NewsItem, NewsGridProps } from "@/types/news"
 import { useRouter } from "next/navigation"
 
 export function NewsGrid({ items, onPreview, onEdit, onDelete }: NewsGridProps) {
+  console.log(items)
   const [selectedItem, setSelectedItem] = useState<NewsItem | null>(null)
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
   const [itemToDelete, setItemToDelete] = useState<string | null>(null)
@@ -49,7 +50,7 @@ export function NewsGrid({ items, onPreview, onEdit, onDelete }: NewsGridProps) 
     <>
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((item) => (
+          {items && items?.map((item) => (
             <Card key={item.slug} className="overflow-hidden">
               <div className="relative aspect-video">
                 <Image

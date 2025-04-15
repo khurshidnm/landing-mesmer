@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 import { FC, useState } from "react"
 
 interface Props {
-  news: NewsItem[]
+  news: {news: NewsItem[]}
 }
 
  const AdminNewsPageInner:FC<Props> = ({news}) => {
@@ -68,7 +68,7 @@ interface Props {
         <Plus className="mr-2 h-4 w-4" />
         <span>Add News</span>
       </Button>
-      <NewsGrid items={news} onPreview={handlePreview} onEdit={handleEdit} onDelete={handleDelete} />
+      <NewsGrid items={news.news} onPreview={handlePreview} onEdit={handleEdit} onDelete={handleDelete} />
     </div>
   )
 }

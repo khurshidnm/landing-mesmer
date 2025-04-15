@@ -2,12 +2,17 @@
 
 import News from "@/database/news.model";
 import { connectToDatabase } from "@/lib/mongoose";
+import { IPagination } from "@/types";
 
-export const getNews = async (
-  slug?: string,
+export const getNews = async ({
   page = 1,
-  limit = 10
-): Promise<string> => {
+  limit = 10,
+  slug = null,
+}: {
+  page?: number;
+  limit?: number;
+  slug?: string | null;
+}): Promise<string> => {
   try {
     await connectToDatabase();
 
@@ -15,25 +20,29 @@ export const getNews = async (
       // Calculate skip value for pagination
       const skip = (page - 1) * limit;
 
-      // Get total count for pagination
-      const totalItems = await News.countDocuments({});
-      const totalPages = Math.ceil(totalItems / limit);
-
       // Get paginated news
       const news = await News.find({})
         .sort({ createdAt: -1 }) // Sort by creation date, newest first
         .skip(skip)
         .limit(limit);
 
+      const total = await News.countDocuments();
+      const pages = Math.ceil(total / limit);
+      const next = page < pages ? page + 1 : 1;
+      const prev = page > 1 ? page - 1 : pages;
+      const pagination: IPagination = {
+        page,
+        limit,
+        total,
+        pages,
+        next,
+        prev,
+      };
+
       // Return news with pagination metadata
       return JSON.stringify({
         news,
-        pagination: {
-          totalItems,
-          totalPages,
-          currentPage: page,
-          limit,
-        },
+        pagination,
       });
     }
 

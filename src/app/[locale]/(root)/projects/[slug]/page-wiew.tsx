@@ -3,10 +3,10 @@
 import Image from "@/components/BluredImage";
 import { motion } from "framer-motion";
 import Hero from "../../components/Hero";
-import { ProjectsItem } from "../page-wiew";
 import Gallery from "../../components/Gallery";
 import { useLocale, useTranslations } from "next-intl";
 import Footer from "../../components/Footer";
+import { ProjectsItem } from "../page";
 
 export default function ProjectPage({ project }: { project: ProjectsItem }) {
   const locale = useLocale() as "uz" | "ru" | "en";

@@ -48,7 +48,7 @@ const Goals = () => {
         animate={inView ? "visible" : "hidden"}
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
       >
-        {goals.map((goal) => (
+        {goals?.map((goal) => (
           <motion.div
             key={goal.id}
             variants={{

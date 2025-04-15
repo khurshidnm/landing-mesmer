@@ -82,7 +82,7 @@ export default function JobListings({
 
         <div className="w-full md:w-1/2">
           <div className="grid gap-6 w-full">
-            {filteredVacancies.map((job: JobListing, index: number) => (
+            {filteredVacancies?.map((job: JobListing, index: number) => (
               <motion.div
                 key={job._id}
                 initial={{ opacity: 0, y: 20 }}
@@ -134,7 +134,7 @@ export default function JobListings({
                             JobListing,
                             "uz" | "ru" | "en"
                           >
-                        ].conditions.map((condition, i) => (
+                        ].conditions?.map((condition, i) => (
                           <li key={i} className="flex items-start text-sm">
                             <span className="mr-2 mt-1.5 h-1 w-1  bg-blue-600 flex-shrink-0" />
                             <span className="text-gray-600">{condition}</span>
@@ -153,7 +153,7 @@ export default function JobListings({
                             JobListing,
                             "uz" | "ru" | "en"
                           >
-                        ].requirements.map((requirement, i) => (
+                        ].requirements?.map((requirement, i) => (
                           <li key={i} className="flex items-start text-sm">
                             <span className="mr-2 mt-1.5 h-1 w-1 rounded-full bg-blue-600 flex-shrink-0" />
                             <span className="text-gray-600">{requirement}</span>
@@ -172,7 +172,7 @@ export default function JobListings({
                             JobListing,
                             "uz" | "ru" | "en"
                           >
-                        ].responsibilities.map((responsibility, i) => (
+                        ].responsibilities?.map((responsibility, i) => (
                           <li key={i} className="flex items-start text-sm">
                             <span className="mr-2 mt-1.5 h-1 w-1 bg-blue-600 flex-shrink-0" />
                             <span className="text-gray-600">

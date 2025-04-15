@@ -48,7 +48,7 @@ export default function VacanciesTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {vacancies.map((vacancy) => (
+          {vacancies?.map((vacancy) => (
             <TableRow key={vacancy._id}>
               <TableCell>{vacancy.en.title}</TableCell>
               <TableCell>{vacancy.en.company}</TableCell>

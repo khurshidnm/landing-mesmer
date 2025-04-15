@@ -67,7 +67,7 @@ export default function CertificatesPage({certificates}: {certificates: Certific
         </Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {certificates.map((certificate) => (
+        {certificates?.map((certificate) => (
           <CertificateCard key={certificate._id} certificate={certificate} onEdit={handleEdit} onDelete={handleDelete} />
         ))}
       </div>
