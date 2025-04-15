@@ -1,14 +1,18 @@
 import { getProjects } from "@/app/admin/(admin)/(root)/projects/server-action";
-import ProjectsList from "./page-view";
+import ProjectsList from "./page-wiew";
 import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const ProjectsPage = async ({ searchParams }: any) => {
+const ProjectsPage = async ({
+  searchParams,
+}: {
+  searchParams: { page?: string; limit?: string };
+}) => {
   // Get pagination parameters from URL or use defaults
-  const page = searchParams?.page ? Number.parseInt(searchParams.page) : 1;
-  const limit = searchParams?.limit ? Number.parseInt(searchParams.limit) : 10;
+  const page = searchParams.page ? Number.parseInt(searchParams.page) : 1;
+  const limit = searchParams.limit ? Number.parseInt(searchParams.limit) : 10;
 
   // Validate page number
   if (page < 1) {
