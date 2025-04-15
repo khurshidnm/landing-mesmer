@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IPagination } from "@/types";
+import { getProjects } from "@/app/admin/(admin)/(root)/projects/server-action";
 
 export interface ProjectsItem {
   _id: string;
@@ -66,6 +67,24 @@ const ProjectsList = () => {
   });
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
+
+  const fetchProjects = async () => {
+    try {
+      const projectsData = await getProjects({
+        page,
+        limit,
+        slug: null
+      });
+      const { projects, pagination } = JSON.parse(projectsData);
+      setProjects(projects);
+      setPagination(pagination);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  }
+  useEffect(() => {
+    fetchProjects();
+  }, [page, limit]);
 
   // Scroll to top when page changes
   useEffect(() => {
