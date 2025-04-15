@@ -1,27 +1,22 @@
 import { getProjects } from "@/app/admin/(admin)/(root)/projects/server-action";
-import ProjectsList from "./page-wiew";
+import ProjectsList from "./page-view";
 import { redirect } from "next/navigation";
 
-// Rename the interface to avoid conflict
-interface PaginationPageProps {
-  searchParams?: {
-    page?: string;
-    limit?: string;
-  };
-}
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-const ProjectsPage = async ({ searchParams }: PaginationPageProps) => {
-  // Get pagination parameters from URL or use defaults
-  const page = searchParams?.page ? Number.parseInt(searchParams.page) : 1;
-  const limit = searchParams?.limit ? Number.parseInt(searchParams.limit) : 10;
+const ProjectsPage = async ({ searchParams }: any) => {
+  // Get pagination params or fallback to defaults
+  const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
+  const limit = searchParams?.limit ? parseInt(searchParams.limit, 10) : 10;
 
-  // Validate page number
+  // Redirect if invalid page number
   if (page < 1) {
     redirect("?page=1");
   }
 
-  // Fetch projects with pagination
-  const data = await getProjects(undefined, page, limit); // slug = undefined
+  // Fetch project data
+  const data = await getProjects(undefined, page, limit); // assuming slug = undefined
   const { projects, pagination } = JSON.parse(data);
 
   return (
