@@ -12,28 +12,21 @@ interface PaginationProps {
     limit?: string;
   };
 }
-const NewsPage = async ({ searchParams }: PaginationProps) => {
-  // Get pagination parameters from URL or use defaults
-  const page = searchParams?.page ? Number.parseInt(searchParams.page) : 1;
-  const limit = searchParams?.limit ? Number.parseInt(searchParams.limit) : 10;
+const NewsPage = async ({ searchParams }: any) => {
+  const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
+  const limit = searchParams?.limit ? parseInt(searchParams.limit, 10) : 10;
 
-  // Validate page number
   if (page < 1) {
     redirect("?page=1");
   }
 
   try {
-    // Fetch news with pagination
     const data = await getNews(undefined, page, limit);
     const parsedData = JSON.parse(data);
 
-    console.log("Server parsed data:", parsedData);
-
-    // Check structure
     if (parsedData.news && parsedData.pagination) {
       return <News news={parsedData.news} pagination={parsedData.pagination} />;
     } else {
-      // Legacy fallback
       return (
         <News
           news={parsedData}
@@ -59,3 +52,54 @@ const NewsPage = async ({ searchParams }: PaginationProps) => {
 };
 
 export default NewsPage;
+
+
+
+
+// const NewsPage = async ({ searchParams }: PaginationProps) => {
+//   // Get pagination parameters from URL or use defaults
+//   const page = searchParams?.page ? Number.parseInt(searchParams.page) : 1;
+//   const limit = searchParams?.limit ? Number.parseInt(searchParams.limit) : 10;
+
+//   // Validate page number
+//   if (page < 1) {
+//     redirect("?page=1");
+//   }
+
+//   try {
+//     // Fetch news with pagination
+//     const data = await getNews(undefined, page, limit);
+//     const parsedData = JSON.parse(data);
+
+//     console.log("Server parsed data:", parsedData);
+
+//     // Check structure
+//     if (parsedData.news && parsedData.pagination) {
+//       return <News news={parsedData.news} pagination={parsedData.pagination} />;
+//     } else {
+//       // Legacy fallback
+//       return (
+//         <News
+//           news={parsedData}
+//           pagination={{
+//             totalPages: 1,
+//             currentPage: 1,
+//             totalItems: parsedData.length || 0,
+//             limit,
+//           }}
+//         />
+//       );
+//     }
+//   } catch (error) {
+//     console.error("Error parsing news data:", error);
+
+//     return (
+//       <News
+//         news={[]}
+//         pagination={{ totalPages: 1, currentPage: 1, totalItems: 0, limit }}
+//       />
+//     );
+//   }
+// };
+
+// export default NewsPage;
