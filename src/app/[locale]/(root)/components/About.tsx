@@ -28,7 +28,7 @@ const AboutCompany = () => {
 
   const stats = [
     {
-      number: 750,
+      number: 800,
       ru_label: "ПЕРСОНАЛ",
       ru_sublabel: "",
       en_label: "EMPLOYEES",
@@ -37,7 +37,7 @@ const AboutCompany = () => {
       uz_sublabel: "",
     },
     {
-      number: 59,
+      number: 30,
       ru_label: "ПРОЕКТЫ",
       ru_sublabel: "",
       en_label: "PROJECTS",
@@ -46,7 +46,7 @@ const AboutCompany = () => {
       uz_sublabel: "",
     },
     {
-      number: 20,
+      number: 100,
       ru_label: "ПОСТАВЩИКИ",
       ru_sublabel: "",
       en_label: "SUPPLIERS",
