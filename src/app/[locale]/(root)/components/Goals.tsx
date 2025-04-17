@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 const goals = Array.from({ length: 18 }, (_, i) => ({
   id: i + 1,
   img: `/goals/goals${i + 1}.png`,
-  animate: [6, 7, 8, 9, 13, 17].includes(i + 1),
+  animate: [6, 7, 8, 9, 11, 13, 17].includes(i + 1),
 }));
 
 const Goals = () => {
