@@ -6,6 +6,9 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 const partners = [
+  "/partners/uzsuv.svg",
+  "/partners/adb.svg",
+  "/partners/wb.svg",
   "/partners/siemens.svg",
   "/partners/abb.svg",
   "/partners/andritz.svg",
