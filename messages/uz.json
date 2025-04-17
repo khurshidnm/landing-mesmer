@@ -15,15 +15,15 @@
   "home": {
     "hero": {
       "title": "ENERGETIKA, SUV TA'MINOTI VA EKOLOGIK INFRATUZILMA",
-      "subtitle": "Uchta bozor segmentlariga ixtisoslashganmiz:"
+      "subtitle": "Asosiy yo'nalishlarimiz:"
     },
     "partners": {
       "trust_us": "Bizga ishonishadi"
     },
     "about": {
       "title": "Kompaniya haqida",
-      "subtitle": "Bizning asosiy maqsadimiz – mijozlarimiz tomonidan ishonchli EPC",
-      "description": "(Muhandislik, ta'minot va qurilish) pudratchisi sifatida e'tirof etilish va yuqori sifatli uskunalar yetkazib beruvchi sifatida xalqaro miqyosda tan olinishi. Erishgan yutuqlarimizni inobatga olgan holda, MESMER kompaniyasi o‘z faoliyat doirasini qo‘shni davlatlarda, jumladan Tojikiston va Qirg‘izistonda kengaytirishga intilmoqda.",
+      "subtitle": "Bizning maqsadimiz",
+      "description": "EPC (Lohihalashtirish, xarid qilish va qurilish) pudratchisi sifatida e'tirof etilish va yuqori sifatli uskunalar yetkazib beruvchi sifatida xalqaro miqyosda tan olinishi. Erishgan yutuqlarimizni inobatga olgan holda, MESMER kompaniyasi o‘z faoliyat doirasini xorijiy davlatlarda ham kengaytirishga intilmoqda.",
       "task": {
         "title": "Bizning vazifamiz – ko‘p tarmoqli yetakchi kompaniya bo‘lib qolish",
         "description": "Dunyo bo‘ylab mijozlar bilan uzoq muddatli hamkorlikni rivojlantirish, innovatsion yechimlar taqdim etish, xizmat ko‘rsatishning xalqaro standartlariga javob berish, yuqori sifatli mahsulotlar yetkazib berish, maksimal samaradorlik, katta texnik tajriba va investitsiyalardan eng yuqori foyda olish."
@@ -113,7 +113,7 @@
     },
     "maintenance": {
       "title": "Ekspluatatsiya va texnik xizmat ko‘rsatish",
-      "description": "Uskunalarning xavfsizligi va ishonchliligini ta’minlash ob’ekt ekspluatatsiyasida muhim ahamiyat kasb etadi. Bu maqsadga erishish uchun MESMER loyihalarning barcha bosqichlarida – texnik-iqtisodiy tadqiqotlar, loyihalash, muhandislik, xarid qilish, qurilish va tijorat ekspluatatsiyasida ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taklif etadi. MESMER mijozlarning ehtiyojlariga mos ravishda ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taqdim etadi, jumladan: ekspluatatsiyaga tayyorgarlik – rejalashtirish, tizim ishlab chiqish va o‘qitish; maslahat xizmatlari – daromadni optimallashtirish, ishonchlilik va xavfsizlikni oshirish; shuningdek, turli texnik xizmat ko‘rsatish rejalarini ishlab chiqish va amalga oshirish. Bundan tashqari, ekspluatatsiya ma’lumotlarini to‘plash va tahlil qilish orqali mumkin bo‘lgan nosozliklarni oldindan bashorat qilish hamda ob’ekt va uskunalarning ish samaradorligini oshirish uchun ilg‘or texnologiyalarni qo‘llash imkoniyati mavjud."
+      "description": "Uskunalarning xavfsizligi va ishonchliligini ta’minlash ob’ekt ekspluatatsiyasida muhim ahamiyat kasb etadi. Bu maqsadga erishish uchun MESMER loyihalarning barcha bosqichlarida – texnik-iqtisodiy tadqiqotlar, loyihalash, muhandislik, xarid qilish, qurilish va tijorat ekspluatatsiyasida ekspluatatsiya va texnik xizmat ko‘rsatish xizmatlarini taklif etadi. Jumladan: ekspluatatsiyaga tayyorgarlik – rejalashtirish, tizim ishlab chiqish va o‘qitish; maslahat xizmatlari – daromadni optimallashtirish, ishonchlilik va xavfsizlikni oshirish; shuningdek, turli texnik xizmat ko‘rsatish rejalarini ishlab chiqish va amalga oshirish. Bundan tashqari, ekspluatatsiya ma’lumotlarini to‘plash va tahlil qilish orqali mumkin bo‘lgan nosozliklarni oldindan bashorat qilish hamda ob’ekt va uskunalarning ish samaradorligini oshirish uchun ilg‘or texnologiyalarni qo‘llash imkoniyati mavjud."
     }
   },
   "career": {
@@ -166,7 +166,7 @@
   },
   "projects": {
     "title": "Bizning loyihalarimiz",
-    "main_title": "JORIY VA TUGARILGAN LOYIHALAR",
+    "main_title": "JORIY VA TUGATILGAN LOYIHALAR",
     "project": {
       "task": "Kontrakt",
       "customer": "Mijoz",
