@@ -102,7 +102,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
       <div className="relative">
         <div
           ref={scrollContainerRef}
-          className="hidden md:flex space-x-6 overflow-x-auto scroll-hide pb-4"
+          className="md:col-span-5 grid grid-cols-1 rounded-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 order-2 w-full"
         >
           {certificates?.map((cert, index) => (
             <motion.div
