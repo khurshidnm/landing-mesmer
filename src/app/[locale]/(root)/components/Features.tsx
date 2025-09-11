@@ -112,7 +112,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 min-w-[250px]"
             >
-              <div className="relative aspect-[3/4] mb-4">
+              <div className="relative aspect-[3/4] mb-2 flex justify-center items-center">
                 <Image
                   src={cert.image || "/placeholder.svg"}
                   width={300}
@@ -125,7 +125,6 @@ const Advantages: FC<Props> = ({ certificates }) => {
                   }}
                 />
               </div>
-              <br />
               <p className="text-sm text-gray-600">
                 {cert[locale as "ru" | "en" | "uz"].title}
               </p>
