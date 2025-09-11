@@ -112,19 +112,19 @@ const Advantages: FC<Props> = ({ certificates }) => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 min-w-[250px] flex flex-col items-center"
             >
-              <div className="relative aspect-[3/4] flex justify-center items-center mb-2 w-full">
-                <Image
-                  src={cert.image || "/placeholder.svg"}
-                  width={300}
-                  height={400}
-                  alt={cert.ru.title}
-                  className="object-contain cursor-pointer max-h-[400px]"
-                  onClick={() => {
-                    setPhotoIndex(index);
-                    setIsOpen(true);
-                  }}
-                />
-              </div>
+              <div className="flex justify-center items-center mb-2 w-full h-[400px]">
+                  <Image
+                    src={cert.image || "/placeholder.svg"}
+                    width={300}
+                    height={400}
+                    alt={cert[locale as "ru" | "en" | "uz"].title}
+                    className="object-contain cursor-pointer h-full w-auto"
+                    onClick={() => {
+                      setPhotoIndex(index);
+                      setIsOpen(true);
+                    }}
+                  />
+                </div>
               <p className="text-sm text-gray-600">
                 {cert[locale as "ru" | "en" | "uz"].title}
               </p>
