@@ -103,7 +103,7 @@ const Advantages: FC<Props> = ({ certificates }) => {
         <div
           ref={scrollContainerRef}
           className="hidden md:flex space-x-6 overflow-x-auto scroll-hide pb-4"
-
+        >
           {certificates?.map((cert, index) => (
             <motion.div
               key={cert._id}
