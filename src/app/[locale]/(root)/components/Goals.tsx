@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type TargetAndTransition } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "@/components/BluredImage";
 import { useTranslations } from "next-intl";
@@ -14,7 +14,7 @@ const goals = Array.from({ length: 18 }, (_, i) => ({
 const Goals = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  const pulseAnimation = {
+  const pulseAnimation: TargetAndTransition = {
     scale: [1, 1.1, 1],
     transition: {
       duration: 2,

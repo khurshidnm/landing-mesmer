@@ -25,7 +25,7 @@ const ProjectsSection = () => {
         ease: "easeOut",
       },
     },
-  };
+  } as const;
 
   const t = useTranslations("home.projects");
   const locale = useLocale();

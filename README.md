@@ -34,3 +34,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Production with PM2
+
+Build and start with PM2:
+
+```bash
+npm install
+npm run build
+npm run pm2:start
+```
+
+Useful PM2 commands:
+
+```bash
+npm run pm2:logs
+npm run pm2:restart
+npx pm2 list
+```
+
+The project includes `ecosystem.config.cjs` so PM2 starts Next.js with a stable production command.

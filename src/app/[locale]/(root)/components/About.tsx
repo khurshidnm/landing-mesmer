@@ -24,7 +24,7 @@ const AboutCompany = () => {
         ease: "easeOut",
       },
     },
-  };
+  } as const;
 
   const stats = [
     {

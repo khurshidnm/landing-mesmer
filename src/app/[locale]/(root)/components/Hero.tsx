@@ -44,7 +44,7 @@ const Hero = ({
         damping: 40,
       },
     },
-  };
+  } as const;
 
   const linkVariants = {
     closed: { x: 20, opacity: 0 },

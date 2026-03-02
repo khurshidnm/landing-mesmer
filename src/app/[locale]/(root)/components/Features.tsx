@@ -3,10 +3,9 @@
 import { motion } from "framer-motion";
 import Image from "@/components/BluredImage";
 import { type FC, useState, useRef, useEffect } from "react";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
 import type { Certificate } from "@/types/certificates";
 import { useLocale, useTranslations } from "next-intl";
+import SimpleLightbox from "@/components/simple-lightbox";
 
 const standards = [
   {
@@ -32,6 +31,9 @@ const Advantages: FC<Props> = ({ certificates }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const certificateImages = certificates.map(
+    (certificate) => certificate.image || "/placeholder.svg"
+  );
 
   const t = useTranslations("home.features");
   const locale = useLocale();
@@ -141,11 +143,8 @@ const Advantages: FC<Props> = ({ certificates }) => {
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 mx-auto"
                 onClick={() => {
-                  setPhotoIndex(index + 1);
+                  setPhotoIndex(index);
                   setIsOpen(true);
-                  setTimeout(() => {
-                    setPhotoIndex(index);
-                  }, 1000);
                 }}
               >
                 <div className="relative aspect-[3/4] mb-4 mx-auto">
@@ -166,26 +165,25 @@ const Advantages: FC<Props> = ({ certificates }) => {
         </div>
       </div>
 
-      {isOpen && (
-        <Lightbox
-          mainSrc={certificates[photoIndex].image}
-          nextSrc={certificates[(photoIndex + 1) % certificates.length].image}
-          prevSrc={
-            certificates[
-              (photoIndex + certificates.length - 1) % certificates.length
-            ].image
-          }
-          onCloseRequest={() => setIsOpen(false)}
-          onMovePrevRequest={() =>
-            setPhotoIndex(
-              (photoIndex + certificates.length - 1) % certificates.length
-            )
-          }
-          onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % certificates.length)
-          }
-        />
-      )}
+      <SimpleLightbox
+        images={certificateImages}
+        index={photoIndex}
+        open={isOpen}
+        altPrefix={t("title")}
+        onClose={() => setIsOpen(false)}
+        onPrev={() =>
+          setPhotoIndex((prev) =>
+            certificates.length > 0
+              ? (prev + certificates.length - 1) % certificates.length
+              : 0
+          )
+        }
+        onNext={() =>
+          setPhotoIndex((prev) =>
+            certificates.length > 0 ? (prev + 1) % certificates.length : 0
+          )
+        }
+      />
     </div>
   );
 };

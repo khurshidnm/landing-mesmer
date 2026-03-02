@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import Image from "@/components/BluredImage";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import SimpleLightbox from "@/components/simple-lightbox";
 
 
 export default function Gallery({photos}: {photos: string[]}) {
@@ -34,11 +33,8 @@ export default function Gallery({photos}: {photos: string[]}) {
                 false ? "md:col-span-2" : ""
               }`}
               onClick={() => {
-                setPhotoIndex(index +1);
+                setPhotoIndex(index);
                 setIsOpen(true);
-                setTimeout(() => {
-                  setPhotoIndex(index);
-                }, 1000)
               }}
             >
               <div
@@ -57,29 +53,23 @@ export default function Gallery({photos}: {photos: string[]}) {
           ))}
         </div>
 
-        {/* Lightbox */}
-        {isOpen && (
-          <Lightbox
-            mainSrc={photos[photoIndex]}
-            nextSrc={photos[(photoIndex + 1) % photos.length]}
-            prevSrc={
-              photos[(photoIndex + photos.length - 1) % photos.length]
-            }
-            onCloseRequest={() => setIsOpen(false)}
-            onMovePrevRequest={() =>
-              setPhotoIndex((photoIndex + photos.length - 1) % photos.length)
-            }
-            onMoveNextRequest={() =>
-              setPhotoIndex((photoIndex + 1) % photos.length)
-            }
-            enableZoom={true}
-            zoomInLabel="Увеличить"
-            zoomOutLabel="Уменьшить"
-            closeLabel="Закрыть"
-            prevLabel="Предыдущее фото"
-            nextLabel="Следующее фото"
-          />
-        )}
+        <SimpleLightbox
+          images={photos}
+          index={photoIndex}
+          open={isOpen}
+          altPrefix={t("gallery")}
+          onClose={() => setIsOpen(false)}
+          onPrev={() =>
+            setPhotoIndex((prev) =>
+              photos.length > 0 ? (prev + photos.length - 1) % photos.length : 0
+            )
+          }
+          onNext={() =>
+            setPhotoIndex((prev) =>
+              photos.length > 0 ? (prev + 1) % photos.length : 0
+            )
+          }
+        />
       </div>
     </section>
   );
