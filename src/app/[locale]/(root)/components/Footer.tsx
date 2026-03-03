@@ -188,7 +188,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
             <div>
               <Image
-                src="/logo.svg"
+                src="/logo_footer.svg"
                 alt="Mesmer Logo"
                 width={120}
                 height={40}
