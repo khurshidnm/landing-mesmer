@@ -1,4 +1,5 @@
 export interface NewsItem {
+  _id: string;
   uz: {
     title: string;
     description: string;
@@ -16,6 +17,8 @@ export interface NewsItem {
   };
   slug: string;
   cover: string;
+  createdAt: string;
+  updatedAt: string;
   locale?: string;
 }
 

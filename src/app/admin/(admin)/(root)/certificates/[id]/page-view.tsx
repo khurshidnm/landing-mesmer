@@ -6,8 +6,19 @@ import type { Certificate } from "@/types/certificates"
 import { toast } from "@/hooks/use-toast"
 import axios from "axios"
 
-export default function EditCertificatePage({certificate}: {certificate: Certificate}) {
+export default function EditCertificatePage({certificate}: {certificate: Certificate | null}) {
   const router = useRouter()
+
+  if (!certificate) {
+    return (
+      <div className="container mx-auto py-8">
+        <h1 className="text-3xl font-bold mb-4">Edit Certificate</h1>
+        <p className="text-sm text-muted-foreground">
+          Certificate ma&apos;lumotini yuklab bo&apos;lmadi.
+        </p>
+      </div>
+    )
+  }
 
   const handleSubmit = async (data: Partial<Certificate>) => {
     toast({

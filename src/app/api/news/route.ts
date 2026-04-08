@@ -4,6 +4,7 @@ import { connectToDatabase } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { parseDateTimeLocal } from "@/lib/datetime-local";
 
 export async function GET() {
   try {
@@ -49,7 +50,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const { title_uz, title_en, title_ru, description_uz, description_en, description_ru, content_uz, content_en, content_ru, cover, slug } = await req.json();
+    const { title_uz, title_en, title_ru, description_uz, description_en, description_ru, content_uz, content_en, content_ru, cover, slug, createdAt } = await req.json();
+    const parsedCreatedAt = parseDateTimeLocal(createdAt);
 
     const collection = await News.create({
       uz: {
@@ -69,6 +71,7 @@ export async function POST(req: Request) {
       },
       cover,
       slug,
+      ...(parsedCreatedAt ? { createdAt: parsedCreatedAt } : {}),
     });
 
     revalidatePath("/admin/news")

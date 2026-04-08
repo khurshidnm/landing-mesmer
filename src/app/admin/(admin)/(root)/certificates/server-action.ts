@@ -14,6 +14,6 @@ export const getSertificates = async (id?: string): Promise<string> => {
     return JSON.stringify(certificates);
   } catch (error) {
     console.log(error);
-    return error as string;
+    return JSON.stringify(id ? null : []);
   }
 };

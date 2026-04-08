@@ -4,6 +4,7 @@ import { connectToDatabase } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { parseDateTimeLocal } from "@/lib/datetime-local";
 
 export async function GET(_: Request, { params }: any) {
   try {
@@ -106,8 +107,10 @@ export async function PUT(req: Request, { params }: any) {
       content_ru,
       cover,
       slug,
+      createdAt,
     } = await req.json();
     const existNews = await News.findOne({slug: id});
+    const parsedCreatedAt = parseDateTimeLocal(createdAt);
 
     if (!existNews) {
       return NextResponse.json({
@@ -116,25 +119,36 @@ export async function PUT(req: Request, { params }: any) {
         data: null,
       });
     }
-    const news = await News.findOneAndUpdate({slug: id}, {
-      uz: {
-        title: title_uz || existNews.uz.title,
-        description: description_uz || existNews.uz.description,
-        content: content_uz || existNews.uz.content,
+    const news = await News.findOneAndUpdate(
+      {slug: id},
+      {
+        uz: {
+          title: title_uz || existNews.uz.title,
+          description: description_uz || existNews.uz.description,
+          content: content_uz || existNews.uz.content,
+        },
+        en: {
+          title: title_en || existNews.en.title,
+          description: description_en || existNews.en.description,
+          content: content_en || existNews.en.content,
+        },
+        ru: {
+          title: title_ru || existNews.ru.title,
+          description: description_ru || existNews.ru.description,
+          content: content_ru || existNews.ru.content,
+        },
+        cover: cover || existNews.cover,
+        slug: slug || existNews.slug,
+        createdAt: parsedCreatedAt || existNews.createdAt,
+        updatedAt: new Date(),
       },
-      en: {
-        title: title_en || existNews.en.title,
-        description: description_en || existNews.en.description,
-        content: content_en || existNews.en.content,
-      },
-      ru: {
-        title: title_ru || existNews.ru.title,
-        description: description_ru || existNews.ru.description,
-        content: content_ru || existNews.ru.content,
-      },
-      cover: cover || existNews.cover,
-      slug: slug || existNews.slug,
-    }, {new: true});
+      {
+        new: true,
+        runValidators: true,
+        timestamps: false,
+        overwriteImmutable: true,
+      }
+    );
     revalidatePath("/admin/news")
     return NextResponse.json({
       message: "News",

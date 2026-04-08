@@ -14,6 +14,8 @@ import axios from "axios"
 import { toast } from "@/hooks/use-toast"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { formatDateTimeLocal } from "@/lib/datetime-local"
+import { DateTimePicker } from "@/components/ui/date-time-picker"
 
 interface LanguageContent {
   title: string
@@ -28,6 +30,7 @@ export default function NewsPage() {
   const [coverImage, setCoverImage] = useState<File | null>(null)
   const [coverImageUrl, setCoverImageUrl] = useState("")
   const [slug, setSlug] = useState("")
+  const [createdAt, setCreatedAt] = useState(() => formatDateTimeLocal())
   const [isLoading, setIsLoading] = useState(false)
 
   const router = useRouter()
@@ -79,6 +82,7 @@ export default function NewsPage() {
         content_ru: ru.content,
         slug,
         cover: coverImageUrl.includes("/api/uploads/") ? coverImageUrl : "/api/uploads/" + coverImageUrl,
+        createdAt,
       })
 
       if (response.status === 200) {
@@ -172,6 +176,14 @@ export default function NewsPage() {
             {renderLanguageTab("en", en, setEn)}
             {renderLanguageTab("ru", ru, setRu)}
           </Tabs>
+          <div className="space-y-2">
+            <Label htmlFor="createdAt">Created At</Label>
+            <DateTimePicker
+              value={createdAt}
+              onChange={setCreatedAt}
+              disabled={isLoading}
+            />
+          </div>
           <div className="space-y-2">
             <Label htmlFor="slug">Slug</Label>
             <Input id="slug" disabled={isLoading} className={isLoading ? "animate-pulse" : ""} value={slug} readOnly />

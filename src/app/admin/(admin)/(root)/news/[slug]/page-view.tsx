@@ -21,6 +21,8 @@ import { toast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { NewsItem } from "@/types/news";
+import { formatDateTimeLocal } from "@/lib/datetime-local";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
 
 interface LanguageContent {
   title: string;
@@ -47,6 +49,7 @@ export default function NewsEditPageInner({ news }: { news: NewsItem }) {
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [coverImageUrl, setCoverImageUrl] = useState("");
   const [slug, setSlug] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
@@ -73,6 +76,7 @@ export default function NewsEditPageInner({ news }: { news: NewsItem }) {
       .then((blob) => setCoverImage(new File([blob], "cover.png", { type: "image/png" })))
       .catch(() => null);
     setSlug(news.slug);
+    setCreatedAt(formatDateTimeLocal(news.createdAt));
   }, [news]);
 
   const handleCoverImageChange = async (
@@ -124,6 +128,7 @@ export default function NewsEditPageInner({ news }: { news: NewsItem }) {
         content_ru: ru.content,
         slug,
         cover: coverImageUrl.includes("/api/uploads/") ? coverImageUrl : "/api/uploads/" + coverImageUrl,
+        createdAt,
       });
 
       if (response.status === 200) {
@@ -232,6 +237,14 @@ export default function NewsEditPageInner({ news }: { news: NewsItem }) {
             {renderLanguageTab("en", en, setEn)}
             {renderLanguageTab("ru", ru, setRu)}
           </Tabs>
+          <div className="space-y-2">
+            <Label htmlFor="createdAt">Created At</Label>
+            <DateTimePicker
+              value={createdAt}
+              onChange={setCreatedAt}
+              disabled={isLoading}
+            />
+          </div>
           <div className="space-y-2">
             <Label htmlFor="slug">Slug</Label>
             <Input
