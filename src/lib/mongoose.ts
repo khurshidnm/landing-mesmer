@@ -26,7 +26,7 @@ export const connectToDatabase = async () => {
     const admins_count = await User.countDocuments();
     console.log(admins_count);
     if (admins_count === 0) {
-      const passwordHash = await hash("admin", 10);
+      const passwordHash = await hash("j8Wqf$cHGeFHiKZiiXo2", 10);
       await User.create({
         username: "admin",
         password: passwordHash,
