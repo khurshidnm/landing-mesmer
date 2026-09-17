@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "@/components/BluredImage";
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import { useLocale, useTranslations } from "next-intl";
@@ -147,17 +147,13 @@ const ProjectsList = () => {
                 href={`/${locale}/projects/${project.slug}`}
                 className="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-xl"
               >
-                {/* Project Number & View details indicator */}
-                <div className="px-6 pt-6 flex items-center justify-between">
+                {/* Project Number */}
+                <div className="px-6 pt-6">
                   <span className="text-4xl font-bold text-gray-300 group-hover:text-blue-500 transition-colors">
                     {String(
                       pagination.total - (page - 1) * limit - index
                     ).padStart(2, "0")}
                     .
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
-                    {t("view_more")}
-                    <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
 
