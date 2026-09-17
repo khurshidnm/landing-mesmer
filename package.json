@@ -9,7 +9,8 @@
     "lint": "next lint",
     "pm2:start": "npx pm2 start ecosystem.config.cjs --env production",
     "pm2:restart": "npx pm2 restart ecosystem.config.cjs --env production",
-    "pm2:logs": "npx pm2 logs mesmer --lines 200"
+    "pm2:logs": "npx pm2 logs mesmer --lines 200",
+    "seed:projects": "node scripts/seed-projects.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
