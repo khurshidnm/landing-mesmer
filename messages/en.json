@@ -174,7 +174,10 @@
       "implementation": "Implementation period"
     },
     "single": "ABOUT THE PROJECT",
-    "gallery": "GALLERY"
+    "gallery": "GALLERY",
+    "back": "Back to projects",
+    "not_found": "Project not found",
+    "view_more": "View details"
   },
   "location": {
     "title": "Tashkent, Almazar district, Shiroq street, 100. ZIP 100069"

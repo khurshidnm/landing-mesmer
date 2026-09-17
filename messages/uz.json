@@ -174,7 +174,10 @@
       "implementation": "Amalga oshirish/oshirilgan muddati"
     },
     "single": "LOYIHA HAQIDA",
-    "gallery": "GALLERY"
+    "gallery": "GALLERY",
+    "back": "Loyihalarga qaytish",
+    "not_found": "Loyiha topilmadi",
+    "view_more": "Batafsil ma'lumot"
   },
   "location": {
     "title": "Toshkent, Olmazor tumani, Shiroq ko‘chasi, 100. Pochta indeksi 100069"

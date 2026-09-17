@@ -2,11 +2,12 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "@/components/BluredImage";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import type { IPagination } from "@/types";
 import { getProjects } from "@/app/admin/(admin)/(root)/projects/server-action";
 
@@ -139,77 +140,96 @@ const ProjectsList = () => {
             <motion.div
               key={project._id}
               variants={item}
-              className="bg-white rounded-lg overflow-hidden h-full flex flex-col"
+              className="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col cursor-pointer"
               ref={index === 0 ? firstProjectRef : null}
             >
-              {/* Project Number */}
-              <div className="px-6 pt-6">
-                <span className="text-4xl font-bold text-gray-300">
-                  {String(
-                    pagination.total - (page - 1) * limit - index
-                  ).padStart(2, "0")}
-                  .
-                </span>
-              </div>
-
-              {/* Project Content */}
-              <div className="px-6 pb-6 flex-1 flex flex-col">
-                <h2 className="text-xl font-semibold mb-4 text-gray-900">
-                  {project?.[locale]?.title}
-                </h2>
-
-                {/* Project Image */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg mb-6">
-                  <Image
-                    src={project.cover || "/placeholder.svg"}
-                    alt={project?.[locale]?.title}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                  />
+              <Link
+                href={`/${locale}/projects/${project.slug}`}
+                className="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-xl"
+              >
+                {/* Project Number & View details indicator */}
+                <div className="px-6 pt-6 flex items-center justify-between">
+                  <span className="text-4xl font-bold text-gray-300 group-hover:text-blue-500 transition-colors">
+                    {String(
+                      pagination.total - (page - 1) * limit - index
+                    ).padStart(2, "0")}
+                    .
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+                    {t("view_more")}
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
                 </div>
 
-                {/* Project Details Grid */}
-                <div className="space-y-4 flex-1 flex flex-col justify-between">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500 mb-1">
-                        {t("project.task")}:
-                      </h3>
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        {project?.[locale]?.volume_of_tasks}
-                      </p>
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-medium text-gray-500 mb-1">
-                        {t("project.customer")}:
-                      </h3>
-                      <p className="text-sm text-gray-700">
-                        {project?.[locale]?.customer}
-                      </p>
-                    </div>
+                {/* Project Content */}
+                <div className="px-6 pb-6 flex-1 flex flex-col">
+                  <h2 className="text-xl font-semibold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {project?.[locale]?.title}
+                  </h2>
+
+                  {/* Project Image */}
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg mb-5 bg-gray-100">
+                    <Image
+                      src={project.cover || "/placeholder.svg"}
+                      alt={project?.[locale]?.title || "Project"}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
 
-                  {/* Status and Implementation */}
-                  <div className="flex justify-between items-center pt-4 border-t border-gray-100 mt-auto">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-gray-500">
-                        {t("project.status")}:
-                      </span>
-                      <span className="text-xs px-2 py-1 rounded-full">
-                        {project[locale].status}
-                      </span>
+                  {/* Brief description if available */}
+                  {project?.[locale]?.description && (
+                    <div
+                      className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed"
+                      dangerouslySetInnerHTML={{
+                        __html: project[locale].description,
+                      }}
+                    />
+                  )}
+
+                  {/* Project Details Grid */}
+                  <div className="space-y-4 flex-1 flex flex-col justify-between">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">
+                          {t("project.task")}:
+                        </h3>
+                        <p className="text-sm text-gray-700 leading-relaxed line-clamp-3">
+                          {project?.[locale]?.volume_of_tasks}
+                        </p>
+                      </div>
+                      <div>
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">
+                          {t("project.customer")}:
+                        </h3>
+                        <p className="text-sm text-gray-700 line-clamp-2">
+                          {project?.[locale]?.customer}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-gray-500">
-                        {t("project.implementation")}:
-                      </span>
-                      <span className="text-xs text-gray-700">
-                        {project?.[locale]?.implementation_period}
-                      </span>
+
+                    {/* Status and Implementation */}
+                    <div className="flex justify-between items-center pt-4 border-t border-gray-100 mt-auto">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium text-gray-500">
+                          {t("project.status")}:
+                        </span>
+                        <span className="text-xs px-2.5 py-1 rounded-full font-medium bg-blue-50 text-blue-700">
+                          {project?.[locale]?.status}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-medium text-gray-500">
+                          {t("project.implementation")}:
+                        </span>
+                        <span className="text-xs text-gray-700 font-medium">
+                          {project?.[locale]?.implementation_period}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </motion.div>
