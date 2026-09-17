@@ -60,7 +60,7 @@ export default function ProjectPage({ project }: { project: ProjectsItem | null 
         height="500px"
       />
       <article className="min-h-screen bg-white">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4 lg:px-0">
           {/* Back to the list */}
           <div className="pt-8">
             <Link
@@ -82,24 +82,24 @@ export default function ProjectPage({ project }: { project: ProjectsItem | null 
               </h2>
             </div>
           </div>
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative mt-8 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
-        >
-          <Image
-            src={project.cover}
-            alt={localizedProject.title || "Проект"}
-            fill
-            className="object-cover"
-          />
-        </motion.div>
+          {/* Project Cover Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="relative mt-8 w-full h-[240px] sm:h-[350px] md:h-[450px] lg:h-[540px] overflow-hidden rounded-xl sm:rounded-2xl shadow-sm bg-gray-100"
+          >
+            <Image
+              src={project.cover}
+              alt={localizedProject.title || "Проект"}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
 
-        <div className="container mx-auto py-8 sm:py-12">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
+          <div className="py-8 sm:py-12">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
             {/* Description */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -137,6 +137,7 @@ export default function ProjectPage({ project }: { project: ProjectsItem | null 
             </motion.aside>
           </div>
         </div>
+      </div>
 
         {project.gallery?.length > 0 && <Gallery photos={project.gallery} />}
       </article>
