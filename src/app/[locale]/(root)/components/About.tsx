@@ -28,7 +28,7 @@ const AboutCompany = () => {
 
   const stats = [
     {
-      number: 1000,
+      number: 1200,
       ru_label: "ПЕРСОНАЛ",
       ru_sublabel: "",
       en_label: "EMPLOYEES",

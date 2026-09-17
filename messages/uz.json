@@ -166,10 +166,10 @@
   },
   "projects": {
     "title": "Bizning loyihalarimiz",
-    "main_title": "JORIY VA TUGATILGAN LOYIHALAR",
+    "main_title": "JORIY VA TAMOMLANGAN LOYIHALAR",
     "project": {
       "task": "Kontrakt",
-      "customer": "Mijoz",
+      "customer": "Buyurtmachi",
       "status": "Status",
       "implementation": "Amalga oshirish/oshirilgan muddati"
     },
