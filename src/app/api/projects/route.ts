@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth-options";
 import { connectToDatabase } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { cityFields, sanitizeProjectStructured } from "@/lib/project-fields";
 
 export async function GET() {
   try {
@@ -41,13 +42,14 @@ export async function POST(req: Request) {
             },
           ],
           data: null,
-          success: true,
+          success: false,
           status: 401,
         },
         { status: 401 }
       );
     }
 
+    const body = await req.json();
     const {
       title_uz,
       title_en,
@@ -70,10 +72,19 @@ export async function POST(req: Request) {
       implementation_period_uz,
       implementation_period_en,
       implementation_period_ru,
+      meta_title_uz,
+      meta_title_en,
+      meta_title_ru,
+      meta_description_uz,
+      meta_description_en,
+      meta_description_ru,
       cover,
       slug,
       gallery,
-    } = await req.json();
+      project_type,
+    } = body;
+    const structured = sanitizeProjectStructured(body);
+    const city = cityFields(body);
 
     const collection = await Projects.create({
       uz: {
@@ -84,6 +95,9 @@ export async function POST(req: Request) {
         volume_of_tasks: volume_of_tasks_uz,
         customer: customer_uz,
         implementation_period: implementation_period_uz,
+        meta_title: meta_title_uz || "",
+        meta_description: meta_description_uz || "",
+        city: city.uz,
       },
       en: {
         title: title_en,
@@ -93,6 +107,9 @@ export async function POST(req: Request) {
         volume_of_tasks: volume_of_tasks_en,
         customer: customer_en,
         implementation_period: implementation_period_en,
+        meta_title: meta_title_en || "",
+        meta_description: meta_description_en || "",
+        city: city.en,
       },
       ru: {
         title: title_ru,
@@ -102,14 +119,19 @@ export async function POST(req: Request) {
         volume_of_tasks: volume_of_tasks_ru,
         customer: customer_ru,
         implementation_period: implementation_period_ru,
+        meta_title: meta_title_ru || "",
+        meta_description: meta_description_ru || "",
+        city: city.ru,
       },
       slug,
       cover,
       gallery,
+      project_type: project_type || "",
+      ...structured,
     });
 
     return NextResponse.json({
-      message: "Hello world",
+      message: "Project created successfully",
       errors: null,
       success: true,
       data: {

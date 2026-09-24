@@ -4,6 +4,7 @@ import { connectToDatabase } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+import { VACANCY_CATEGORIES } from "@/lib/cms/definitions";
 
 export async function GET() {
   try {
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
     }
 
     const { ...body } = await req.json();
+    body.category = VACANCY_CATEGORIES.some((c) => c.value === body.category) ? body.category : "";
 
     const vacancy = await Vacancies.create(body);
 

@@ -13,11 +13,13 @@ const Hero = ({
   height,
   title,
   subtitle,
+  headingTag = "h1",
 }: {
   backgroundImage: string;
   height: string;
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
+  headingTag?: "h1" | "h2" | "p" | "div";
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -68,10 +70,17 @@ const Hero = ({
 
   return (
     <div
-      className="relative bg-cover bg-center"
-      style={{ backgroundImage: `url(${backgroundImage})`, height }}
+      className="relative overflow-hidden"
+      style={{ height }}
     >
-      <div className="absolute inset-0   mx-auto bg-black/40 z-10"></div>
+      <Image
+        src={backgroundImage}
+        alt={title || subtitle || "MESMER Water Treatment & Wastewater EPC Contractor"}
+        fill
+        priority
+        className="object-cover object-center"
+      />
+      <div className="absolute inset-0 mx-auto bg-black/40 z-10"></div>
       <Navbar />
       <div className="conatiner mx-auto">
       <motion.section
@@ -80,22 +89,46 @@ const Hero = ({
         transition={{ duration: 0.5 }}
         className="absolute bottom-[200px] md:bottom-20 left-0 right-0  text-white z-10 container mx-auto"
       >
-        <motion.p
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-xl md:text-2xl lg:text-3xl mb-4 text-center md:text-left"
-        >
-          {subtitle}
-        </motion.p>
-        <motion.h1
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight  text-center md:text-left max-w-6xl"
-        >
-          {title}
-        </motion.h1>
+        {subtitle && (
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="text-xl md:text-2xl lg:text-3xl mb-4 text-center md:text-left"
+          >
+            {subtitle}
+          </motion.p>
+        )}
+        {title && (
+          headingTag === "h2" ? (
+            <motion.h2
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight text-center md:text-left max-w-6xl"
+            >
+              {title}
+            </motion.h2>
+          ) : headingTag === "p" || headingTag === "div" ? (
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight text-center md:text-left max-w-6xl"
+            >
+              {title}
+            </motion.div>
+          ) : (
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-3xl md:text-5xl lg:text-7xl font-bold leading-tight text-center md:text-left max-w-6xl"
+            >
+              {title}
+            </motion.h1>
+          )
+        )}
       </motion.section>
       </div>
       <AnimatePresence>

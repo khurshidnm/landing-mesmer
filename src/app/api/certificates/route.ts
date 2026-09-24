@@ -12,22 +12,23 @@ export async function GET() {
     const certificates = await Certificates.find({});
 
     return NextResponse.json({
-      message: "Certificates",
+      message: "Certificates retrieved",
       errors: null,
       data: {
         certificates,
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
-      { message: "Internal server Error: ", error },
+      { message: "Internal server Error", error: (error as Error).message },
       {
         status: 500,
       }
     );
   }
 }
+
 export async function POST(req: Request) {
   try {
     await connectToDatabase();
@@ -42,7 +43,7 @@ export async function POST(req: Request) {
             },
           ],
           data: null,
-          success: true,
+          success: false,
           status: 401,
         },
         { status: 401 }
@@ -56,7 +57,7 @@ export async function POST(req: Request) {
     revalidatePath("/admin/certificates");
 
     return NextResponse.json({
-      message: "Hello world",
+      message: "Certificate created successfully",
       errors: null,
       success: true,
       data: {
@@ -64,9 +65,9 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
-      { message: "Internal server Error: ", error, success: false },
+      { message: "Internal server Error", error: (error as Error).message, success: false },
       {
         status: 500,
       }

@@ -2,13 +2,20 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import CountUp from "react-countup";
 import Image from "@/components/BluredImage";
 import { useLocale, useTranslations } from "next-intl";
+import { t as cmsText } from "@/lib/cms/definitions";
+import type { HomeContent } from "@/lib/cms/content-types";
 
-const AboutCompany = () => {
-  const t = useTranslations("home.about");
+
+const AboutCompany = ({ content }: { content?: HomeContent }) => {
+  const tr = useTranslations("home.about");
   const locale = useLocale();
+  // Website Content → Home Page Texts, falling back to the translation files
+  const t = (key: string) => {
+    const field = { title: "about_title", subtitle: "about_subtitle", description: "about_description", "task.title": "mission_title", "task.description": "mission_description" }[key];
+    return (field && cmsText(content?.[field as keyof HomeContent] as Record<string, string>, locale)) || tr(key);
+  };
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -26,36 +33,6 @@ const AboutCompany = () => {
     },
   } as const;
 
-  const stats = [
-    {
-      number: 1200,
-      ru_label: "ПЕРСОНАЛ",
-      ru_sublabel: "",
-      en_label: "EMPLOYEES",
-      en_sublabel: "",
-      uz_label: "XODIMLAR",
-      uz_sublabel: "",
-    },
-    {
-      number: 30,
-      ru_label: "ПРОЕКТЫ",
-      ru_sublabel: "",
-      en_label: "PROJECTS",
-      en_sublabel: "",
-      uz_label: "LOYIHALAR",
-      uz_sublabel: "",
-    },
-    {
-      number: 100,
-      ru_label: "ПОСТАВЩИКИ",
-      ru_sublabel: "",
-      en_label: "SUPPLIERS",
-      en_sublabel: "",
-      uz_label: "TA'MINOTCHILAR",
-      uz_sublabel: "",
-    },
-  ];
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <motion.div
@@ -66,9 +43,9 @@ const AboutCompany = () => {
       >
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10">
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10">
               {t("title")}
-            </h1>
+            </h2>
           </div>
           <div className="space-y-6 max-w-2xl">
             <motion.div variants={fadeInUp}>
@@ -83,43 +60,18 @@ const AboutCompany = () => {
         </div>
       </motion.div>
 
-      <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        {stats?.map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="text-center"
-          >
-            <div className="text-5xl md:text-6xl font-bold text-blue-600 mb-2">
-              {inView && (
-                <CountUp
-                  start={0}
-                  end={stat.number}
-                  duration={2.5}
-                  separator=","
-                />
-              )}
-            </div>
-            <div className="text-gray-800 font-medium">{stat[`${locale as "ru" | "en" | "uz"}_label`]}</div>
-            <div className="text-gray-500 text-sm">{stat[`${locale as "ru" | "en" | "uz"}_sublabel`]}</div>
-          </motion.div>
-        ))}
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
           {
-            src: "/work1.png",
+            src: content?.about_image_1 || "/work1.png",
             alt: "Construction workers",
           },
           {
-            src: "/work2.png",
+            src: content?.about_image_2 || "/work2.png",
             alt: "Team collaboration",
           },
           {
-            src: "/work3.png",
+            src: content?.about_image_3 || "/work3.png",
             alt: "Business handshake",
           },
         ]?.map((image, index) => (
@@ -150,7 +102,7 @@ const AboutCompany = () => {
       >
         <div className="flex flex-col mt-5 lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10"></h1>
+            <div className="text-4xl sm:text-5xl mb-6 sm:mb-10" />
           </div>
           <div className="space-y-6 max-w-2xl">
             <motion.div variants={fadeInUp}>

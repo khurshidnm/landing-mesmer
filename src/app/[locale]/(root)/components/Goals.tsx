@@ -3,7 +3,10 @@
 import { motion, type TargetAndTransition } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "@/components/BluredImage";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { t as cmsText } from "@/lib/cms/definitions";
+import type { HomeContent } from "@/lib/cms/content-types";
+
 
 const goals = Array.from({ length: 18 }, (_, i) => ({
   id: i + 1,
@@ -11,7 +14,7 @@ const goals = Array.from({ length: 18 }, (_, i) => ({
   animate: [6, 7, 8, 9, 11, 13, 17].includes(i + 1),
 }));
 
-const Goals = () => {
+const Goals = ({ content }: { content?: HomeContent }) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const pulseAnimation: TargetAndTransition = {
@@ -23,7 +26,10 @@ const Goals = () => {
     },
   };
 
-  const t = useTranslations("home.goals");
+  const tr = useTranslations("home.goals");
+  const locale = useLocale();
+  const t = (key: "title" | "description") =>
+    cmsText(content?.[key === "title" ? "goals_title" : "goals_description"], locale) || tr(key);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">

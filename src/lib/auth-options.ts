@@ -3,6 +3,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDatabase } from "./mongoose";
 import User from "@/database/user.model";
 import { compare } from "bcrypt";
+import { loginGuard } from "./login-guard";
+import { decryptSecret, verifyTotp } from "./totp";
 
 interface SessionUser {
   username: string;
@@ -24,25 +26,51 @@ export const authOptions: AuthOptions = {
           type: "password",
           placeholder: "Password",
         },
+        code: {
+          label: "Authenticator code",
+          type: "text",
+        },
       },
-      async authorize(credentials) {
+      // Step 2 of the admin login (step 1 is /api/admin/2fa): the password AND a
+      // Google Authenticator code are required every time.
+      async authorize(credentials, req) {
+        const guard = loginGuard(req?.headers || {}, credentials?.username);
+        if (guard.blocked()) {
+          console.warn("[Auth] Login blocked, too many failed attempts:", { ip: guard.ip, username: guard.username });
+          throw new Error("TOO_MANY_ATTEMPTS");
+        }
+
         await connectToDatabase();
         const user = await User.findOne({ username: credentials?.username });
-        console.log(user, "user");
-
-        if (user) {
-          const isPasswordValid = await compare(
-            credentials?.password || "",
-            user.password
-          );
-
-          if (isPasswordValid) {
-            console.log(user, "password is valid");
-
-            return user;
-          }
+        if (!user || !(await compare(credentials?.password || "", user.password))) {
+          guard.fail();
+          return null;
         }
-        return null;
+
+        // 2FA already set up: check against the saved secret.
+        // First login: check against the pending secret shown as a QR code, and switch 2FA on.
+        const enrolling = !user.totp_enabled;
+        const stored = enrolling ? user.totp_pending_secret : user.totp_secret;
+        let step: number | null = null;
+        try {
+          step = stored ? verifyTotp(decryptSecret(stored), String(credentials?.code || ""), user.totp_last_step || 0) : null;
+        } catch (error) {
+          console.error("[Auth] Could not read 2FA secret:", error);
+        }
+        if (step === null) {
+          guard.fail();
+          throw new Error("INVALID_2FA_CODE");
+        }
+
+        if (enrolling) {
+          user.totp_secret = stored;
+          user.totp_pending_secret = "";
+          user.totp_enabled = true;
+        }
+        user.totp_last_step = step;
+        await user.save();
+        guard.succeed();
+        return { id: String(user._id), _id: String(user._id), name: user.name, email: user.email };
       },
     }),
   ],
@@ -51,8 +79,9 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       await connectToDatabase();
 
-      // Agar token mavjud bo'lmasa yoki yaroqsiz bo'lsa, sessionni null qaytarish
-      if (!token || !token.sub) {
+      // Agar token mavjud bo'lmasa yoki yaroqsiz bo'lsa, sessionni null qaytarish.
+      // Sessions created before 2FA existed (no "twoFactor" flag) are rejected too.
+      if (!token || !token.sub || token.twoFactor !== true) {
         return null;
       }
 
@@ -60,7 +89,7 @@ export const authOptions: AuthOptions = {
         // @ts-ignore
         _id: token.sub,
       });
-      console.log(isExistingUser, "SDsd");
+      if (!isExistingUser) return null;
 
       // @ts-ignore
       session.user = {
@@ -77,12 +106,15 @@ export const authOptions: AuthOptions = {
       if (user) {
         // @ts-expect-error: error not defined
         token.sub = user._id;
+        // Only reachable through authorize(), which requires the 2FA code
+        token.twoFactor = true;
       }
       return token;
     },
   },
   debug: process.env.NODE_ENV === "development",
-  session: { strategy: "jwt" },
+  // Admins sign in again (with a new 2FA code) at least every 12 hours
+  session: { strategy: "jwt", maxAge: 12 * 60 * 60 },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },

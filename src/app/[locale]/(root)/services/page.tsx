@@ -1,210 +1,113 @@
-"use client";
+import React from "react";
+import ServicesClientView from "./client-view";
+import { getConsts } from "@/app/admin/(admin)/(root)/consts/server-action";
+import { getProjects } from "@/app/admin/(admin)/(root)/projects/server-action";
+import { parseServerActionJson } from "@/lib/parse-server-action-json";
+import type { Metadata } from "next";
+import type { ProjectsItem } from "../projects/page";
 
-import Image from "@/components/BluredImage";
-import { motion } from "framer-motion";
-import Hero from "../components/Hero";
-import Footer from "../components/Footer";
-import { useTranslations } from "next-intl";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-const About = () => {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = await props.params;
+  const constsRaw = await getConsts();
+  const constants = parseServerActionJson<{
+    services_seo?: {
+      en?: { title?: string; description?: string };
+      ru?: { title?: string; description?: string };
+      uz?: { title?: string; description?: string };
+    };
+  } | null>(constsRaw, null);
+
+  const lang = (locale as "en" | "ru" | "uz") || "en";
+  const customSeo = constants?.services_seo?.[lang];
+
+  // Default SEO copy tailored to target query pool
+  const defaultMeta = {
+    en: {
+      title: "Water Treatment Company Uzbekistan | Wastewater Treatment EPC Contractor | MESMER",
+      description: "MESMER is a premier water treatment company and wastewater treatment plant EPC contractor in Uzbekistan & Central Asia. Leading WWTP contractor, WTP construction, ADB and EBRD water projects.",
+    },
+    ru: {
+      title: "EPC-подрядчик водоочистных сооружений и ВОС/КОС в Узбекистане | MESMER",
+      description: "MESMER — генеральный EPC-подрядчик по проектированию и строительству водоочистных станций (ВОС) и очистных сооружений канализации (КОС) в Узбекистане и Центральной Азии. Проекты ЕБРР и АБР.",
+    },
+    uz: {
+      title: "O'zbekistonda suv tozalash va oqova suv tozalash inshootlari EPC pudratchisi | MESMER",
+      description: "MESMER — O'zbekiston va Markaziy Osiyoda suv tozalash (WTP) va oqova suv tozalash inshootlari (WWTP) bo'yicha yetakchi EPC bosh pudratchisi. OTB va EBRD xalqaro suv loyihalari.",
+    },
+  };
+
+  const title = customSeo?.title?.trim() || defaultMeta[lang]?.title || defaultMeta.en.title;
+  const description = customSeo?.description?.trim() || defaultMeta[lang]?.description || defaultMeta.en.description;
+
+  const canonicalUrl = `https://www.mesmer.uz/${locale}/services`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      "water treatment company Uzbekistan",
+      "wastewater treatment EPC contractor",
+      "WWTP contractor Central Asia",
+      "WTP construction Uzbekistan",
+      "water infrastructure contractor Uzbekistan",
+      "wastewater treatment plant EPC",
+      "ADB water projects Uzbekistan",
+      "EBRD water projects Uzbekistan",
+      "WWTP EPC Central Asia",
+      "water treatment plant engineering",
+      "MESMER services Uzbekistan",
+    ],
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: "https://www.mesmer.uz/en/services",
+        ru: "https://www.mesmer.uz/ru/services",
+        uz: "https://www.mesmer.uz/uz/services",
       },
     },
-  } as const;
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-  } as const;
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "website",
+      images: [
+        {
+          url: "https://www.mesmer.uz/services.png",
+          width: 1200,
+          height: 630,
+          alt: "MESMER Water Treatment & Wastewater EPC Contractor Uzbekistan",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["https://www.mesmer.uz/services.png"],
+    },
+  };
+}
 
-  const t = useTranslations("services");
+const ServicesPage = async () => {
+  const projectsData = await getProjects({
+    page: 1,
+    limit: 6,
+    slug: null,
+  });
 
-  return (
-    <div className="overflow-hidden ">
-      <Hero
-        title={t("main_title")}
-        subtitle=""
-        backgroundImage="/services.png"
-        height="500px"
-      />
-
-      <section className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row items-start gap-8">
-          <motion.div className="w-full lg:w-1/2"></motion.div>
-
-          <motion.div
-            className="w-full lg:w-1/2 space-y-6"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeIn}
-          >
-            <h2 className="text-3xl font-bold">{t("title")}</h2>
-
-            <p className="text-gray-700 leading-relaxed">{t("description")}</p>
-            <div className="h-[85.07px] relative w-full ">
-              <Image
-                src="/partners.jpg.svg"
-                alt="Company partners"
-                fill
-                className="object-contain"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <motion.div
-        className="w-full h-[300px] relative my-8"
-        initial={{ scale: 1.1 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2 }}
-      >
-        <Image
-          src="/servishero.png"
-          alt="Construction site panorama"
-          fill
-          className="object-cover"
-        />
-      </motion.div>
-
-      <section className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row items-start gap-8">
-          <motion.div className="w-full lg:w-1/2"></motion.div>
-
-          <motion.div
-            className="w-full lg:w-1/2 space-y-6"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeIn}
-          >
-            <div>
-              <h2 className="text-3xl font-bold mb-6">
-                {t("tecnologies.title")}
-              </h2>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                {[1, 2, 3, 4]?.map((item) => (
-                  <li key={item}>{t(`tecnologies.list.label_${item}`)}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-6">
-                {t("engineering.title")}
-              </h2>
-              <p className="text-gray-700 leading-relaxed">
-                {t("engineering.description")}
-              </p>
-              <p className="text-gray-700 leading-relaxed mt-4">
-                {t("engineering.list.title")}
-              </p>
-              <ul className="list-disc pl-5 space-y-2 text-gray-700 mt-2">
-                {[1, 2, 3]?.map((item) => (
-                  <li key={item}>{t(`engineering.list.label_${item}`)}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative w-[600px]  h-[436px]">
-              <Image
-                src="/servishero5.png"
-                alt="Engineering design"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-      <section className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row items-start gap-8">
-          <motion.div
-            className="w-full hidden md:flex lg:w-1/2 aspect-video relative"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeIn}
-          ></motion.div>
-
-          <motion.div
-            className="w-full lg:w-1/2 space-y-6"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeIn}
-          >
-            <div>
-              <h2 className="text-3xl font-bold mb-4 leading-snug">
-                {t("delivery.title")}
-              </h2>
-              <p className="text-gray-700 leading-relaxed">
-                {t("delivery.description")}
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-4 leading-snug">
-                {t("experience.title")}
-              </h2>
-              <p className="text-gray-700 leading-relaxed mb-4">
-                {t("experience.description")}
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <motion.div
-        className="w-full md:h-[300px] h-[100px]  relative my-8"
-        initial={{ scale: 1.1 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2 }}
-      >
-        <Image
-          src="/servishero3.jpg.png"
-          alt="Construction site panorama"
-          fill
-          className="object-cover"
-        />
-      </motion.div>
-
-      <section className="py-8 bg-gray-50">
-        <div className="container mx-auto">
-          <div className="flex flex-col lg:flex-row items-start gap-8 w-full">
-            <motion.div className="w-full hidden md:flex lg:w-1/2"></motion.div>
-
-            <motion.div
-              className="w-full lg:w-1/2 space-y-6"
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              variants={fadeIn}
-            >
-              <div>
-                <h2 className="text-3xl font-bold mb-6">
-                  {t("maintenance.title")}
-                </h2>
-                <p className="text-gray-700 leading-relaxed">
-                  {t("maintenance.description")}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-      <Footer />
-    </div>
+  const parsed = parseServerActionJson<{ projects: ProjectsItem[] } | null>(
+    projectsData,
+    null
   );
+
+  return <ServicesClientView featuredProjects={parsed?.projects || []} />;
 };
 
-export default About;
+export default ServicesPage;

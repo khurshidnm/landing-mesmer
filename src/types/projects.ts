@@ -27,6 +27,8 @@ export interface ProjectsItem {
     slug: string;
     cover: string;
     gallery: string[];
+    project_type?: string;
+    category?: string;
   }
   
   export interface ProjectsGridProps {

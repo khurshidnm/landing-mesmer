@@ -17,6 +17,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { PreviewModal } from "./projects-preview-modal"
+import { PROJECT_CATEGORIES, optionLabel } from "@/lib/cms/definitions"
+import { getStatusColor, normalizeStatusDisplay } from "@/lib/project-status"
 import type { ProjectsItem, ProjectsGridProps } from "@/types/projects"
 
 export function ProjectsGrid({ items, onEdit, onDelete }: ProjectsGridProps) {
@@ -51,6 +53,22 @@ export function ProjectsGrid({ items, onEdit, onDelete }: ProjectsGridProps) {
               </div>
               <CardContent className="p-4">
                 <h3 className="text-lg font-semibold line-clamp-2 mb-2">{item.uz.title}</h3>
+                <div className="flex flex-wrap gap-1.5 mb-2">
+                  {item.category && (
+                    <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
+                      {optionLabel(PROJECT_CATEGORIES, item.category, "en")}
+                    </span>
+                  )}
+                  {item.en?.status && (() => {
+                    const sc = getStatusColor(item.en.status);
+                    return (
+                      <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-md flex items-center gap-1 ${sc.bg} ${sc.text} border ${sc.border}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${sc.dot}`} />
+                        {normalizeStatusDisplay(item.en.status, "en")}
+                      </span>
+                    );
+                  })()}
+                </div>
                 <div
                   className="text-sm text-muted-foreground line-clamp-3"
                   dangerouslySetInnerHTML={{ __html: item.uz.description }}

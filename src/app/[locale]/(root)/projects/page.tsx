@@ -1,15 +1,9 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import Image from "@/components/BluredImage";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import Hero from "../components/Hero";
-import Footer from "../components/Footer";
-import { useLocale, useTranslations } from "next-intl";
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
-import type { IPagination } from "@/types";
-import { getProjects } from "@/app/admin/(admin)/(root)/projects/server-action";
+import type { Metadata } from "next";
+import { getSeo } from "@/lib/cms/server";
+import ProjectsDatabase from "./projects-database";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export interface ProjectsItem {
   _id: string;
@@ -21,6 +15,9 @@ export interface ProjectsItem {
     customer: string;
     status: string;
     implementation_period: string;
+    meta_title?: string;
+    meta_description?: string;
+    city?: string;
   };
   en: {
     title: string;
@@ -30,6 +27,9 @@ export interface ProjectsItem {
     customer: string;
     status: string;
     implementation_period: string;
+    meta_title?: string;
+    meta_description?: string;
+    city?: string;
   };
   ru: {
     title: string;
@@ -39,10 +39,25 @@ export interface ProjectsItem {
     customer: string;
     status: string;
     implementation_period: string;
+    meta_title?: string;
+    meta_description?: string;
+    city?: string;
   };
   slug: string;
   cover: string;
   gallery: string[];
+  project_type?: string;
+  // Structured fields (project database)
+  country?: string;
+  financier?: string;
+  contract_type?: string;
+  category?: string;
+  stage?: string;
+  capacity_value?: number | null;
+  capacity_unit?: string;
+  population_served?: number | null;
+  start_date?: string;
+  end_date?: string;
 }
 
 export interface ProjectsGridProps {
@@ -52,224 +67,86 @@ export interface ProjectsGridProps {
   onDelete: (slug: string) => void;
 }
 
-const ProjectsList = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const firstProjectRef = useRef<HTMLDivElement>(null);
-  const [projects, setProjects] = useState<ProjectsItem[]>([]);
-  const [pagination, setPagination] = useState<IPagination>({
-    page: 1,
-    limit: 10,
-    total: 0,
-    pages: 0,
-    next: 0,
-    prev: 0,
-  });
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-  const fetchProjects = async () => {
-    try {
-      const projectsData = await getProjects({
-        page,
-        limit,
-        slug: null,
-      });
-      const { projects, pagination } = JSON.parse(projectsData);
-      setProjects(projects);
-      setPagination(pagination);
-    } catch (error) {
-      console.error("Error fetching projects:", error);
-    }
-  };
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { locale } = await props.params;
+  const lang = (locale as "en" | "ru" | "uz") || "en";
 
-  useEffect(() => {
-    fetchProjects();
-  }, [page, limit]);
-
-  // Scroll to top when page changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [page]);
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
+  const metaData = {
+    en: {
+      title: "Water & Wastewater Treatment EPC Projects Uzbekistan | WWTP & WTP Contractor | MESMER",
+      description: "Explore MESMER's portfolio of WWTP and WTP construction projects across Uzbekistan and Central Asia, including major ADB and EBRD financed water infrastructure contracts.",
+    },
+    ru: {
+      title: "Проекты строительства ВОС и КОС в Узбекистане | Подрядчик водной инфраструктуры | MESMER",
+      description: "Портфолио проектов MESMER: строительство и реконструкция очистных сооружений (КОС/ВОС), насосных станций и водопроводных сетей в Узбекистане при поддержке ЕБРР и АБР.",
+    },
+    uz: {
+      title: "O'zbekistonda suv va oqova suv tozalash EPC loyihalari | WWTP va WTP inshootlari | MESMER",
+      description: "MESMER kompaniyasining suv tozalash (WTP) va oqova suv tozalash (WWTP) loyihalari portfeli. OTB, EBRD va Jahon banki xalqaro infratuzilma shartnomalari.",
     },
   };
 
-  const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  let title = metaData[lang]?.title || metaData.en.title;
+  let description = metaData[lang]?.description || metaData.en.description;
+  // Website Content → SEO overrides the built-in texts
+  ({ title, description } = await getSeo("projects", locale, { title, description }));
+
+  const canonicalUrl = `https://www.mesmer.uz/${locale}/projects`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      "water treatment company Uzbekistan",
+      "wastewater treatment EPC contractor",
+      "WWTP contractor Central Asia",
+      "WTP construction Uzbekistan",
+      "water infrastructure contractor Uzbekistan",
+      "wastewater treatment plant EPC",
+      "ADB water projects Uzbekistan",
+      "EBRD water projects Uzbekistan",
+      "WWTP EPC Central Asia",
+      "water supply project Uzbekistan",
+      "MESMER projects portfolio",
+    ],
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: "https://www.mesmer.uz/en/projects",
+        ru: "https://www.mesmer.uz/ru/projects",
+        uz: "https://www.mesmer.uz/uz/projects",
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "website",
+      images: [
+        {
+          url: "https://www.mesmer.uz/projects.png",
+          width: 1200,
+          height: 630,
+          alt: "MESMER Water Treatment EPC Projects Portfolio",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["https://www.mesmer.uz/projects.png"],
+    },
   };
+}
 
-  const locale = useLocale() as "uz" | "en" | "ru";
-  const t = useTranslations("projects");
-
-  // Handle page change
-  const handlePageChange = (page: number) => setPage(page);
-
-  return (
-    <>
-      <Hero
-        backgroundImage="/projects.png"
-        title={t("title")}
-        subtitle=""
-        height="500px"
-      />
-      <div className="mx-auto container w-full py-16">
-        {/* Header Section */}
-        <div className="mb-16">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            {t("main_title")}
-          </h1>
-        </div>
-
-        {/* Projects Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16"
-        >
-          {projects?.map((project, index) => (
-            <motion.div
-              key={project._id}
-              variants={item}
-              className="group bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col cursor-pointer"
-              ref={index === 0 ? firstProjectRef : null}
-            >
-              <Link
-                href={`/${locale}/projects/${project.slug}`}
-                className="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-xl"
-              >
-                {/* Project Number */}
-                <div className="px-6 pt-6">
-                  <span className="text-4xl font-bold text-gray-300 group-hover:text-blue-500 transition-colors">
-                    {String(
-                      pagination.total - (page - 1) * limit - index
-                    ).padStart(2, "0")}
-                    .
-                  </span>
-                </div>
-
-                {/* Project Content */}
-                <div className="px-6 pb-6 flex-1 flex flex-col">
-                  <h2 className="text-xl font-semibold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {project?.[locale]?.title}
-                  </h2>
-
-                  {/* Project Image */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg mb-5 bg-gray-100">
-                    <Image
-                      src={project.cover || "/placeholder.svg"}
-                      alt={project?.[locale]?.title || "Project"}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-
-                  {/* Brief description if available */}
-                  {project?.[locale]?.description && (
-                    <div
-                      className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed"
-                      dangerouslySetInnerHTML={{
-                        __html: project[locale].description,
-                      }}
-                    />
-                  )}
-
-                  {/* Project Details Grid */}
-                  <div className="space-y-4 flex-1 flex flex-col justify-between">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">
-                          {t("project.task")}:
-                        </h3>
-                        <p className="text-sm text-gray-700 leading-relaxed line-clamp-3">
-                          {project?.[locale]?.volume_of_tasks}
-                        </p>
-                      </div>
-                      <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">
-                          {t("project.customer")}:
-                        </h3>
-                        <p className="text-sm text-gray-700 line-clamp-2">
-                          {project?.[locale]?.customer}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Status and Implementation */}
-                    <div className="flex justify-between items-center pt-4 border-t border-gray-100 mt-auto">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-medium text-gray-500">
-                          {t("project.status")}:
-                        </span>
-                        <span className="text-xs px-2.5 py-1 rounded-full font-medium bg-blue-50 text-blue-700">
-                          {project?.[locale]?.status}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-medium text-gray-500">
-                          {t("project.implementation")}:
-                        </span>
-                        <span className="text-xs text-gray-700 font-medium">
-                          {project?.[locale]?.implementation_period}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Pagination */}
-        {pagination.pages > 1 && (
-          <div className="flex justify-center items-center gap-4">
-            <button
-              onClick={() => handlePageChange(pagination.prev)}
-              disabled={pagination.page === 1}
-              className="p-3 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-gray-200"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            <div className="flex items-center gap-2">
-              {Array.from({ length: pagination.pages }, (_, i) => (
-                <button
-                  key={i + 1}
-                  onClick={() => handlePageChange(i + 1)}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors font-medium ${
-                    page === i + 1
-                      ? "bg-blue-600 text-white shadow-md"
-                      : "hover:bg-gray-100 text-gray-700 border border-gray-200"
-                  }`}
-                >
-                  {i + 1}
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={() => handlePageChange(pagination.next)}
-              disabled={pagination.page === pagination.pages}
-              className="p-3 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-gray-200"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        )}
-      </div>
-      <Footer />
-    </>
-  );
-};
-
-export default ProjectsList;
+export default async function ProjectsPage(props: PageProps & {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { locale } = await props.params;
+  return <ProjectsDatabase locale={locale} searchParams={await props.searchParams} />;
+}

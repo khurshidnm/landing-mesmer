@@ -7,7 +7,13 @@ import { useTranslations } from "next-intl";
 import SimpleLightbox from "@/components/simple-lightbox";
 
 
-export default function Gallery({photos}: {photos: string[]}) {
+export default function Gallery({
+  photos,
+  title,
+}: {
+  photos: string[];
+  title?: string;
+}) {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,7 +50,7 @@ export default function Gallery({photos}: {photos: string[]}) {
               >
                 <Image
                   src={photo || "/placeholder.svg"}
-                  alt={photo || ""}
+                  alt={`${title || "Water infrastructure"} - construction facility photo ${index + 1}`}
                   fill
                   className="object-cover hover:opacity-95 transition-opacity"
                 />

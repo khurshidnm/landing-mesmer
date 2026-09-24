@@ -15,6 +15,17 @@ import { toast } from "@/hooks/use-toast"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { ImageGallery } from "@/components/imageGallery"
+import {
+  PROJECT_STAGES,
+  getSelectedStageValue,
+  getStageTranslations,
+} from "@/lib/project-status"
+import {
+  EMPTY_PROJECT_DATABASE,
+  ProjectDatabaseFields,
+  projectDatabaseValues,
+  type ProjectDatabaseValues,
+} from "@/components/project-database-fields"
 
 interface LanguageContent {
   title: string
@@ -24,6 +35,8 @@ interface LanguageContent {
   customer: string
   status: string
   implementation_period: string
+  meta_title?: string
+  meta_description?: string
 }
 
 export default function ProjectsPage() {
@@ -33,8 +46,10 @@ export default function ProjectsPage() {
     description: "",
     volume_of_tasks: "",
     customer: "",
-    status: "",
+    status: "Jarayonda",
     implementation_period: "",
+    meta_title: "",
+    meta_description: "",
   })
   const [en, setEn] = useState<LanguageContent>({
     title: "",
@@ -42,8 +57,10 @@ export default function ProjectsPage() {
     description: "",
     volume_of_tasks: "",
     customer: "",
-    status: "",
+    status: "Ongoing",
     implementation_period: "",
+    meta_title: "",
+    meta_description: "",
   })
   const [ru, setRu] = useState<LanguageContent>({
     title: "",
@@ -51,14 +68,17 @@ export default function ProjectsPage() {
     description: "",
     volume_of_tasks: "",
     customer: "",
-    status: "",
+    status: "В процессе",
     implementation_period: "",
+    meta_title: "",
+    meta_description: "",
   })
   const [coverImage, setCoverImage] = useState<File | null>(null)
   const [coverImageUrl, setCoverImageUrl] = useState("")
   const [slug, setSlug] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [galleryImages, setGalleryImages] = useState<string[]>([])
+  const [projectDb, setProjectDb] = useState<ProjectDatabaseValues>(EMPTY_PROJECT_DATABASE)
 
   const router = useRouter()
 
@@ -94,6 +114,22 @@ export default function ProjectsPage() {
   }
 
   const handlePublish = async () => {
+    if (!projectDb.category) {
+      toast({
+        title: "Validation Error",
+        description: "Please select a project Category before publishing.",
+        variant: "destructive",
+      })
+      return
+    }
+    if (!en.status) {
+      toast({
+        title: "Validation Error",
+        description: "Please select a Project Stage / Status before publishing.",
+        variant: "destructive",
+      })
+      return
+    }
     setIsLoading(true)
 
     try {
@@ -119,9 +155,16 @@ export default function ProjectsPage() {
         main_title_uz: uz.main_title,
         main_title_en: en.main_title,
         main_title_ru: ru.main_title,
+        meta_title_uz: uz.meta_title,
+        meta_title_en: en.meta_title,
+        meta_title_ru: ru.meta_title,
+        meta_description_uz: uz.meta_description,
+        meta_description_en: en.meta_description,
+        meta_description_ru: ru.meta_description,
         slug,
         cover: coverImageUrl.includes("/api/uploads/") ? coverImageUrl : "/api/uploads/" + coverImageUrl,
         gallery: galleryImages,
+        ...projectDb,
       })
 
       if (response.status === 200) {
@@ -188,15 +231,11 @@ export default function ProjectsPage() {
     }
   }
 
-  const handleStatusChange = (lang: "uz" | "en" | "ru", value: string) => {
-    const newStatus = value
-    if (lang === "uz") {
-      setUz((prev) => ({ ...prev, status: newStatus }))
-    } else if (lang === "en") {
-      setEn((prev) => ({ ...prev, status: newStatus }))
-    } else {
-      setRu((prev) => ({ ...prev, status: newStatus }))
-    }
+  const handleStageSelect = (selectedValue: string) => {
+    const translations = getStageTranslations(selectedValue)
+    setUz((prev) => ({ ...prev, status: translations.uz }))
+    setEn((prev) => ({ ...prev, status: translations.en }))
+    setRu((prev) => ({ ...prev, status: translations.ru }))
   }
 
   const handleImplementationPeriodChange = (lang: "uz" | "en" | "ru", value: string) => {
@@ -207,6 +246,26 @@ export default function ProjectsPage() {
       setEn((prev) => ({ ...prev, implementation_period: newImplementationPeriod }))
     } else {
       setRu((prev) => ({ ...prev, implementation_period: newImplementationPeriod }))
+    }
+  }
+
+  const handleMetaTitleChange = (lang: "uz" | "en" | "ru", value: string) => {
+    if (lang === "uz") {
+      setUz((prev) => ({ ...prev, meta_title: value }))
+    } else if (lang === "en") {
+      setEn((prev) => ({ ...prev, meta_title: value }))
+    } else {
+      setRu((prev) => ({ ...prev, meta_title: value }))
+    }
+  }
+
+  const handleMetaDescriptionChange = (lang: "uz" | "en" | "ru", value: string) => {
+    if (lang === "uz") {
+      setUz((prev) => ({ ...prev, meta_description: value }))
+    } else if (lang === "en") {
+      setEn((prev) => ({ ...prev, meta_description: value }))
+    } else {
+      setRu((prev) => ({ ...prev, meta_description: value }))
     }
   }
 
@@ -240,9 +299,9 @@ export default function ProjectsPage() {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`title-${lang}`}>Volume of tasks ({lang.toUpperCase()})</Label>
+          <Label htmlFor={`volume_of_tasks-${lang}`}>Volume of tasks ({lang.toUpperCase()})</Label>
           <Input
-            id={`title-${lang}`}
+            id={`volume_of_tasks-${lang}`}
             placeholder={`Enter project volume of tasks in ${lang.toUpperCase()}`}
             disabled={isLoading}
             className={isLoading ? "animate-pulse" : ""}
@@ -251,10 +310,10 @@ export default function ProjectsPage() {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`title-${lang}`}>Customer ({lang.toUpperCase()})</Label>
+          <Label htmlFor={`customer-${lang}`}>Customer ({lang.toUpperCase()})</Label>
           <Input
-            id={`title-${lang}`}
-            placeholder={`Enter project volume of tasks in ${lang.toUpperCase()}`}
+            id={`customer-${lang}`}
+            placeholder={`Enter customer in ${lang.toUpperCase()}`}
             disabled={isLoading}
             className={isLoading ? "animate-pulse" : ""}
             value={content.customer}
@@ -262,25 +321,85 @@ export default function ProjectsPage() {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`title-${lang}`}>Status ({lang.toUpperCase()})</Label>
-          <Input
-            id={`title-${lang}`}
-            placeholder={`Enter project volume of tasks in ${lang.toUpperCase()}`}
+          <Label htmlFor={`status-${lang}`}>
+            {lang === "en"
+              ? "Project Stage / Status"
+              : lang === "uz"
+              ? "Loyiha bosqichi (Status)"
+              : "Этап проекта (Статус)"}
+          </Label>
+          <select
+            id={`status-${lang}`}
             disabled={isLoading}
-            className={isLoading ? "animate-pulse" : ""}
-            value={content.status}
-            onChange={(e) => handleStatusChange(lang, e.target.value)}
-          />
+            className="w-full h-10 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            value={getSelectedStageValue(content.status)}
+            onChange={(e) => handleStageSelect(e.target.value)}
+          >
+            <option value="" disabled>
+              {lang === "en"
+                ? "-- Select Project Stage --"
+                : lang === "uz"
+                ? "-- Loyiha bosqichini tanlang --"
+                : "-- Выберите этап проекта --"}
+            </option>
+            {PROJECT_STAGES.map((stage) => (
+              <option key={stage.value} value={stage.value}>
+                {lang === "en"
+                  ? stage.labelEn
+                  : lang === "uz"
+                  ? stage.labelUz
+                  : stage.labelRu}
+              </option>
+            ))}
+            {content.status &&
+              !PROJECT_STAGES.some(
+                (s) => s.value === getSelectedStageValue(content.status)
+              ) && (
+                <option value={content.status}>{content.status} (Custom)</option>
+              )}
+          </select>
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`title-${lang}`}>Implementation period ({lang.toUpperCase()})</Label>
+          <Label htmlFor={`implementation_period-${lang}`}>Implementation period ({lang.toUpperCase()})</Label>
           <Input
-            id={`title-${lang}`}
-            placeholder={`Enter project volume of tasks in ${lang.toUpperCase()}`}
+            id={`implementation_period-${lang}`}
+            placeholder={`Enter implementation period in ${lang.toUpperCase()}`}
             disabled={isLoading}
             className={isLoading ? "animate-pulse" : ""}
             value={content.implementation_period}
             onChange={(e) => handleImplementationPeriodChange(lang, e.target.value)}
+          />
+        </div>
+        <div className="p-4 border rounded-lg bg-blue-50/40 space-y-3">
+          <div className="flex items-center justify-between">
+            <Label htmlFor={`meta_title-${lang}`} className="font-semibold text-blue-950">
+              SEO Meta Title ({lang.toUpperCase()})
+            </Label>
+            <span className="text-xs text-muted-foreground">
+              {(content.meta_title || "").length}/60 chars (e.g. WWTP EPC Central Asia | ...)
+            </span>
+          </div>
+          <Input
+            id={`meta_title-${lang}`}
+            placeholder={`e.g. WWTP EPC Central Asia | ${content.title || "Project Name"} | MESMER`}
+            disabled={isLoading}
+            value={content.meta_title || ""}
+            onChange={(e) => handleMetaTitleChange(lang, e.target.value)}
+          />
+          <div className="flex items-center justify-between pt-1">
+            <Label htmlFor={`meta_description-${lang}`} className="font-semibold text-blue-950">
+              SEO Meta Description ({lang.toUpperCase()})
+            </Label>
+            <span className="text-xs text-muted-foreground">
+              {(content.meta_description || "").length}/160 chars
+            </span>
+          </div>
+          <Input
+            id={`meta_description-${lang}`}
+            placeholder="Key project highlights, EPC contractor role, capacity and region"
+            disabled={isLoading}
+            value={content.meta_description || ""}
+            onChange={(e) => handleMetaDescriptionChange(lang, e.target.value)}
           />
         </div>
         <div className="space-y-2">
@@ -318,6 +437,7 @@ export default function ProjectsPage() {
             <Label htmlFor="slug">Slug</Label>
             <Input id="slug" disabled={isLoading} className={isLoading ? "animate-pulse" : ""} value={slug} readOnly />
           </div>
+          <ProjectDatabaseFields values={projectDb} onChange={setProjectDb} disabled={isLoading} />
           <div className="space-y-2">
             <Label htmlFor="cover">Cover Image</Label>
             <Input

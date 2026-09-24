@@ -23,4 +23,5 @@ export interface Vacancy {
   };
   salary: string;
   slug: string;
+  category?: string;
 }

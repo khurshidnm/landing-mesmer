@@ -63,7 +63,8 @@ export async function PUT(
       message: "User updated",
       errors: null,
       data: {
-        user,
+        // Never send the password hash or 2FA secrets to the browser
+        user: { _id: user._id, name: user.name, email: user.email, username: user.username },
       },
       success: true,
     });

@@ -7,9 +7,12 @@ import { ArrowRight, OctagonAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import { t as cmsText } from "@/lib/cms/definitions";
+import type { HomeContent } from "@/lib/cms/content-types";
+
 import { use } from "react";
 
-const ProjectsSection = () => {
+const ProjectsSection = ({ content }: { content?: HomeContent }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -27,9 +30,12 @@ const ProjectsSection = () => {
     },
   } as const;
 
-  const t = useTranslations("home.projects");
+  const tr = useTranslations("home.projects");
   const locale = useLocale();
-  console.log(locale);
+  const t = (key: string) => {
+    const field = { title: "projects_title", sub_title: "projects_subtitle", description: "projects_description", button: "projects_button" }[key];
+    return (field && cmsText(content?.[field as keyof HomeContent] as Record<string, string>, locale)) || tr(key);
+  };
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -41,9 +47,9 @@ const ProjectsSection = () => {
       >
         <div className="flex flex-col mt-5 lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">
               {t("title")}
-            </h1>
+            </h2>
           </div>
           <div className="space-y-6 max-w-2xl">
             <motion.div variants={fadeInUp}>
@@ -57,7 +63,7 @@ const ProjectsSection = () => {
 
                 <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                   <Image
-                    src="/projects.png"
+                    src={content?.projects_image || "/projects.png"}
                     alt="Team collaboration"
                     fill
                     className="object-cover"

@@ -5,6 +5,9 @@ import Image from "@/components/BluredImage";
 import { type FC, useState, useRef, useEffect } from "react";
 import type { Certificate } from "@/types/certificates";
 import { useLocale, useTranslations } from "next-intl";
+import { t as cmsText } from "@/lib/cms/definitions";
+import type { HomeContent } from "@/lib/cms/content-types";
+
 import SimpleLightbox from "@/components/simple-lightbox";
 
 const standards = [
@@ -25,9 +28,10 @@ const standards = [
 
 interface Props {
   certificates: Certificate[];
+  content?: HomeContent;
 }
 
-const Advantages: FC<Props> = ({ certificates }) => {
+const Advantages: FC<Props> = ({ certificates, content }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -35,8 +39,12 @@ const Advantages: FC<Props> = ({ certificates }) => {
     (certificate) => certificate.image || "/placeholder.svg"
   );
 
-  const t = useTranslations("home.features");
+  const tr = useTranslations("home.features");
   const locale = useLocale();
+  const t = (key: string) => {
+    const field = { title: "advantages_title", sub_title: "advantages_subtitle", description: "advantages_description" }[key];
+    return (field && cmsText(content?.[field as keyof HomeContent] as Record<string, string>, locale)) || tr(key);
+  };
 
   const isDragging = useRef(false);
   const startX = useRef(0);
@@ -87,9 +95,9 @@ const Advantages: FC<Props> = ({ certificates }) => {
       >
         <div className="flex flex-col mt-5 lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
           <div>
-            <h1 className="text-xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10">
+            <h2 className="text-xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10">
               {t("title")}
-            </h1>
+            </h2>
           </div>
           <div className="space-y-6 max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">

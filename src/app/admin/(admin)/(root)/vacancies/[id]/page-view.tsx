@@ -3,6 +3,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { VACANCY_CATEGORIES } from "@/lib/cms/definitions";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
@@ -56,6 +57,7 @@ export default function VacanciesEditInnerPage({
     responsibilities: [""],
   });
   const [salary, setSalary] = useState("");
+  const [category, setCategory] = useState("");
   const [slug, setSlug] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -64,6 +66,7 @@ export default function VacanciesEditInnerPage({
     setUz(vacancy.uz);
     setRu(vacancy.ru);
     setSalary(vacancy.salary);
+    setCategory(vacancy.category || "");
     setSlug(vacancy.slug);
   }, []);
 
@@ -114,6 +117,7 @@ export default function VacanciesEditInnerPage({
         ru,
         salary,
         slug,
+        category,
       });
       if (res) {
         toast({
@@ -252,11 +256,28 @@ export default function VacanciesEditInnerPage({
             <TabsContent value="ru">{renderLanguageFields("ru")}</TabsContent>
           </Tabs>
           <div className="space-y-2">
+            <Label htmlFor="category">Category</Label>
+            <select
+              id="category"
+              className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">— Not specified —</option>
+              {VACANCY_CATEGORIES.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.en}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-muted-foreground">Used by the Careers menu (Engineering, Project Management, O&M).</p>
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="salary">Salary</Label>
             <Input
               id="salary"
               value={salary}
-              type="number"
+              type="text"
               onChange={(e) => setSalary(e.target.value)}
               placeholder="Enter salary information"
             />

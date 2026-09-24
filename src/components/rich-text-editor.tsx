@@ -17,10 +17,32 @@ import CodeBlockLowlight from "@tiptap/extension-code-block";
 import BulletList from "@tiptap/extension-bullet-list";
 import OrderedList from "@tiptap/extension-ordered-list";
 import ListItem from "@tiptap/extension-list-item";
+import TextAlign from "@tiptap/extension-text-align";
+import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import axios from "axios";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
+
+// Image with an adjustable width (stored as a percentage of the text column),
+// so it can be made smaller and aligned left, center or right.
+const SizedImage = Image.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      width: {
+        default: null,
+        parseHTML: (el) => {
+          const width = el.style.width || el.getAttribute("width");
+          return width && /^\d+$/.test(width) ? `${width}px` : width || null;
+        },
+        renderHTML: (attrs) => (attrs.width ? { style: `width: ${attrs.width}` } : {}),
+      },
+    };
+  },
+});
+
+const IMAGE_SIZES = ["25%", "50%", "75%", "100%"];
 
 export function RichTextEditor({
   className,
@@ -42,7 +64,7 @@ export function RichTextEditor({
         heading: { levels: [1, 2, 3, 4, 5, 6] },
       }),
       Link.configure({ openOnClick: false }),
-      Image.configure({ inline: true, allowBase64: true }),
+      SizedImage.configure({ inline: true, allowBase64: true }),
       Table.configure({ resizable: true }),
       TableRow,
       TableHeader,
@@ -51,6 +73,12 @@ export function RichTextEditor({
       Color,
       Highlight,
       Underline,
+      // Aligns paragraphs and headings; an image sits inside a paragraph,
+      // so aligning that paragraph moves the image too.
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+        alignments: ["left", "center", "right", "justify"],
+      }),
       BulletList,
       OrderedList,
       ListItem,
@@ -205,6 +233,60 @@ export function RichTextEditor({
         >
           {loading ? "Yuklanmoqda..." : "Rasm"}
         </button>
+        <span className="rich-text-editor mx-1 w-px self-stretch bg-gray-200" />
+        {(
+          [
+            { value: "left", label: "Chapga", Icon: AlignLeft },
+            { value: "center", label: "Markazga", Icon: AlignCenter },
+            { value: "right", label: "O‘ngga", Icon: AlignRight },
+            { value: "justify", label: "Kenglik bo‘yicha", Icon: AlignJustify },
+          ] as const
+        ).map(({ value, label, Icon }) => (
+          <button
+            key={value}
+            type="button"
+            title={label}
+            aria-label={label}
+            onClick={() => editor?.chain().focus().setTextAlign(value).run()}
+            className={`rich-text-editor px-2 py-1 ${
+              editor?.isActive({ textAlign: value })
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 hover:bg-gray-300"
+            }`}
+          >
+            <Icon className="h-4 w-4" />
+          </button>
+        ))}
+        {editor?.isActive("image") && (
+          <>
+            <span className="rich-text-editor mx-1 w-px self-stretch bg-gray-200" />
+            <span className="rich-text-editor self-center text-xs text-gray-500">
+              Rasm o‘lchami:
+            </span>
+            {IMAGE_SIZES.map((size) => (
+              <button
+                key={size}
+                type="button"
+                title={`Rasm kengligi ${size}`}
+                onClick={() =>
+                  editor
+                    .chain()
+                    .focus()
+                    .updateAttributes("image", { width: size === "100%" ? null : size })
+                    .run()
+                }
+                className={`rich-text-editor px-2 py-1 text-sm ${
+                  (editor.getAttributes("image").width || "100%") === size
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 hover:bg-gray-300"
+                }`}
+              >
+                {size}
+              </button>
+            ))}
+          </>
+        )}
+        <span className="rich-text-editor mx-1 w-px self-stretch bg-gray-200" />
         <button
           onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
           className="rich-text-editor px-2 py-1"

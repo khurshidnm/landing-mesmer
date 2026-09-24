@@ -4,41 +4,45 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import { usePathname, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { ChevronDown, Globe, FileText } from "lucide-react";
 
-interface FormData {
-  name: string;
-  phone: string;
-  email: string;
-  message: string;
-}
+import { trackContactClick, trackDownload } from "@/lib/analytics";
+import { PROJECT_CATEGORIES, t as cmsText } from "@/lib/cms/definitions";
+import { useSiteData } from "@/components/site/site-data";
+
+const EXTRA_LINKS = {
+  expertise: { en: "Expertise", ru: "Экспертиза", uz: "Ekspertiza" },
+  group: { en: "MESMER Group", ru: "Группа MESMER", uz: "MESMER Group" },
+} as const;
+
+type Locale = "uz" | "ru" | "en";
+
+const LOCALES: Locale[] = ["uz", "ru", "en"];
 
 const Footer = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    phone: "",
-    email: "",
-    message: "",
-  });
-
   const [constants, setConstants] = useState({
-    number: "+ 998 (55) 518 88 70",
     email: "info@mesmer.uz",
-    location: "Ташкент, Алмазарский район, улица Широк, 100. Индекс 100069",
+    location: "Tashkent, Almazar district, Shiroq street, 100. ZIP 100069",
+    address: {} as Partial<Record<Locale, string>> | undefined,
+    profile_pdf: "" as string | undefined,
+    footer_bg: "" as string | undefined,
   });
 
-  const contactsLang = useTranslations("contact");
+  const t = useTranslations("footer");
+  const { texts } = useSiteData();
   const navbarLang = useTranslations("navbar");
-  const location = useTranslations("location");
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchConstants = async () => {
       try {
         const res = await axios.get("/api/consts");
-        if (res.data) {
-          setConstants(res.data.data.constant);
+        if (res.data?.data?.constant) {
+          setConstants((prev) => ({ ...prev, ...res.data.data.constant }));
         }
       } catch (error) {
         console.error(error);
@@ -47,207 +51,146 @@ const Footer = () => {
     fetchConstants();
   }, []);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const changeLanguage = (lang: string) => {
+    const parts = pathname.split("/");
+    parts[1] = lang;
+    router.push(parts.join("/") || `/${lang}`);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const companyLinks = [
+    { href: `/${locale}`, label: t("home") },
+    { href: `/${locale}/about`, label: navbarLang("about") },
+    { href: `/${locale}/expertise`, label: EXTRA_LINKS.expertise[locale] },
+    { href: `/${locale}/group`, label: EXTRA_LINKS.group[locale] },
+    { href: `/${locale}/career`, label: navbarLang("career") },
+    { href: `/${locale}/news`, label: navbarLang("news") },
+    { href: `/${locale}/contact`, label: navbarLang("contacts") },
+  ];
 
-    try {
-      const BOT_TOKEN = "7049223832:AAH0qBWpoDVAWiCbMxH92HTNcC3JQ2zbHS4";
-      const CHAT_ID = -1002471201680;
-
-      const message = `📨 Новая заявка!\n\n👤 Имя: ${formData.name}\n📞 Телефон: ${formData.phone}\n📧 Email: ${formData.email}\n💬 Сообщение: ${formData.message}`;
-
-      await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        chat_id: CHAT_ID,
-        text: message,
-        parse_mode: "HTML",
-      });
-
-      setFormData({ name: "", phone: "", email: "", message: "" });
-    } catch (error) {
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const headingClass =
+    "text-sm font-light uppercase leading-[22px] text-white/70";
+  const linkClass =
+    "text-base font-medium leading-6 tracking-[-0.01em] text-white transition-opacity hover:opacity-70";
 
   return (
-    <footer className="bg-black text-white">
-      <div className="container mx-auto py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
-          {/* Contact Information */}
-          <div>
-            <h2 className="text-2xl font-bold mb-8">{contactsLang("title")}</h2>
-            <div className="space-y-6">
-              <div>
-                <a
-                  href="tel:+998555188870"
-                  className="text-lg hover:text-blue-400 transition-colors"
-                >
-                  {constants.number}
-                </a>
-              </div>
-              <div>
-                <a
-                  href="mailto:info@mesmer.uz"
-                  className="text-lg hover:text-blue-400 transition-colors"
-                >
-                  {constants.email}
-                </a>
-              </div>
+    <footer className="relative overflow-hidden bg-black text-white">
+      {/* Background photo fading to black */}
+      <div className="absolute inset-0" aria-hidden="true">
+        {constants.footer_bg ? (
+          <Image
+            src={constants.footer_bg}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        ) : (
+          // Default photo is zoomed toward the plant to hide the empty sky
+          <Image
+            src="/banner.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="origin-[50%_90%] scale-[1.6] object-cover object-[50%_80%] md:scale-[1.4]"
+          />
+        )}
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.5)_0%,rgba(0,0,0,0.9)_85%)]" />
+      </div>
 
-              <div className="text-gray-400">{constants.location}</div>
-
-              <div className="flex gap-3">
-                <img
-                  src={"/Negative.svg"}
-                  alt=""
-                  className="text-white"
-                  width={22}
-                  height={22}
+      <div className="relative flex flex-col gap-12 px-6 pt-16 md:pt-20">
+        <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
+          {/* Logo, language & tagline */}
+          <div className="flex flex-col gap-5 lg:w-[323px] lg:shrink-0">
+            <div className="flex items-center gap-4">
+              <Link href={`/${locale}`} aria-label="MESMER">
+                <Image
+                  src="/logo_footer.svg"
+                  alt="Mesmer Logo"
+                  width={214}
+                  height={32}
+                  className="h-8 w-auto"
                 />
-                <a href="https://www.linkedin.com/company/mesmer-llc/">
-                  LinkedIn
-                </a>
-              </div>
-              <div>
-                <p>{location("title")}</p>
-              </div>
+              </Link>
+              <label className="relative flex items-center gap-2 text-sm text-white">
+                <Globe className="h-[18px] w-[18px]" strokeWidth={1.5} />
+                <span>{locale.toUpperCase()}</span>
+                <ChevronDown className="h-3.5 w-3.5" strokeWidth={2} />
+                <span className="sr-only">{t("language")}</span>
+                <select
+                  value={locale}
+                  onChange={(e) => changeLanguage(e.target.value)}
+                  className="absolute inset-0 cursor-pointer opacity-0"
+                >
+                  {LOCALES.map((l) => (
+                    <option key={l} value={l} className="text-black">
+                      {l.toUpperCase()}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
+            <p className="text-lg leading-[1.2] text-white/70">{cmsText(texts?.footer_tagline, locale) || t("tagline")}</p>
           </div>
 
-          {/* Contact Form */}
-          <div>
-            <h2 className="text-2xl font-bold mb-8">
-              {navbarLang("contact_title")}
-            </h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder={contactsLang("form.name")}
-                  required
-                  className="w-full px-4 py-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
-                />
-              </div>
-              <div>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder={contactsLang("form.phone")}
-                  required
-                  className="w-full px-4 py-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder={contactsLang("form.email")}
-                  required
-                  className="w-full px-4 py-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
-                />
-              </div>
-              <div>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder={contactsLang("form.message")}
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors resize-none"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="px-8 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
-              >
-                {isSubmitting ? navbarLang("sending") : navbarLang("send")}
-              </button>
-            </form>
+          {/* Columns */}
+          <div className="grid flex-1 grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-3">
+            <div className="flex flex-col gap-2.5">
+              <p className={headingClass}>{t("address")}</p>
+              <p className="text-base font-medium leading-6 tracking-[-0.01em] text-white/70">
+                {constants.address?.[locale] || constants.location}
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2.5">
+              <p className={headingClass}>{t("company")}</p>
+              <nav className="flex flex-col gap-2">
+                {companyLinks.map((link) => (
+                  <Link key={link.href} href={link.href} className={linkClass}>
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            <div className="flex flex-col gap-2.5">
+              <p className={headingClass}>{t("projects")}</p>
+              <nav className="flex flex-col gap-2">
+                {PROJECT_CATEGORIES.map((category) => (
+                  <Link
+                    key={category.value}
+                    href={`/${locale}/projects?category=${category.value}`}
+                    className={linkClass}
+                  >
+                    {category[locale]}
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="mt-16 pt-8 border-t border-gray-800">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
-            <div>
-              <Image
-                src="/logo_footer.svg"
-                alt="Mesmer Logo"
-                width={120}
-                height={40}
-                className="h-10 w-auto"
-              />
-            </div>
-            <nav className="flex flex-wrap gap-x-6 gap-y-3 justify-center text-sm text-gray-400">
-              <Link
-                href={`/${locale}/about`}
-                className="hover:text-white transition-colors"
-              >
-                {navbarLang("about")}
-              </Link>
-              <Link
-                href={`/${locale}/services`}
-                className="hover:text-white transition-colors"
-              >
-                {navbarLang("services")}
-              </Link>
-              <Link
-                href={`/${locale}/projects`}
-                className="hover:text-white transition-colors"
-              >
-                {navbarLang("projects")}
-              </Link>
-              <Link
-                href={`/${locale}/career`}
-                className="hover:text-white transition-colors"
-              >
-                {navbarLang("career")}
-              </Link>
-              <Link
-                href={`/${locale}/news`}
-                className="hover:text-white transition-colors"
-              >
-                {navbarLang("news")}
-              </Link>
-              <Link
-                href={`/${locale}/contact`}
-                className="hover:text-white transition-colors"
-              >
-                {navbarLang("contacts")}
-              </Link>
-            </nav>
-            <div className="text-right text-sm text-gray-400">
-              <p>© 2025 MESMER-EAST LLC</p>
-
-              {/*
-              <div className="mt-2 space-x-4">
-                
-                <div className="hover:text-white transition-colors">
-                  <a href="/MESMER RULES.pdf">{navbarLang("license")}</a>
-                </div>
-                <div className="hover:text-white transition-colors">
-                  <a href="/MESMER RULES.pdf"> {navbarLang("rules")}</a>
-                </div> 
-              </div>
-              */}
-            </div>
+        {/* Bottom bar */}
+        <div className="flex flex-col-reverse gap-2 py-2.5 text-xs font-medium leading-4 text-white/55 md:flex-row md:items-center md:justify-between">
+          <p>© {new Date().getFullYear()} MESMER-EAST LLC</p>
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2">
+            <a
+              href={constants.profile_pdf || "/MESMER%20RULES.pdf"}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackDownload("MESMER Company Profile & Rules")}
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-white underline decoration-white/30 underline-offset-4"
+            >
+              <FileText className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+              <span>{t("profile")}</span>
+            </a>
+            <span aria-hidden="true">·</span>
+            <a
+              href={`mailto:${constants.email}`}
+              onClick={() => trackContactClick("email", constants.email)}
+              className="transition-colors hover:text-white"
+            >
+              {constants.email}
+            </a>
           </div>
         </div>
       </div>

@@ -155,14 +155,37 @@
   "contact": {
     "title": "BIZ BILAN BOG'LANING",
     "form": {
-      "title": "FORMANI TO'LDIRING",
-      "name": "Ism",
-      "phone": "Telefon raqami",
-      "email": "Elektron pochta",
-      "message": "Xabar",
-      "send": "Yuborish"
+      "title": "MESMER BILAN LOYIHA BOSHLASH",
+      "subtitle": "Loyiha talablari yoki tender hujjatlarini qoldiring. Muhandislik va EPC bo'limimiz texnik talablarni tezda ko'rib chiqadi.",
+      "types_title": "Murojaat turi (bir yoki bir nechtasini tanlang) *",
+      "types": {
+        "epc": "EPC «to'liq kalit ostida» shartnomasi",
+        "wwtp": "WWTP (Oqova suv tozalash inshootlari)",
+        "wtp": "WTP (Suv tozalash inshootlari)",
+        "water_supply": "Suv ta’minoti va magistral kanallar",
+        "equipment": "Uskunalar yetkazib berish",
+        "om": "Ekspluatatsiya va servis xizmati (O&M)",
+        "partnership": "Strategik hamkorlik / Subpudrat",
+        "tender": "Xalqaro tender / Takliflar so'rovi (RFP)"
+      },
+      "name": "Mas'ul shaxs F.I.SH *",
+      "company": "Tashkilot / Kompaniya nomi *",
+      "country": "Mamlakat / Hudud *",
+      "email": "Korporativ Email *",
+      "phone": "Telefon raqami *",
+      "phone_suggest": "Davlat kodi:",
+      "phone_hint": "Tanlangan davlat bo'yicha tavsiya. Har qanday xalqaro telefon raqami qabul qilinadi.",
+      "message": "Loyiha tavsifi va texnik topshiriq *",
+      "file_label": "Texnik topshiriq / tender hujjatlarini biriktirish (PDF, DOCX, XLSX 10 MB gacha)",
+      "file_drop": "Faylni tanlash uchun bosing yoki bu yerga sudrab keling",
+      "file_selected": "Biriktirilgan fayl",
+      "remove_file": "O'chirish",
+      "send": "ARIZANI YUBORISH",
+      "sending": "YUBORILMOQDA...",
+      "success_title": "Murojaat muvaffaqiyatli qabul qilindi",
+      "success_desc": "Tashakkur! Mutaxassislarimiz texnik hujjatlarni o'rganib, 24 ish soati ichida siz bilan bog'lanishadi."
     },
-    "contacts": "KONTAKTLAR"
+    "contacts": "BOSH OFIS VA KONTAKTLAR"
   },
   "projects": {
     "title": "Bizning loyihalarimiz",
@@ -181,5 +204,14 @@
   },
   "location": {
     "title": "Toshkent, Olmazor tumani, Shiroq ko‘chasi, 100. Pochta indeksi 100069"
+  },
+  "footer": {
+    "tagline": "Suv ta’minoti, oqova suvlarni tozalash va ekologik infratuzilma loyihalarida ishonchli EPC pudratchi",
+    "address": "Manzil",
+    "company": "Kompaniya",
+    "projects": "Loyihalar",
+    "home": "Bosh sahifa",
+    "profile": "Kompaniya profilini yuklab olish (PDF)",
+    "language": "Tilni tanlang"
   }
 }

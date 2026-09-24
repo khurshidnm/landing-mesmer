@@ -81,16 +81,16 @@
     }
   },
   "services": {
-    "main_title": "Services",
-    "title": "What Do We Do?",
-    "description": "MESMER, in collaboration with its subsidiaries and international partners, is ready to act as a general contractor in domestic, regional, and international markets. We provide the following range of services:",
+    "main_title": "Water Treatment & Wastewater Infrastructure EPC Services",
+    "title": "What Do We Do? Full-Cycle EPC Contractor",
+    "description": "MESMER, in collaboration with its subsidiaries and international partners, acts as a premier EPC contractor in Uzbekistan and Central Asian markets. We deliver turnkey engineering, equipment procurement, and construction for municipal drinking water treatment plants (WTP construction), wastewater treatment plants (WWTP EPC), and strategic water supply systems financed by international institutions including ADB and EBRD.",
     "tecnologies": {
-      "title": "MESMER provides the most advanced technologies:",
+      "title": "Advanced Engineering & Water Technologies:",
       "list": {
-        "label_1": "World-class management skills",
-        "label_2": "Marketing and business development",
-        "label_3": "Focus on intellectual development",
-        "label_4": "Research process and study results"
+        "label_1": "World-class project management & FIDIC standards",
+        "label_2": "Process engineering & hydraulic modeling",
+        "label_3": "Automated SCADA & water quality monitoring systems",
+        "label_4": "Energy-efficient wastewater treatment solutions"
       }
     },
     "engineering": {
@@ -104,7 +104,7 @@
       }
     },
     "delivery": {
-      "title": "Equipment Procurement",
+      "title": "Specialized Equipment Procurement",
       "description": "Procurement and supply of equipment, along with engineering and design work, are key components of MESMER company’s activities. To achieve our goals, we collaborate with a well-organized and highly qualified team of professionals in the construction industry, as well as with specialists in design, management, and other fields."
     },
     "experience": {
@@ -112,7 +112,7 @@
       "description": "MESMER has more than a decade of experience in engineering and construction industries. During this time, we have accumulated valuable expertise and knowledge, allowing us to guarantee the high quality of our services and products. We have implemented a strict quality control system at all stages of the project, from design to final commissioning."
     },
     "maintenance": {
-      "title": "Operation and Maintenance",
+      "title": "Operation and Maintenance (O&M)",
       "description": "Ensuring the safety and reliability of equipment plays a crucial role in facility operations. To achieve this goal, MESMER offers a wide range of operation and maintenance services at all project stages – from feasibility studies to design, engineering, procurement, construction, and commercial operation. MESMER provides operation and maintenance services tailored to its clients' needs, including preparation for operation, such as planning, system development, and training; consulting services, such as profit optimization, reliability, and safety improvement; as well as full-cycle planning, implementation, and execution of various maintenance types. Additionally, through data collection and operational analysis, potential failures can be predicted, allowing us to apply the latest technologies to enhance facility and equipment efficiency."
     }
   },
@@ -155,31 +155,63 @@
   "contact": {
     "title": "CONTACT US",
     "form": {
-      "title": "FILL OUT THE FORM",
-      "name": "Name",
-      "phone": "Phone number",
-      "email": "Email",
-      "message": "Message",
-      "send": "SEND"
+      "title": "START A PROJECT WITH MESMER",
+      "subtitle": "Provide your project requirements or tender scope. Our engineering and EPC division will review your documentation.",
+      "types_title": "Inquiry Type (select all that apply) *",
+      "types": {
+        "epc": "EPC Turnkey Contract",
+        "wwtp": "WWTP (Wastewater Treatment)",
+        "wtp": "WTP (Water Treatment Plant)",
+        "water_supply": "Water Supply & Canals",
+        "equipment": "Equipment Procurement",
+        "om": "Operation & Maintenance (O&M)",
+        "partnership": "Strategic Partnership",
+        "tender": "International Tender / RFP"
+      },
+      "name": "Full Name *",
+      "company": "Company / Organization *",
+      "country": "Country / Region *",
+      "email": "Corporate Email *",
+      "phone": "Phone Number *",
+      "phone_suggest": "Suggested code:",
+      "phone_hint": "Optional suggestion based on selected country. Any international number is accepted.",
+      "message": "Project Description & Scope *",
+      "file_label": "Attach Specification / Tender Documents (PDF, DOCX, XLSX up to 10MB)",
+      "file_drop": "Click to upload or drag and drop",
+      "file_selected": "Attached file",
+      "remove_file": "Remove",
+      "send": "SUBMIT INQUIRY",
+      "sending": "SUBMITTING...",
+      "success_title": "Inquiry Successfully Received",
+      "success_desc": "Thank you! Our engineering and sales department will review your specifications and respond within 24 business hours."
     },
-    "contacts": "CONTACTS"
+    "contacts": "HEADQUARTERS & CONTACTS"
   },
   "projects": {
-    "title": "Our projects",
-    "main_title": "CURRENT AND COMPLETED PROJECTS",
+    "title": "Water & Wastewater Infrastructure Projects",
+    "main_title": "CURRENT AND COMPLETED WWTP, WTP & WATER INFRASTRUCTURE PROJECTS",
     "project": {
-      "task": "Contract",
+      "task": "Contract & Financing",
       "customer": "Customer",
       "status": "Status",
       "implementation": "Implementation period"
     },
-    "single": "ABOUT THE PROJECT",
-    "gallery": "GALLERY",
+    "single": "PROJECT OVERVIEW & EPC EXECUTION",
+    "gallery": "PROJECT GALLERY & CONSTRUCTION SITE",
     "back": "Back to projects",
     "not_found": "Project not found",
-    "view_more": "View details"
+    "view_more": "View project details"
   },
   "location": {
     "title": "Tashkent, Almazar district, Shiroq street, 100. ZIP 100069"
+  },
+  "footer": {
+    "tagline": "Trusted EPC contractor for water supply, wastewater and environmental infrastructure projects",
+    "address": "Address Details",
+    "company": "Company",
+    "projects": "Projects",
+    "home": "Homepage",
+    "profile": "Download Company Profile (PDF)",
+    "language": "Select language"
   }
 }

@@ -1,5 +1,7 @@
 import Constants from "@/database/consts.model";
+import { authOptions } from "@/lib/auth-options";
 import { connectToDatabase } from "@/lib/mongoose";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -16,7 +18,7 @@ export async function GET() {
         data: {
           constant: new_constant,
         },
-      })
+      });
     }
 
     return NextResponse.json({
@@ -38,10 +40,28 @@ export async function GET() {
 export async function PUT(req: Request) {
   try {
     await connectToDatabase();
+    const session = await getServerSession(authOptions);
 
-    const {...updateData } = await req.json();
+    if (!session) {
+      return NextResponse.json(
+        {
+          errors: [
+            {
+              code: "unauthenticated",
+              message: "You are not authenticated",
+            },
+          ],
+          data: null,
+          success: false,
+        },
+        { status: 401 }
+      );
+    }
+
+    const { ...updateData } = await req.json();
     const constant = await Constants.findOneAndUpdate({}, updateData, {
       new: true,
+      upsert: true,
     });
 
     if (!constant) {
@@ -49,12 +69,14 @@ export async function PUT(req: Request) {
         message: "Something went wrong",
         errors: null,
         data: null,
-      })
+        success: false,
+      });
     }
 
     return NextResponse.json({
       message: "Contact updated",
       errors: null,
+      success: true,
       data: {
         constant,
       },
@@ -62,7 +84,7 @@ export async function PUT(req: Request) {
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { message: "Internal Server Error", error },
+      { message: "Internal Server Error", error, success: false },
       { status: 500 }
     );
   }

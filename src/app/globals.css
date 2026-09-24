@@ -153,6 +153,63 @@ h6.rich-text-editor {
   @apply outline-none min-h-[200px];
 }
 
+/*
+ * Article text written in the rich text editor (news, projects).
+ * Behaves like Word: every Enter leaves a gap after the paragraph, and blank
+ * lines (saved by the editor as empty <p></p>, which browsers draw 0px tall)
+ * keep the height of one line.
+ */
+.article-content p,
+.tiptap.ProseMirror p {
+  margin: 0 0 1em;
+}
+
+.article-content p:last-child,
+.tiptap.ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+.article-content p:empty::before {
+  content: "\00a0";
+}
+
+.article-content ul,
+.tiptap.ProseMirror ul {
+  list-style: disc;
+  padding-left: 1.5em;
+  margin: 0 0 1em;
+}
+
+.article-content ol,
+.tiptap.ProseMirror ol {
+  list-style: decimal;
+  padding-left: 1.5em;
+  margin: 0 0 1em;
+}
+
+.article-content li > p {
+  margin-bottom: 0.25em;
+}
+
+/* Images sit inside paragraphs, so they follow the paragraph's alignment */
+.article-content img,
+.tiptap.ProseMirror img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* Show which image is selected while editing */
+.tiptap.ProseMirror img.ProseMirror-selectednode {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.article-content a {
+  @apply text-blue-600 underline underline-offset-2 hover:text-blue-700;
+}
+
 .scroll-hide::-webkit-scrollbar {
   display: none;
 }

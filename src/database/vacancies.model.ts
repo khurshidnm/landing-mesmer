@@ -94,10 +94,19 @@ const vacanciesSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    // engineering | project-management | om | other (see VACANCY_CATEGORIES)
+    category: {
+      type: String,
+      default: "",
     }
   },
   { timestamps: true }
 );
+
+if (process.env.NODE_ENV !== "production" && mongoose.models.Vacancies) {
+  mongoose.deleteModel("Vacancies");
+}
 
 const Vacancies =
   mongoose.models.Vacancies || mongoose.model("Vacancies", vacanciesSchema);

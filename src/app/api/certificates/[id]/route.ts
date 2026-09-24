@@ -5,30 +5,36 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
-export async function GET(_: Request, { params }: any) {
+export async function GET(_: Request, props: { params: Promise<{ id: string }> }) {
   try {
     await connectToDatabase();
-    const { id } = await params;
+    const { id } = await props.params;
     const certificate = await Certificates.findById(id);
+
+    if (!certificate) {
+      return NextResponse.json(
+        { message: "Certificate not found", errors: null, data: null },
+        { status: 404 }
+      );
+    }
+
     return NextResponse.json({
-      message: "Certificate",
+      message: "Certificate retrieved",
       errors: null,
       data: {
         certificate,
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
-      { message: "Internal server Error: ", error },
-      {
-        status: 500,
-      }
+      { message: "Internal server Error", error: (error as Error).message },
+      { status: 500 }
     );
   }
 }
 
-export async function DELETE(_: Request, { params }: any) {
+export async function DELETE(_: Request, props: { params: Promise<{ id: string }> }) {
   try {
     await connectToDatabase();
     const session = await getServerSession(authOptions);
@@ -43,34 +49,34 @@ export async function DELETE(_: Request, { params }: any) {
             },
           ],
           data: null,
-          success: true,
-          status: 401,
+          success: false,
         },
         { status: 401 }
       );
     }
-    const { id } = await params;
-    const certificate = await Certificates.findOneAndDelete({_id: id});
-    revalidatePath("/admin/certificated")
+
+    const { id } = await props.params;
+    const certificate = await Certificates.findOneAndDelete({ _id: id });
+    revalidatePath("/admin/certificates");
+
     return NextResponse.json({
-      message: "Certificate",
+      message: "Certificate deleted",
       errors: null,
+      success: true,
       data: {
         certificate,
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
-      { message: "Internal server Error: ", error },
-      {
-        status: 500,
-      }
+      { message: "Internal server Error", error: (error as Error).message, success: false },
+      { status: 500 }
     );
   }
 }
 
-export async function PUT(req: Request, { params }: any) {
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
   try {
     await connectToDatabase();
     const session = await getServerSession(authOptions);
@@ -85,40 +91,48 @@ export async function PUT(req: Request, { params }: any) {
             },
           ],
           data: null,
-          success: true,
-          status: 401,
+          success: false,
         },
         { status: 401 }
       );
     }
 
-    const { id } = await params;
-    const { ...body } = await req.json();
-    const existCertificates = await Certificates.findOne({_id: id});
+    const { id } = await props.params;
+    const body = await req.json();
+    const existCertificate = await Certificates.findOne({ _id: id });
 
-    if (!existCertificates) {
-      return NextResponse.json({
-        message: "Certificate not found",
-        errors: null,
-        data: null,
-      });
+    if (!existCertificate) {
+      return NextResponse.json(
+        {
+          message: "Certificate not found",
+          errors: null,
+          data: null,
+          success: false,
+        },
+        { status: 404 }
+      );
     }
-    const certificate = await Certificates.findOneAndUpdate({_id: id}, body, {new: true});
-    revalidatePath("/admin/certificates")
+
+    const certificate = await Certificates.findOneAndUpdate(
+      { _id: id },
+      body,
+      { new: true }
+    );
+    revalidatePath("/admin/certificates");
+
     return NextResponse.json({
-      message: "Certificates",
+      message: "Certificate updated",
       errors: null,
+      success: true,
       data: {
         certificate,
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
-      { message: "Internal server Error: ", error },
-      {
-        status: 500,
-      }
+      { message: "Internal server Error", error: (error as Error).message, success: false },
+      { status: 500 }
     );
   }
 }

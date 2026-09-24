@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -14,6 +14,9 @@ import { JobApplicationModal } from "../components/JobModal";
 import { format } from "date-fns";
 import Footer from "../components/Footer";
 import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { VACANCY_CATEGORIES } from "@/lib/cms/definitions";
 
 interface JobListing {
   _id: number;
@@ -22,6 +25,7 @@ interface JobListing {
   en: LocaleData;
   salary: string;
   createdAt: string;
+  category?: string;
 }
 
 interface LocaleData {
@@ -38,11 +42,24 @@ function isValidLocale(
   return ["uz", "ru", "en"].includes(locale);
 }
 
+const FILTER_TEXT = {
+  en: { title: "Directions", all: "All vacancies", empty: "No open vacancies in this direction right now." },
+  ru: { title: "Направления", all: "Все вакансии", empty: "Сейчас нет открытых вакансий по этому направлению." },
+  uz: { title: "Yo‘nalishlar", all: "Barcha vakansiyalar", empty: "Hozircha bu yo‘nalishda ochiq vakansiyalar yo‘q." },
+} as const;
+
 export default function JobListings({
-  vacancies,
+  vacancies: allVacancies,
 }: {
   vacancies: JobListing[];
 }) {
+  // Careers menu links: /career?category=engineering
+  const category = useSearchParams().get("category") || "";
+  // Memoized: the effect below depends on it, so a new array every render would loop
+  const vacancies = useMemo(
+    () => (category ? allVacancies.filter((v) => v.category === category) : allVacancies),
+    [allVacancies, category]
+  );
   const [limit, setLimit] = useState(3);
   const [total, setTotal] = useState(vacancies.length);
   const [filteredVacancies, setFilteredVacancies] = useState(vacancies.slice(0, limit));
@@ -60,7 +77,8 @@ export default function JobListings({
   };
   const locale = useLocale();
   const safeLocale = isValidLocale(locale) ? locale : "en";
-  console.log(locale);
+  const filterText = FILTER_TEXT[safeLocale];
+  const counts = (value: string) => allVacancies.filter((v) => v.category === value).length;
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -77,10 +95,37 @@ export default function JobListings({
         backgroundImage="/vacancy.png"
         height="500px"
       />
-      <div className="flex flex-col container justify-between mt-5 mx-auto w-full items-center md:flex-row">
-        <div className="w-full md:w-1/2"></div>
+      <div
+        id="vacancies"
+        className="flex flex-col container justify-between gap-8 mt-5 mx-auto w-full items-start md:flex-row scroll-mt-24"
+      >
+        <nav className="w-full md:w-1/2 md:sticky md:top-28 pt-4" aria-label={filterText.title}>
+          <p className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-500">{filterText.title}</p>
+          <div className="flex flex-wrap gap-2 md:flex-col md:items-start">
+            {[{ value: "", label: filterText.all, count: allVacancies.length }, ...VACANCY_CATEGORIES.map((c) => ({ value: c.value, label: c[safeLocale], count: counts(c.value) }))]
+              .filter((item) => item.value === "" || item.count > 0 || item.value === category)
+              .map((item) => (
+                <Link
+                  key={item.value || "all"}
+                  href={`/${safeLocale}/career${item.value ? `?category=${item.value}` : ""}#vacancies`}
+                  scroll={false}
+                  className={`inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm transition-colors ${
+                    category === item.value
+                      ? "border-blue-600 bg-blue-600 font-semibold text-white"
+                      : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {item.label}
+                  <span className={`text-xs ${category === item.value ? "text-white/80" : "text-gray-400"}`}>{item.count}</span>
+                </Link>
+              ))}
+          </div>
+        </nav>
 
         <div className="w-full md:w-1/2">
+          {vacancies.length === 0 && (
+            <p className="rounded-lg border border-dashed border-gray-300 p-8 text-center text-gray-500">{filterText.empty}</p>
+          )}
           <div className="grid gap-6 w-full">
             {filteredVacancies?.map((job: JobListing, index: number) => (
               <motion.div
