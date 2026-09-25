@@ -9,6 +9,10 @@ import { t as cmsText } from "@/lib/cms/definitions";
 import type { HomeContent } from "@/lib/cms/content-types";
 
 import SimpleLightbox from "@/components/simple-lightbox";
+import Link from "next/link";
+import SectionHeading from "./SectionHeading";
+
+const ALL = { en: "All certificates", ru: "Все сертификаты", uz: "Barcha sertifikatlar" } as const;
 
 const standards = [
   {
@@ -86,33 +90,23 @@ const Advantages: FC<Props> = ({ certificates, content }) => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="mb-12"
-      >
-        <div className="flex flex-col mt-5 lg:flex-row justify-between items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-0">
-          <div>
-            <h2 className="text-xl sm:text-5xl font-extrabold tracking-wide text-gray-900 mb-6 sm:mb-10">
-              {t("title")}
-            </h2>
-          </div>
-          <div className="space-y-6 max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-5">
-              {t("sub_title")}
-            </h2>
-            <p className="text-gray-600 leading-relaxed">{t("description")}</p>
-          </div>
-        </div>
-      </motion.div>
+    <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <SectionHeading
+        eyebrow={t("title")}
+        title={t("sub_title")}
+        description={t("description")}
+        action={
+          <Link href={`/${locale}/certificates`} className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700">
+            {ALL[locale as keyof typeof ALL] || ALL.en} →
+          </Link>
+        }
+      />
 
       {/* SLIDER FAOLIYAT */}
       <div className="relative">
         <div
           ref={scrollContainerRef}
-          className="md:col-span-5 grid grid-cols-1 rounded-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 order-2 w-full"
+          className="hidden md:grid md:col-span-5 rounded-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 order-2 w-full"
         >
           {certificates?.map((cert, index) => (
             <motion.div
@@ -120,22 +114,22 @@ const Advantages: FC<Props> = ({ certificates, content }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 min-w-[250px] flex flex-col items-center"
+              className="flex min-w-[250px] flex-col items-center overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-md"
             >
-              <div className="flex justify-center items-center mb-2 w-full h-[400px]">
+              <div className="flex h-[400px] w-full items-center justify-center bg-gray-50 p-5">
                   <Image
                     src={cert.image || "/placeholder.svg"}
                     width={300}
                     height={400}
                     alt={cert[locale as "ru" | "en" | "uz"].title}
-                    className="object-contain cursor-pointer h-full w-auto"
+                    className="object-contain cursor-pointer h-full w-auto mx-auto block"
                     onClick={() => {
                       setPhotoIndex(index);
                       setIsOpen(true);
                     }}
                   />
                 </div>
-              <p className="text-sm text-gray-600">
+              <p className="w-full border-t border-gray-100 px-5 py-4 text-center text-sm font-medium text-gray-800">
                 {cert[locale as "ru" | "en" | "uz"].title}
               </p>
             </motion.div>
@@ -149,7 +143,7 @@ const Advantages: FC<Props> = ({ certificates, content }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 mx-auto"
+                className="mx-auto rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
                 onClick={() => {
                   setPhotoIndex(index);
                   setIsOpen(true);
@@ -161,7 +155,7 @@ const Advantages: FC<Props> = ({ certificates, content }) => {
                     width={300}
                     height={400}
                     alt={cert.ru.title}
-                    className="object-contain cursor-pointer mx-auto"
+                    className="object-contain cursor-pointer mx-auto block"
                   />
                 </div>
                 <p className="text-sm text-gray-600 text-center">

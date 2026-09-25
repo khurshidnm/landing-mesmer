@@ -5,7 +5,7 @@ import { getSertificates } from "../../../admin/(admin)/(root)/certificates/serv
 import { parseServerActionJson } from "@/lib/parse-server-action-json";
 import type { Certificate } from "@/types/certificates";
 import { getEntries, getSeo, getSingleton } from "@/lib/cms/server";
-import { serialize, type AboutContent, type FinancierEntry, type PartnerEntry } from "@/lib/cms/content-types";
+import { serialize, type AboutContent, type FinancierEntry, type PartnerEntry, type StatEntry } from "@/lib/cms/content-types";
 
 export const dynamic = "force-dynamic";
 
@@ -70,11 +70,12 @@ export async function generateMetadata(props: {
 }
 
 export default async function AboutPage() {
-  const [certsJson, financiers, content, partners] = await Promise.all([
+  const [certsJson, financiers, content, partners, stats] = await Promise.all([
     getSertificates(),
     getEntries("financiers"),
     getSingleton("about_page"),
     getEntries("partners"),
+    getEntries("stats"),
   ]);
   return (
     <AboutClientView
@@ -82,6 +83,7 @@ export default async function AboutPage() {
       financiers={serialize(financiers) as FinancierEntry[]}
       content={serialize(content) as AboutContent}
       partners={(serialize(partners) as PartnerEntry[]).filter((p) => p.show_on_about && p.logo)}
+      stats={serialize(stats) as StatEntry[]}
     />
   );
 }

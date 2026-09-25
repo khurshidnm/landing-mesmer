@@ -132,22 +132,60 @@ export const COLLECTIONS = {
   expertise: {
     key: "expertise",
     title: "Expertise",
-    description: "Core expertise areas. Each has its own page at /expertise/<slug>.",
+    description:
+      "Core expertise areas. Each has its own page at /expertise/<slug>. Empty page fields use the built-in texts.",
     slugField: "slug",
     fields: [
-      { name: "slug", label: "URL slug", type: "text", required: true, help: "Lowercase, e.g. water-treatment" },
+      { name: "slug", label: "URL slug", type: "text", required: true, help: "Lowercase, e.g. water-treatment", section: "Card & menu" },
       { name: "title", label: "Title", type: "i18n", required: true },
-      { name: "summary", label: "Summary", type: "i18n-textarea" },
+      { name: "summary", label: "Summary (card text and page intro)", type: "i18n-textarea" },
+      { name: "image", label: "Image (card and page)", type: "image" },
+      { name: "featured", label: "Show on home page", type: "boolean" },
+
+      { name: "hero_image", label: "Top banner image", type: "image", help: "Optional. Uses the image above when empty.", section: "Page — top banner" },
+      { name: "hero_subtitle", label: "Small text above the title", type: "i18n", help: "Default: “Expertise”" },
+
+      {
+        name: "body",
+        label: "About this direction",
+        type: "i18n-textarea",
+        help: "Shown under the intro. Leave a blank line between paragraphs.",
+        section: "Page — overview",
+      },
+      {
+        name: "highlights",
+        label: "Key figures",
+        type: "i18n-list",
+        help: "One per line as “value | label”, e.g. “25+ | plants built”. Shown as a row of numbers.",
+      },
+
+      { name: "services_title", label: "Heading", type: "i18n", help: "Default: “What we deliver”", section: "Page — services" },
       { name: "services", label: "Services (one per line)", type: "i18n-list" },
-      { name: "image", label: "Image", type: "image" },
+
+      { name: "process_title", label: "Heading", type: "i18n", help: "Default: “How we work”", section: "Page — how we work" },
+      {
+        name: "process",
+        label: "Steps",
+        type: "i18n-list",
+        help: "One step per line as “Title | description”. The section is hidden when empty.",
+      },
+
       {
         name: "project_category",
         label: "Related project category",
         type: "select",
         options: categoryOptions,
-        help: "Projects of this category are listed on the expertise page.",
+        help: "Projects of this category are listed on the page.",
+        section: "Page — projects",
       },
-      { name: "featured", label: "Show on home page", type: "boolean" },
+      { name: "projects_title", label: "Heading", type: "i18n", help: "Default: “Related projects”" },
+
+      { name: "cta_title", label: "Title", type: "i18n", help: "Default: “Planning a similar project?”", section: "Page — call to action" },
+      { name: "cta_text", label: "Text", type: "i18n-textarea" },
+      { name: "cta_button", label: "Button text", type: "i18n", help: "Default: “Start a project”" },
+
+      { name: "seo_title", label: "Title (up to ~60 characters)", type: "i18n", help: "Default: page title | MESMER", section: "SEO" },
+      { name: "seo_description", label: "Description (up to ~160 characters)", type: "i18n-textarea", help: "Default: the summary" },
     ],
   },
   financiers: {
@@ -276,6 +314,7 @@ export const COLLECTIONS = {
           { value: "projects", label: "Projects" },
           { value: "expertise", label: "Expertise" },
           { value: "group", label: "MESMER Group" },
+          { value: "certificates", label: "Certificates" },
           { value: "news", label: "News" },
           { value: "career", label: "Careers" },
           { value: "contact", label: "Contact" },

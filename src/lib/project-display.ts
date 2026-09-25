@@ -12,10 +12,28 @@ export const LABELS = {
 
 export const labels = (locale: string) => LABELS[(locale as Locale) in LABELS ? (locale as Locale) : "en"];
 
+// Fixed names for the region's countries. Intl.DisplayNames can't be used:
+// Node has no Uzbek names and falls back to English while browsers have them,
+// so server and client rendered different text (hydration errors).
+const COUNTRY_NAMES: Record<string, { en: string; ru: string; uz: string }> = {
+  UZ: { en: "Uzbekistan", ru: "Узбекистан", uz: "Oʻzbekiston" },
+  KG: { en: "Kyrgyzstan", ru: "Киргизия", uz: "Qirgʻiziston" },
+  KZ: { en: "Kazakhstan", ru: "Казахстан", uz: "Qozogʻiston" },
+  TJ: { en: "Tajikistan", ru: "Таджикистан", uz: "Tojikiston" },
+  TM: { en: "Turkmenistan", ru: "Туркменистан", uz: "Turkmaniston" },
+  AF: { en: "Afghanistan", ru: "Афганистан", uz: "Afgʻoniston" },
+  AZ: { en: "Azerbaijan", ru: "Азербайджан", uz: "Ozarbayjon" },
+  RU: { en: "Russia", ru: "Россия", uz: "Rossiya" },
+  TR: { en: "Türkiye", ru: "Турция", uz: "Turkiya" },
+};
+
 export function countryName(code: string | undefined, locale: string) {
   if (!code) return "";
+  const known = COUNTRY_NAMES[code.toUpperCase()];
+  if (known) return known[(locale as Locale) in known ? (locale as Locale) : "en"];
+  // Other countries: English names are the same on server and client
   try {
-    return new Intl.DisplayNames([locale], { type: "region" }).of(code) || code;
+    return new Intl.DisplayNames(["en"], { type: "region" }).of(code) || code;
   } catch {
     return code;
   }

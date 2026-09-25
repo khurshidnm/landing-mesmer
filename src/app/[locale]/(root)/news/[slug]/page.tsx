@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
-import NewsPage from "./page-view";
+import NewsArticle from "./page-view";
+import { pickNewsLocale } from "@/lib/news-display";
 import { getNews } from "@/app/admin/(admin)/(root)/news/server-action";
 import { parseServerActionJson } from "@/lib/parse-server-action-json";
 import type { NewsItem } from "@/types/news";
@@ -76,15 +77,16 @@ const page = async (props: {
   params: Promise<{ locale: string; slug: string }>;
 }) => {
   const params = await props.params;
-  const newsData = await getNews({
-    page: 1,
-    limit: 10,
-    slug: params.slug,
-  });
+  const [newsData, latestData] = await Promise.all([
+    getNews({ page: 1, limit: 1, slug: params.slug }),
+    getNews({ page: 1, limit: 4 }),
+  ]);
 
   const news = parseServerActionJson<NewsItem | null>(newsData, null);
+  const latest = parseServerActionJson<{ news?: NewsItem[] }>(latestData, {}).news || [];
+  const related = latest.filter((item) => item.slug !== params.slug).slice(0, 3);
 
-  return <NewsPage news={news} />;
+  return <NewsArticle news={news} related={related} locale={pickNewsLocale(params.locale)} />;
 };
 
 export default page;

@@ -1,7 +1,7 @@
 import React from "react";
 import { getSeo } from "@/lib/cms/server";
 import type { Metadata } from "next";
-import NewsClientView from "./client-view";
+import NewsList from "./news-list";
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
@@ -63,6 +63,13 @@ export async function generateMetadata(props: {
   };
 }
 
-export default function NewsPage() {
-  return <NewsClientView />;
+export const dynamic = "force-dynamic";
+
+export default async function NewsPage(props: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const [{ locale }, searchParams] = await Promise.all([props.params, props.searchParams]);
+  const page = Math.max(1, parseInt(String(searchParams.page || "1"), 10) || 1);
+  return <NewsList locale={locale} page={page} />;
 }

@@ -27,6 +27,19 @@ export type ExpertiseEntry = CmsEntry<{
   image?: string;
   project_category?: string;
   featured?: boolean;
+  hero_image?: string;
+  hero_subtitle?: I18nText;
+  body?: I18nText;
+  highlights?: I18nList;
+  services_title?: I18nText;
+  process_title?: I18nText;
+  process?: I18nList;
+  projects_title?: I18nText;
+  cta_title?: I18nText;
+  cta_text?: I18nText;
+  cta_button?: I18nText;
+  seo_title?: I18nText;
+  seo_description?: I18nText;
 }>;
 
 export type FinancierEntry = CmsEntry<{

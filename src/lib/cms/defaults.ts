@@ -33,7 +33,7 @@ export const CMS_DEFAULTS: Record<CollectionKey, DefaultEntry[]> = {
     // No content for these yet: enable once the sections exist on the About page
     menu("about-history", i18n("Our History", "Наша история", "Tariximiz"), "/about#history", "about", false),
     menu("about-management", i18n("Management", "Руководство", "Rahbariyat"), "/about#management", "about", false),
-    menu("about-certificates", i18n("Certificates", "Сертификаты", "Sertifikatlar"), "/about#certificates", "about"),
+    menu("about-certificates", i18n("Certificates", "Сертификаты", "Sertifikatlar"), "/certificates", "about"),
     menu("about-sustainability", i18n("Sustainability", "Устойчивое развитие", "Barqaror rivojlanish"), "/about#sustainability", "about", false),
 
     menu("expertise", i18n("Expertise", "Экспертиза", "Ekspertiza"), "/expertise"),
@@ -41,7 +41,7 @@ export const CMS_DEFAULTS: Record<CollectionKey, DefaultEntry[]> = {
     menu("exp-ww", i18n("Wastewater Treatment", "Очистка сточных вод", "Oqova suvlarni tozalash"), "/expertise/wastewater-treatment", "expertise"),
     menu("exp-ws", i18n("Water Supply", "Водоснабжение", "Suv ta’minoti"), "/expertise/water-supply", "expertise"),
     menu("exp-irr", i18n("Irrigation", "Ирригация", "Irrigatsiya"), "/expertise/irrigation", "expertise"),
-    menu("exp-eng", i18n("Engineering", "Инжиниринг", "Muhandislik"), "/expertise/engineering-epc", "expertise"),
+    menu("exp-eng", i18n("Engineering", "Инжиниринг", "Muhandislik"), "/expertise/engineering", "expertise"),
     menu("exp-epc", i18n("EPC & O&M", "EPC и эксплуатация", "EPC va ekspluatatsiya"), "/expertise/engineering-epc", "expertise"),
 
     menu("projects", i18n("Projects", "Проекты", "Loyihalar"), "/projects"),
@@ -197,6 +197,16 @@ export const CMS_DEFAULTS: Record<CollectionKey, DefaultEntry[]> = {
         image: "/api/uploads/project_30_20260512061709180.jpg",
         project_category: "water-treatment",
         featured: true,
+        body: i18n(
+          "We deliver water treatment plants as a turnkey contractor: from surveys and process design to construction, equipment installation, commissioning and staff training.\n\nOur plants are designed around the quality of the raw water source and the needs of each city, and meet national drinking water standards and the requirements of international financial institutions.",
+          "Мы строим водоочистные станции как генеральный подрядчик «под ключ»: от изысканий и технологического проектирования до строительства, монтажа оборудования, пусконаладки и обучения персонала.\n\nКаждая станция проектируется с учётом качества исходной воды и потребностей города и соответствует национальным нормам питьевой воды и требованиям международных финансовых институтов.",
+          "Suv tozalash inshootlarini «kalit topshirish» asosida bosh pudratchi sifatida quramiz: tadqiqotlar va texnologik loyihalashdan tortib qurilish, uskunalarni o‘rnatish, ishga tushirish va xodimlarni o‘qitishgacha.\n\nHar bir inshoot manba suvining sifati va shahar ehtiyojlarini hisobga olgan holda loyihalanadi hamda milliy ichimlik suvi me’yorlari va xalqaro moliya institutlari talablariga javob beradi."
+        ),
+        process: {
+          en: ["Survey & design | Site surveys, process design and working documentation", "Procurement | Selection and supply of equipment and materials", "Construction | Civil works and equipment installation", "Commissioning | Testing, start-up and staff training", "Operation | O&M support after handover"],
+          ru: ["Изыскания и проектирование | Обследование площадки, технологическое проектирование и рабочая документация", "Закупки | Подбор и поставка оборудования и материалов", "Строительство | Строительно-монтажные работы и монтаж оборудования", "Пусконаладка | Испытания, запуск и обучение персонала", "Эксплуатация | Поддержка O&M после сдачи объекта"],
+          uz: ["Tadqiqot va loyihalash | Maydonni o‘rganish, texnologik loyihalash va ishchi hujjatlar", "Xaridlar | Uskunalar va materiallarni tanlash va yetkazib berish", "Qurilish | Qurilish-montaj ishlari va uskunalarni o‘rnatish", "Ishga tushirish | Sinovlar, ishga tushirish va xodimlarni o‘qitish", "Ekspluatatsiya | Topshirilgandan keyin O&M yordami"],
+        },
       },
     },
     {
@@ -217,6 +227,16 @@ export const CMS_DEFAULTS: Record<CollectionKey, DefaultEntry[]> = {
         image: "/api/uploads/project-22_20260422130648948.jpg",
         project_category: "wastewater",
         featured: true,
+        body: i18n(
+          "We build and upgrade municipal and industrial wastewater treatment plants, from mechanical and biological treatment to sludge handling and disinfection.\n\nModern process solutions allow treated water to meet international effluent standards and protect rivers and groundwater.",
+          "Мы строим и модернизируем городские и промышленные очистные сооружения канализации — от механической и биологической очистки до обработки осадка и обеззараживания.\n\nСовременные технологические решения позволяют достигать международных нормативов очистки и защищать реки и подземные воды.",
+          "Shahar va sanoat oqova suv tozalash inshootlarini quramiz va modernizatsiya qilamiz — mexanik va biologik tozalashdan tortib cho‘kmani qayta ishlash va zararsizlantirishgacha.\n\nZamonaviy texnologik yechimlar xalqaro tozalash me’yorlariga erishish hamda daryo va yer osti suvlarini muhofaza qilish imkonini beradi."
+        ),
+        process: {
+          en: ["Survey & design | Site surveys, process design and working documentation", "Procurement | Selection and supply of equipment and materials", "Construction | Civil works and equipment installation", "Commissioning | Testing, start-up and staff training", "Operation | O&M support after handover"],
+          ru: ["Изыскания и проектирование | Обследование площадки, технологическое проектирование и рабочая документация", "Закупки | Подбор и поставка оборудования и материалов", "Строительство | Строительно-монтажные работы и монтаж оборудования", "Пусконаладка | Испытания, запуск и обучение персонала", "Эксплуатация | Поддержка O&M после сдачи объекта"],
+          uz: ["Tadqiqot va loyihalash | Maydonni o‘rganish, texnologik loyihalash va ishchi hujjatlar", "Xaridlar | Uskunalar va materiallarni tanlash va yetkazib berish", "Qurilish | Qurilish-montaj ishlari va uskunalarni o‘rnatish", "Ishga tushirish | Sinovlar, ishga tushirish va xodimlarni o‘qitish", "Ekspluatatsiya | Topshirilgandan keyin O&M yordami"],
+        },
       },
     },
     {
@@ -237,6 +257,16 @@ export const CMS_DEFAULTS: Record<CollectionKey, DefaultEntry[]> = {
         image: "/heroIm.png",
         project_category: "water-supply",
         featured: true,
+        body: i18n(
+          "We build transmission mains, distribution networks, reservoirs and pumping stations that bring a reliable water supply to towns and villages.\n\nOur teams install steel and HDPE pipelines of all diameters and connect households to the network.",
+          "Мы строим магистральные водоводы, распределительные сети, резервуары и насосные станции, обеспечивающие надёжное водоснабжение городов и сёл.\n\nНаши бригады прокладывают стальные и ПНД-трубопроводы любых диаметров и подключают дома к сети.",
+          "Shahar va qishloqlarni ishonchli suv bilan ta’minlaydigan magistral quvurlar, taqsimot tarmoqlari, suv omborlari va nasos stansiyalarini quramiz.\n\nJamoalarimiz har qanday diametrdagi po‘lat va HDPE quvurlarni yotqizadi hamda xonadonlarni tarmoqqa ulaydi."
+        ),
+        process: {
+          en: ["Survey & design | Site surveys, process design and working documentation", "Procurement | Selection and supply of equipment and materials", "Construction | Civil works and equipment installation", "Commissioning | Testing, start-up and staff training", "Operation | O&M support after handover"],
+          ru: ["Изыскания и проектирование | Обследование площадки, технологическое проектирование и рабочая документация", "Закупки | Подбор и поставка оборудования и материалов", "Строительство | Строительно-монтажные работы и монтаж оборудования", "Пусконаладка | Испытания, запуск и обучение персонала", "Эксплуатация | Поддержка O&M после сдачи объекта"],
+          uz: ["Tadqiqot va loyihalash | Maydonni o‘rganish, texnologik loyihalash va ishchi hujjatlar", "Xaridlar | Uskunalar va materiallarni tanlash va yetkazib berish", "Qurilish | Qurilish-montaj ishlari va uskunalarni o‘rnatish", "Ishga tushirish | Sinovlar, ishga tushirish va xodimlarni o‘qitish", "Ekspluatatsiya | Topshirilgandan keyin O&M yordami"],
+        },
       },
     },
     {
@@ -257,13 +287,53 @@ export const CMS_DEFAULTS: Record<CollectionKey, DefaultEntry[]> = {
         image: "/projects.jpg.png",
         project_category: "irrigation",
         featured: false,
+        body: i18n(
+          "We build and rehabilitate irrigation canals, pumping stations and hydraulic structures that deliver water to farmland efficiently.\n\nModernising irrigation systems reduces water losses and improves the reliability of supply for agriculture.",
+          "Мы строим и реконструируем оросительные каналы, насосные станции и гидротехнические сооружения, эффективно подающие воду на сельскохозяйственные земли.\n\nМодернизация ирригационных систем снижает потери воды и повышает надёжность водоподачи для сельского хозяйства.",
+          "Qishloq xo‘jaligi yerlariga suvni samarali yetkazib beradigan sug‘orish kanallari, nasos stansiyalari va gidrotexnik inshootlarni quramiz va rekonstruksiya qilamiz.\n\nSug‘orish tizimlarini modernizatsiya qilish suv yo‘qotishlarini kamaytiradi va qishloq xo‘jaligi uchun suv ta’minoti ishonchliligini oshiradi."
+        ),
+        process: {
+          en: ["Survey & design | Site surveys, process design and working documentation", "Procurement | Selection and supply of equipment and materials", "Construction | Civil works and equipment installation", "Commissioning | Testing, start-up and staff training", "Operation | O&M support after handover"],
+          ru: ["Изыскания и проектирование | Обследование площадки, технологическое проектирование и рабочая документация", "Закупки | Подбор и поставка оборудования и материалов", "Строительство | Строительно-монтажные работы и монтаж оборудования", "Пусконаладка | Испытания, запуск и обучение персонала", "Эксплуатация | Поддержка O&M после сдачи объекта"],
+          uz: ["Tadqiqot va loyihalash | Maydonni o‘rganish, texnologik loyihalash va ishchi hujjatlar", "Xaridlar | Uskunalar va materiallarni tanlash va yetkazib berish", "Qurilish | Qurilish-montaj ishlari va uskunalarni o‘rnatish", "Ishga tushirish | Sinovlar, ishga tushirish va xodimlarni o‘qitish", "Ekspluatatsiya | Topshirilgandan keyin O&M yordami"],
+        },
+      },
+    },
+    {
+      key: "engineering",
+      data: {
+        slug: "engineering",
+        title: i18n("Engineering & Design", "Инжиниринг и проектирование", "Muhandislik va loyihalash"),
+        summary: i18n(
+          "Surveys, process and detailed design, and technical supervision for water and wastewater facilities.",
+          "Изыскания, технологическое и рабочее проектирование, технический надзор для объектов водоснабжения и водоотведения.",
+          "Suv ta’minoti va oqova suv obyektlari uchun tadqiqotlar, texnologik va ishchi loyihalash hamda texnik nazorat."
+        ),
+        services: {
+          en: ["Engineering surveys", "Process design", "Detailed design", "Cost estimates", "Technical supervision"],
+          ru: ["Инженерные изыскания", "Технологическое проектирование", "Рабочая документация", "Сметная документация", "Технический надзор"],
+          uz: ["Muhandislik tadqiqotlari", "Texnologik loyihalash", "Ishchi hujjatlar", "Smeta hujjatlari", "Texnik nazorat"],
+        },
+        image: "/about3.png",
+        project_category: "",
+        featured: false,
+        process: {
+          en: ["Survey & design | Site surveys, process design and working documentation", "Procurement | Selection and supply of equipment and materials", "Construction | Civil works and equipment installation", "Commissioning | Testing, start-up and staff training", "Operation | O&M support after handover"],
+          ru: ["Изыскания и проектирование | Обследование площадки, технологическое проектирование и рабочая документация", "Закупки | Подбор и поставка оборудования и материалов", "Строительство | Строительно-монтажные работы и монтаж оборудования", "Пусконаладка | Испытания, запуск и обучение персонала", "Эксплуатация | Поддержка O&M после сдачи объекта"],
+          uz: ["Tadqiqot va loyihalash | Maydonni o‘rganish, texnologik loyihalash va ishchi hujjatlar", "Xaridlar | Uskunalar va materiallarni tanlash va yetkazib berish", "Qurilish | Qurilish-montaj ishlari va uskunalarni o‘rnatish", "Ishga tushirish | Sinovlar, ishga tushirish va xodimlarni o‘qitish", "Ekspluatatsiya | Topshirilgandan keyin O&M yordami"],
+        },
+        body: i18n(
+          "Our engineers prepare feasibility studies, process design and working documentation for treatment plants, pumping stations and networks.\n\nDesign and construction teams work together, so design decisions are checked for buildability and cost from the start.",
+          "Наши инженеры готовят ТЭО, технологические решения и рабочую документацию для очистных сооружений, насосных станций и сетей.\n\nПроектная и строительная команды работают вместе, поэтому решения с самого начала проверяются на реализуемость и стоимость.",
+          "Muhandislarimiz tozalash inshootlari, nasos stansiyalari va tarmoqlar uchun texnik-iqtisodiy asoslar, texnologik yechimlar va ishchi hujjatlarni tayyorlaydi.\n\nLoyihalash va qurilish jamoalari birgalikda ishlaydi, shuning uchun yechimlar boshidanoq amalga oshirilishi va narxi bo‘yicha tekshiriladi."
+        ),
       },
     },
     {
       key: "engineering-epc",
       data: {
         slug: "engineering-epc",
-        title: i18n("Engineering & EPC", "Инжиниринг и EPC", "Muhandislik va EPC"),
+        title: i18n("EPC & O&M", "EPC и эксплуатация", "EPC va ekspluatatsiya"),
         summary: i18n(
           "Full project lifecycle under one contract: design, procurement, construction, commissioning and operation.",
           "Полный цикл проекта по одному контракту: проектирование, закупки, строительство, пусконаладка и эксплуатация.",
@@ -277,6 +347,16 @@ export const CMS_DEFAULTS: Record<CollectionKey, DefaultEntry[]> = {
         image: "/about4.png",
         project_category: "",
         featured: true,
+        body: i18n(
+          "As an EPC contractor we take responsibility for the whole project under a single contract: engineering, procurement of equipment, construction, commissioning and handover.\n\nAfter handover we can operate and maintain the facility (O&M), train the client's staff and keep the plant running at its design performance. We work under FIDIC contracts and the requirements of international financial institutions.",
+          "Как EPC-подрядчик мы отвечаем за весь проект по одному контракту: проектирование, закупку оборудования, строительство, пусконаладку и сдачу объекта.\n\nПосле сдачи мы можем эксплуатировать и обслуживать объект (O&M), обучать персонал заказчика и поддерживать проектные показатели станции. Мы работаем по контрактам FIDIC и требованиям международных финансовых институтов.",
+          "EPC pudratchi sifatida butun loyiha uchun bitta shartnoma asosida javob beramiz: loyihalash, uskunalar xaridi, qurilish, ishga tushirish va obyektni topshirish.\n\nTopshirilgandan so‘ng obyektni ekspluatatsiya qilish va unga xizmat ko‘rsatish (O&M), buyurtmachi xodimlarini o‘qitish va inshootning loyiha ko‘rsatkichlarini saqlab turishimiz mumkin. FIDIC shartnomalari va xalqaro moliya institutlari talablari asosida ishlaymiz."
+        ),
+        process: {
+          en: ["Survey & design | Site surveys, process design and working documentation", "Procurement | Selection and supply of equipment and materials", "Construction | Civil works and equipment installation", "Commissioning | Testing, start-up and staff training", "Operation | O&M support after handover"],
+          ru: ["Изыскания и проектирование | Обследование площадки, технологическое проектирование и рабочая документация", "Закупки | Подбор и поставка оборудования и материалов", "Строительство | Строительно-монтажные работы и монтаж оборудования", "Пусконаладка | Испытания, запуск и обучение персонала", "Эксплуатация | Поддержка O&M после сдачи объекта"],
+          uz: ["Tadqiqot va loyihalash | Maydonni o‘rganish, texnologik loyihalash va ishchi hujjatlar", "Xaridlar | Uskunalar va materiallarni tanlash va yetkazib berish", "Qurilish | Qurilish-montaj ishlari va uskunalarni o‘rnatish", "Ishga tushirish | Sinovlar, ishga tushirish va xodimlarni o‘qitish", "Ekspluatatsiya | Topshirilgandan keyin O&M yordami"],
+        },
       },
     },
   ],
@@ -483,3 +563,33 @@ export const CMS_DEFAULTS: Record<CollectionKey, DefaultEntry[]> = {
 
   ...PAGE_DEFAULTS,
 };
+
+// Page texts shared by every expertise page, so the admin form shows them
+// filled in (they can be changed per page). SEO defaults to "<title> | MESMER"
+// and the summary.
+const EXPERTISE_PAGE_TEXTS = {
+  hero_subtitle: i18n("Expertise", "Экспертиза", "Ekspertiza"),
+  services_title: i18n("What we deliver", "Что мы делаем", "Biz nimalarni bajaramiz"),
+  process_title: i18n("How we work", "Как мы работаем", "Qanday ishlaymiz"),
+  projects_title: i18n("Related projects", "Реализованные проекты", "Tegishli loyihalar"),
+  cta_title: i18n("Planning a similar project?", "Планируете похожий проект?", "Shunga o‘xshash loyihani rejalashtiryapsizmi?"),
+  cta_text: i18n(
+    "Send us your project details or tender documents and our engineers will get back to you.",
+    "Отправьте описание объекта или тендерную документацию — наши инженеры свяжутся с вами.",
+    "Obyekt tavsifi yoki tender hujjatlarini yuboring — muhandislarimiz siz bilan bog‘lanadi."
+  ),
+  cta_button: i18n("Start a project", "Начать проект", "Loyiha boshlash"),
+};
+
+for (const item of CMS_DEFAULTS.expertise) {
+  const data = item.data as Record<string, unknown> & { title: Record<string, string>; summary: Record<string, string> };
+  Object.assign(data, {
+    hero_image: "",
+    highlights: { en: [], ru: [], uz: [] },
+    ...EXPERTISE_PAGE_TEXTS,
+    seo_title: Object.fromEntries(Object.entries(data.title).map(([l, v]) => [l, `${v} | MESMER`])),
+    seo_description: data.summary,
+    ...data,
+  });
+}
+

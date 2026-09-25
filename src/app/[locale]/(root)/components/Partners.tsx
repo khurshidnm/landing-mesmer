@@ -24,17 +24,18 @@ const Partners = ({ content, partners: partnerEntries }: { content?: HomeContent
     : DEFAULT_LOGOS.map((src) => ({ src, name: "" }));
   const [hovered, setHovered] = React.useState(false);
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">
+    <section className="border-b border-gray-100 py-10 sm:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-6 text-center text-xs font-semibold uppercase tracking-wider text-gray-500">
           {title}
         </h2>
-        <div className="overflow-hidden relative">
+        {/* Soft fade at both edges of the scrolling strip */}
+        <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
           <div className={cn("flex min-w-max animate-scroll", hovered && "pause")} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             {[...partners, ...partners].map((partner, index) => (
               <div
                 key={index}
-                className="w-40 h-40 mx-4 flex items-center justify-center"
+                className="mx-6 flex h-20 w-36 items-center justify-center sm:mx-8"
               >
                 <div className="relative w-full h-full">
                   <Image

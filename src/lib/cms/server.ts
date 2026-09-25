@@ -41,6 +41,23 @@ function defaultEntries(key: CollectionKey): CmsEntry[] {
   }));
 }
 
+/**
+ * Fields added to a collection after an entry was saved are filled from the
+ * built-in entry with the same slug, so new page sections show their default
+ * content (and the admin form shows it for editing) until someone saves them.
+ */
+function withDefaultFields(key: CollectionKey, entry: CmsEntry): CmsEntry {
+  const slugField = (COLLECTIONS[key] as CollectionDef).slugField;
+  if (!slugField) return entry;
+  const fallback = CMS_DEFAULTS[key].find((item) => item.data[slugField] === entry[slugField]);
+  if (!fallback) return entry;
+  const merged: Record<string, unknown> = { ...entry };
+  for (const [field, value] of Object.entries(fallback.data)) {
+    if (!(field in merged)) merged[field] = value;
+  }
+  return merged as CmsEntry;
+}
+
 export async function isSeeded(key: CollectionKey): Promise<boolean> {
   await connectToDatabase();
   const marker = await CmsEntryModel.exists({ collection_key: META, "data.key": key });
@@ -67,7 +84,7 @@ export async function getEntries<T = Record<string, unknown>>(
     })
       .sort({ sort_order: 1, createdAt: 1 })
       .lean<RawEntry[]>();
-    return docs.map(toEntry) as CmsEntry<T>[];
+    return docs.map((doc) => withDefaultFields(key, toEntry(doc))) as CmsEntry<T>[];
   } catch (error) {
     console.error(`[cms] Failed to load "${key}", using defaults:`, error);
     return defaultEntries(key).filter((e) => includeDisabled || e.enabled) as CmsEntry<T>[];

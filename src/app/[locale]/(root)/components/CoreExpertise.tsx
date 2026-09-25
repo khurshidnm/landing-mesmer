@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useLocale } from "next-intl";
 import { t, tList } from "@/lib/cms/definitions";
 import type { ExpertiseEntry } from "@/lib/cms/content-types";
+import SectionHeading from "./SectionHeading";
 
 const TEXT = {
   en: { eyebrow: "What we do", title: "Our Core Expertise", all: "All expertise" },
@@ -28,19 +29,19 @@ export default function CoreExpertise({
   if (!items.length) return null;
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
       {showHeading && (
-        <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <span className="mb-2 block text-xs font-semibold uppercase tracking-wider text-blue-600">{text.eyebrow}</span>
-            <h2 className="text-3xl font-extrabold tracking-wide text-gray-900 sm:text-4xl">{text.title}</h2>
-          </div>
-          {showAllLink && (
-            <Link href={`/${locale}/expertise`} className="text-sm font-semibold text-blue-600 hover:text-blue-700">
-              {text.all} →
-            </Link>
-          )}
-        </div>
+        <SectionHeading
+          eyebrow={text.eyebrow}
+          title={text.title}
+          action={
+            showAllLink && (
+              <Link href={`/${locale}/expertise`} className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700">
+                {text.all} →
+              </Link>
+            )
+          }
+        />
       )}
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {items.map((item, index) => (
